@@ -8,7 +8,7 @@
 - UI: Tailwind CSS v4 + shadcn/ui + Lucide
 - 디자인 정본: 루트 `DESIGN.md`; `@google/design.md` lint로 구조·대비·토큰 참조 검증
 - 테스트/검증: ESLint, Next.js production build, 디자인 lint, 브라우저 smoke
-- 배포: 제품 결정 전에는 보류. 발표용 배포가 필요해지면 Vercel을 기본 후보로 검토
+- 배포: 발표용 앱은 Vercel에 배포하고, Cloudflare DNS에서 `bootcamp.askewly.com`을 CNAME으로 연결한다. 실제 레코드 생성은 Vercel 프로젝트와 배포 URL이 준비된 뒤 수행한다.
 
 ## 프로젝트 구조
 ```text

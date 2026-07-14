@@ -9,6 +9,7 @@
 | # | Changeset | 날짜 | Scope | Verification | Status |
 |---|-----------|------|-------|--------------|--------|
 | 1 | 20260714-bootcamp-foundation | 2026-07-14 | 팀 workflow + web/design starter | ✅ | passed |
+| 2 | 20260714-deployment-architecture | 2026-07-14 | Vercel 호스팅 + Cloudflare DNS 결정 및 OAuth 인증 | ✅ | passed |
 
 ## 운영 원칙
 
