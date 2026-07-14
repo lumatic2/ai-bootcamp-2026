@@ -66,6 +66,24 @@ components:
     textColor: "{colors.on-muted}"
     rounded: "{rounded.md}"
     padding: 1rem
+  app-shell:
+    backgroundColor: "{colors.neutral}"
+    textColor: "{colors.on-surface}"
+  divider:
+    backgroundColor: "{colors.border}"
+    height: 1px
+  status-success:
+    backgroundColor: "{colors.success}"
+    textColor: "{colors.on-primary}"
+    rounded: "{rounded.sm}"
+  status-warning:
+    backgroundColor: "{colors.warning}"
+    textColor: "{colors.on-primary}"
+    rounded: "{rounded.sm}"
+  status-danger:
+    backgroundColor: "{colors.danger}"
+    textColor: "{colors.on-primary}"
+    rounded: "{rounded.sm}"
 ---
 
 ## Overview

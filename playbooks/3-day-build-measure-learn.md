@@ -15,17 +15,19 @@
 4. **가설 작성 — 판단 필요**: `experiments/EXPERIMENT_TEMPLATE.md`를 복사해 사용자·문제·행동 변화가 반증 가능한 한 문장이 되게 한다.
 5. **Measure 먼저 설계 — 판단 필요**: metric, raw data, 수집 방법, 표본, PASS/FAIL/판단불가 기준을 Build 전에 적는다.
 6. **최소 솔루션 선정 — 판단 필요**: 측정에 꼭 필요한 product surface만 선택하고 나머지는 제외 목록에 넣는다.
-7. **스캐폴딩·구현 — 결정론적**: starter에서 새 branch를 만들고 작은 vertical slice부터 구현한다. 매 slice는 lint/build/smoke로 닫는다.
-8. **Product 전달 — 판단 필요**: 실제 사용자 또는 명시된 proxy에게 제품을 보여주고 개입 없이 행동을 관찰한다.
-9. **Measure/Data — 결정론적**: 사전 정의된 metric만 계산하고 raw data 위치, 누락, 표본 한계를 함께 기록한다.
-10. **Learn — 판단 필요**: 가설을 PASS/FAIL/판단불가로 판정하고 keep/change/stop 중 다음 행동과 새 가설을 적는다.
-11. **패키징·발표 — 결정론적**: 문제 → 가설 → 제품 → 데이터 → 학습 → 다음 가설을 각 evidence 경로에 연결한다.
+7. **디자인 방향 — 판단 필요**: `docs/design-reference-selection.md`로 getdesign.md 후보 2~3개를 비교하고, 채택할 원칙과 버릴 패턴을 ADR에 기록한다.
+8. **스캐폴딩·구현 — 결정론적**: starter에서 새 branch를 만들고 작은 vertical slice부터 구현한다. 매 slice는 lint/build/smoke로 닫는다.
+9. **Product 전달 — 판단 필요**: 실제 사용자 또는 명시된 proxy에게 제품을 보여주고 개입 없이 행동을 관찰한다.
+10. **Measure/Data — 결정론적**: 사전 정의된 metric만 계산하고 raw data 위치, 누락, 표본 한계를 함께 기록한다.
+11. **Learn — 판단 필요**: 가설을 PASS/FAIL/판단불가로 판정하고 keep/change/stop 중 다음 행동과 새 가설을 적는다.
+12. **패키징·발표 — 결정론적**: 문제 → 가설 → 제품 → 데이터 → 학습 → 다음 가설을 각 evidence 경로에 연결한다.
 
 ## 체크리스트 (Checklist)
 - [ ] 문제 주장마다 직접 관찰, 사용자 원문 또는 원 출처가 있다.
 - [ ] 가설이 한 번의 관찰로도 틀릴 수 있는 문장이다.
 - [ ] Build 전에 metric과 판정 기준을 합의했다.
 - [ ] 제품 범위의 각 기능이 특정 가설 또는 측정에 연결된다.
+- [ ] getdesign.md 후보를 제품 과업 기준으로 비교하고 선택 이유를 기록했다.
 - [ ] mock·synthetic·proxy·actual 데이터를 명확히 구분했다.
 - [ ] raw data와 해석을 분리하고 표본·누락·편향을 기록했다.
 - [ ] 실패한 가설도 삭제하지 않고 다음 결정 근거로 남겼다.
@@ -36,6 +38,7 @@
 - [The Lean Startup principles](https://theleanstartup.com/principles) — Build–Measure–Learn과 validated learning을 불확실성 속 진척의 기준으로 사용. 접근일 2026-07-14.
 - 부트캠프 강사 안내(2026-07-14 사용자 전달) — 아이디어 참신성보다 결정 과정, planning, 검증 과정과 반복을 평가한다.
 - [Google design.md](https://github.com/google-labs-code/design.md) — DESIGN.md가 토큰과 rationale을 함께 제공하고 lint/export를 지원함. 접근일 2026-07-14.
+- [getdesign.md](https://getdesign.md/) — 300개 이상 디자인 분석의 카탈로그, preview와 프로젝트 설치 명령 제공. 접근일 2026-07-14.
 - [shadcn/ui Next.js 설치](https://ui.shadcn.com/docs/installation/next) — Next.js, Tailwind, import alias와 소유 가능한 UI 컴포넌트 설정 근거. 접근일 2026-07-14.
 - 참고: `docs/DOMAIN.md#핵심-기준`
 

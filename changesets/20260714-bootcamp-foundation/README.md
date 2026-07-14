@@ -26,13 +26,13 @@
 - Not evidence: 파일 존재만 확인, mock 데이터를 실제 측정이라고 주장, dev server 시작 로그만 제시.
 
 ## Verification
-- [ ] Targeted tests: `pnpm design:lint`
-- [ ] Smoke: `pnpm lint && pnpm build` + 브라우저 렌더 확인
+- [x] Targeted tests: `pnpm design:lint` — errors 0, warnings 0
+- [x] Smoke: `pnpm lint && pnpm build` + Chrome desktop/mobile 렌더 확인
 - [x] Sync/deploy if skill changed: 해당 없음 — 스킬 변경 없음
 - [x] Deployed copy grep if skill changed: 해당 없음 — 스킬 변경 없음
-- [ ] Drift/dirty-tree check: 의도한 파일만 변경됐는지 확인
+- [x] Drift/dirty-tree check: `git diff --check` PASS, 제품 종속 secret/env 의존성 없음
 
 ## Result
-- Status: pending
-- Evidence: 실행 후 기록
-- Notes: 제품 결정 후 B2에서 PRD와 DESIGN.md를 팀 합의로 갱신한다.
+- Status: passed
+- Evidence: `pnpm check` PASS; `browser-smoke.md`; design lint errors 0/warnings 0; Chrome console warning/error 0
+- Notes: Next.js 16.2.10, Tailwind 4.3.2, shadcn 4.13.0. 제품 결정 후 B2에서 PRD와 DESIGN.md를 팀 합의로 갱신한다.

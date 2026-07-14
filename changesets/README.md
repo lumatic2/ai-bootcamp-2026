@@ -8,7 +8,7 @@
 
 | # | Changeset | 날짜 | Scope | Verification | Status |
 |---|-----------|------|-------|--------------|--------|
-| 1 | 20260714-bootcamp-foundation | 2026-07-14 | 팀 workflow + web/design starter | ⬜ | in_progress |
+| 1 | 20260714-bootcamp-foundation | 2026-07-14 | 팀 workflow + web/design starter | ✅ | passed |
 
 ## 운영 원칙
 

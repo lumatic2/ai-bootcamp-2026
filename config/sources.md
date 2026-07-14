@@ -6,6 +6,7 @@
 | The Lean Startup principles | Build–Measure–Learn과 validated learning 기준 | `https://theleanstartup.com/principles` | - |
 | Google design.md | DESIGN.md spec, lint, Tailwind export | `pnpm exec designmd ...` | - |
 | VoltAgent/awesome-design-md | 제품별 디자인 레퍼런스 후보 탐색 | GitHub README와 `design-md/*/DESIGN.md` | - |
+| getdesign.md | 카테고리 탐색, preview, 선택한 DESIGN.md 설치 | `npx getdesign@latest add <slug>` | 설치 전 팀 승인 |
 | shadcn/ui docs | Next.js 설치와 컴포넌트 추가 방식 | `https://ui.shadcn.com/docs/installation/next` | - |
 | Tailwind CSS docs | Tailwind v4 Next.js 설정 | `https://tailwindcss.com/docs/installation/framework-guides/nextjs` | - |
 
@@ -24,5 +25,6 @@
 ## ⚠ 주의
 - 모든 외부 호출 결과에 접근 시점을 기록한다.
 - 검색 요약보다 원 출처를 우선한다.
+- getdesign 설치 명령은 root `DESIGN.md`를 변경할 수 있으므로 후보 비교와 ADR 없이 실행하지 않는다.
 - 캐시된 결과와 mock 데이터를 현재 사실로 다시 인용하지 않는다.
 - 개인정보와 secret은 레포에 저장하지 않는다.

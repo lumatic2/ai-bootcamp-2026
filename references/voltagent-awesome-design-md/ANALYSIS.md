@@ -31,17 +31,19 @@ awesome-design-md/
 - [`README.md:L244-L258`](https://github.com/VoltAgent/awesome-design-md#what-is-designmd) — `AGENTS.md`는 어떻게 만들지, `DESIGN.md`는 어떻게 보여야 할지를 나눈다. 디자인 의도를 코드 지침과 분리하는 경계가 명확하다.
 - [`design-md/claude/DESIGN.md`](https://github.com/VoltAgent/awesome-design-md/blob/main/design-md/claude/DESIGN.md) — 색과 글꼴 이름만이 아니라 레이아웃 리듬, 반응형 변화, Do/Don't를 함께 제공해 단순 theme보다 풍부하다.
 - [`README.md:L272-L330`](https://github.com/VoltAgent/awesome-design-md#collection) — 여러 산업·서비스를 한 카탈로그에 배치해 제품 성격에 맞는 후보 비교가 가능하다.
+- [getdesign.md catalog](https://getdesign.md/) — GitHub의 파일 목록을 카테고리, 요약, preview 중심의 선택 UI로 제공한다. 상세 페이지는 `npx getdesign@latest add <slug>` 설치 경로와 비공식 분석 고지를 함께 보여준다.
 
 ## 5. 내 정의에 어떻게 반영할 것인가
 
 - `DESIGN.md`를 AI용 분위기 프롬프트가 아니라 토큰, component, 반응형, 금지 패턴을 포함하는 실행 계약으로 사용한다.
 - 한 브랜드를 그대로 복제하지 않고 제품 사용자·과업과 맞는 2~3개 후보의 원리를 비교한다.
+- 팀 선택에는 `docs/design-reference-selection.md`를 사용하고, getdesign 설치 전 현재 DESIGN.md와의 diff를 검토한다.
 - 원 저장소에 없는 lint와 렌더 검증은 Google `design.md`, Tailwind build, 브라우저 smoke로 보완한다.
 - 브랜드 자산과 고유 표현을 복제하지 않고 구조적 패턴과 토큰 선택 근거만 참고한다.
 - 관련 ADR: `docs/adr/0002-provisional-design-contract.md`
 
 ## 메타
 - 수집일: 2026-07-14
-- 자료: [awesome-design-md](https://github.com/VoltAgent/awesome-design-md), [Google design.md](https://github.com/google-labs-code/design.md)
+- 자료: [awesome-design-md](https://github.com/VoltAgent/awesome-design-md), [getdesign.md](https://getdesign.md/), [Google design.md](https://github.com/google-labs-code/design.md)
 - 소요 시간: 25분
 - 다음 후보: 제품 방향 결정 후 해당 카테고리 2~3개 DESIGN.md 비교

@@ -3,8 +3,8 @@
 ## 디렉토리 구조
 ```text
 src/app/       Next.js App Router와 전역 토큰
-components/ui/ shadcn 소유 컴포넌트
-lib/           공용 유틸리티
+src/components/ui/ shadcn 소유 컴포넌트
+src/lib/           공용 유틸리티
 docs/          계획·결정·발표 evidence
 playbooks/     반복 가능한 팀 절차
 experiments/   가설·방법·결과·학습

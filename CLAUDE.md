@@ -13,12 +13,12 @@
 ## 프로젝트 구조
 ```text
 src/app/       Next.js 앱과 전역 스타일
-components/    shadcn/ui 및 제품 컴포넌트
+src/components/ shadcn/ui 및 제품 컴포넌트
 docs/          Objective, PRD, architecture, ADR, 팀 킥오프 자료
-playbooks/     반복 가능한 팀 진행 절차
-experiments/   가설·방법·결과·학습 기록
-references/    외부 레퍼런스 분석
-changesets/    구현 변경과 검증 증거
+playbooks/      반복 가능한 팀 진행 절차
+experiments/    가설·방법·결과·학습 기록
+references/     외부 레퍼런스 분석
+changesets/     구현 변경과 검증 증거
 ```
 
 ## 개발 명령어

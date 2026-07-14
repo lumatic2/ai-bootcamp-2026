@@ -1,2 +1,14 @@
 data/
 outputs/
+.harness/machines/
+archive/
+tmp/
+reports/
+.venv*/
+node_modules/
+.next/
+out/
+.env*
+!.env.example
+*.tsbuildinfo
+next-env.d.ts
