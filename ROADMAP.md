@@ -12,13 +12,15 @@
 
 ## Active Milestones
 
-<!-- harness:milestone id="B1" status="active" priority="P0" -->
+<!-- harness:milestone id="B1" status="completed" priority="P0" evidence="changesets/20260714-bootcamp-foundation/README.md" -->
 ### B1 — 팀 논의 전 실험·구현 기반 준비
 - DoD: 팀 플레이북, 범용 Next.js/Tailwind/shadcn 스타터, lint 가능한 임시 DESIGN.md, 킥오프 문서가 있고 전체 lint/build가 통과한다.
-- Evidence: `docs/plans/2026-07-14-bootcamp-foundation.md`, `changesets/20260714-bootcamp-foundation/README.md`
+- Evidence: changesets/20260714-bootcamp-foundation/README.md
 - Gap: 현재 레포에는 팀이 바로 문제를 정의하고 검증 가능한 제품을 만들 공통 절차와 실행 환경이 없다.
-- Status: [ ]
+- Status: [x]
 
+- Completed at: 2026-07-14
+- Summary: 팀 플레이북, Next.js/Tailwind/shadcn starter, DESIGN.md lint, Chrome smoke PASS
 <!-- harness:milestone id="B2" status="pending" priority="P0" -->
 ### B2 — 팀 문제·솔루션 선정과 최소 실험 실행
 - DoD: 문제 증거, 반증 가능한 가설, 측정 지표, 최소 제품, 실제 관찰 데이터, 학습 결론이 한 실험 기록으로 연결된다.
