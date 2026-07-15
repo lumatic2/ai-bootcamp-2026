@@ -13,6 +13,7 @@
 | 3 | 20260715-nubi-mvp-scaffold | 2026-07-15 | 너비 MVP: 3스텝 플로우+번역엔진+시드+GA4 | ✅ | passed |
 | 4 | 20260715-nubi-deploy | 2026-07-15 | Vercel 프로덕션 배포 + 도메인 연결 | ✅ | passed |
 | 5 | 20260715-nubi-seed-expansion | 2026-07-15 | 팀 시트 병합 — 시드 9→48 브랜드 | ✅ | passed |
+| 6 | 20260715-nubi-share-polish | 2026-07-15 | OG·공유URL·QR·GA 실수신 검증 | ✅ | passed |
 
 ## 운영 원칙
 

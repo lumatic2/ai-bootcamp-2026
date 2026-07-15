@@ -14,9 +14,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bootcamp.askewly.com"),
   title: "너비 — 처음 보는 브랜드, 사이즈 도박 끝",
   description:
     "잘 맞는 브랜드와 사이즈만 알려주세요. 처음 사는 브랜드의 사이즈를 실측 데이터와 리뷰 신호로 번역해 드립니다.",
+  openGraph: {
+    title: "너비 — 사이즈 번역기",
+    description: "줄자 없이, 잘 맞는 옷 하나로 다른 브랜드 사이즈를 번역해 드려요.",
+    url: "https://bootcamp.askewly.com",
+    siteName: "너비",
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    locale: "ko_KR",
+    type: "website",
+  },
 };
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;

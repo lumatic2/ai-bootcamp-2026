@@ -44,6 +44,20 @@ export function Translator() {
   const mountedAtRef = useRef<number>(0);
   useEffect(() => {
     mountedAtRef.current = Date.now();
+    // 공유 URL(?from=&size=&to=)로 진입 시 동일 결과 자동 재생
+    const params = new URLSearchParams(window.location.search);
+    const from = params.get("from");
+    const size = params.get("size");
+    const to = params.get("to");
+    if (from && size && to && getBrand(from)?.sizes.some((s) => s.label === size) && getBrand(to)) {
+      setTimeout(() => {
+        setSourceBrand(from);
+        setSourceSize(size);
+        setTargetBrand(to);
+        void submit(from, size, to, "");
+      }, 0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const source = sourceBrand ? getBrand(sourceBrand) : undefined;
@@ -57,8 +71,13 @@ export function Translator() {
     setSourceSize(null);
   }
 
-  async function submit() {
-    if (!sourceBrand || !sourceSize || !targetBrand) return;
+  async function submit(
+    sb: string | null = sourceBrand,
+    ss: string | null = sourceSize,
+    tb: string | null = targetBrand,
+    reviewText: string = reviews,
+  ) {
+    if (!sb || !ss || !tb) return;
     setLoading(true);
     setError(null);
     setMining(null);
@@ -66,13 +85,13 @@ export function Translator() {
     const translateReq = fetch("/api/translate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sourceBrand, sourceSize, targetBrand }),
+      body: JSON.stringify({ sourceBrand: sb, sourceSize: ss, targetBrand: tb }),
     });
-    const miningReq = reviews.trim()
+    const miningReq = reviewText.trim()
       ? fetch("/api/mine-reviews", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ reviews }),
+          body: JSON.stringify({ reviews: reviewText }),
         })
       : null;
 
@@ -87,6 +106,9 @@ export function Translator() {
       const data: TranslateResult = await res.json();
       setResult(data);
       setStep(3);
+      // 결과를 URL로 재현·공유 가능하게 (카톡 공유 → 동일 결과 자동 재생)
+      const qs = new URLSearchParams({ from: sb, size: ss, to: tb }).toString();
+      window.history.replaceState(null, "", `?${qs}#translate`);
       gaEvent("view_result", {
         source_brand: data.sourceBrandId,
         target_brand: data.targetBrandId,
@@ -255,7 +277,7 @@ export function Translator() {
             <Button
               className="mt-7 h-11 w-full"
               disabled={!targetBrand || loading}
-              onClick={submit}
+              onClick={() => submit()}
             >
               {loading ? "번역 중..." : "사이즈 번역하기"}
               {!loading && <ArrowRight data-icon="inline-end" />}
