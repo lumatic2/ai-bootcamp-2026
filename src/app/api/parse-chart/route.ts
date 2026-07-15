@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 
 import type { SizeRow } from "@/lib/sizecharts";
 
+// 웹서치 모드는 오래 걸린다 — Vercel 함수 타임아웃 상향
+export const maxDuration = 150;
+
 // 시드에 없는 브랜드 대응 — 두 모드:
 // paste  : 사용자가 상품 페이지에서 복사한 사이즈표 텍스트를 LLM이 표준 스키마로 파싱
 // search : LLM web_search 로 해당 브랜드 반팔티 실측표를 찾아 파싱 (베타 — 출처 URL 필수)
@@ -72,23 +75,46 @@ export async function POST(req: Request) {
       const data = await res.json();
       content = data?.choices?.[0]?.message?.content;
     } else {
-      const res = await fetch("https://api.openai.com/v1/responses", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
-        body: JSON.stringify({
-          model: "gpt-5.4-mini",
-          tools: [{ type: "web_search" }],
-          tool_choice: "auto",
-          input: `웹 검색을 반드시 사용해서, 브랜드 "${brandName}"의 남성 기본 반팔 티셔츠(코튼 크루넥) 실측 사이즈표를 찾아라. 무신사 상품 페이지의 "실측 사이즈" 또는 브랜드 공식몰 사이즈표가 출처다. 최소 3개 사이즈가 필요하고, 검색 결과 페이지에서 실제로 읽은 수치만 써라 — 일반적인 사이즈표를 기억으로 지어내면 안 된다. 확신이 없으면 sizes 를 빈 배열로 반환하라.\n${PARSE_SCHEMA}`,
-        }),
-      });
-      if (!res.ok) return NextResponse.json({ error: "llm-upstream-error" }, { status: 502 });
-      const data = await res.json();
-      const msg = Array.isArray(data?.output)
-        ? data.output.find((o: { type?: string }) => o.type === "message")
-        : null;
-      const textPart = msg?.content?.find?.((c: { type?: string }) => c.type === "output_text");
-      content = textPart?.text;
+      // 검색 각도를 바꿔가며 최대 2회 시도 (공식몰·무신사 → 블로그·리뷰의 실측 인용)
+      const queries = [
+        `웹 검색을 여러 번 사용해서, 브랜드 "${brandName}"의 남성 기본 반팔 티셔츠 실측 사이즈표(총장·어깨너비·가슴·소매, cm)를 찾아라. 좋은 출처: 브랜드 공식몰 상품 페이지의 사이즈 정보, 무신사 상품 설명, 사이즈 스펙을 그대로 옮겨 적은 쇼핑 블로그·리뷰 글. 페이지 본문에서 실제로 읽은 수치만 쓰고, 검색 결과에 없는 숫자는 절대 만들지 마라. 2개 사이즈만 찾아도 반환하라. sourceUrl 에는 수치를 읽은 페이지 주소를 반드시 적어라.`,
+        `"${brandName} 반팔티 실측" 또는 "${brandName} 티셔츠 사이즈 총장 어깨"로 웹 검색해서, 블로그나 착용 후기에 인용된 실측 사이즈표를 찾아라. 본문에서 실제로 읽은 수치만 쓰고 sourceUrl 을 반드시 채워라. 2개 사이즈 이상이면 반환하라.`,
+      ];
+      // 두 각도를 병렬로 쏘고 먼저 검증을 통과한 응답을 쓴다
+      const attempt = async (q: string): Promise<string> => {
+        const res = await fetch("https://api.openai.com/v1/responses", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+          body: JSON.stringify({
+            model: "gpt-5.4-mini",
+            tools: [{ type: "web_search" }],
+            tool_choice: "auto",
+            reasoning: { effort: "medium" },
+            input: `${q}\n${PARSE_SCHEMA}`,
+          }),
+        });
+        if (!res.ok) throw new Error(`upstream ${res.status}`);
+        const data = await res.json();
+        const msg = Array.isArray(data?.output)
+          ? data.output.find((o: { type?: string }) => o.type === "message")
+          : null;
+        const candidate: string | undefined = msg?.content?.find?.(
+          (c: { type?: string }) => c.type === "output_text",
+        )?.text;
+        if (!candidate) throw new Error("no text");
+        const j = JSON.parse(candidate.match(/\{[\s\S]*\}/)?.[0] ?? candidate);
+        // 출처 URL 없는 검색 결과는 기억으로 지어냈을 위험이 있어 버린다
+        if (sane(j?.sizes).length >= 2 && typeof j?.sourceUrl === "string" && j.sourceUrl.startsWith("http")) {
+          return candidate;
+        }
+        throw new Error("insufficient");
+      };
+      try {
+        content = await Promise.any(queries.map(attempt));
+      } catch {
+        console.log(`[parse-chart] search exhausted for "${brandName}"`);
+        return NextResponse.json({ error: "chart-not-found" }, { status: 422 });
+      }
     }
 
     if (!content) return NextResponse.json({ error: "llm-upstream-error" }, { status: 502 });

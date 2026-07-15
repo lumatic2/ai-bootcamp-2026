@@ -84,3 +84,55 @@
     @apply font-mono text-[0.7rem] font-semibold tracking-[0.14em] uppercase;
   }
 }
+
+/* 히어로 인터랙션: 사이즈 라벨 로테이션 + 지원 브랜드 마퀴 */
+@keyframes label-swap {
+  0% {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  82% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-0.5em);
+  }
+}
+
+.animate-label-swap {
+  animation: label-swap 1.8s ease-in-out both;
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-x 55s linear infinite;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-mask:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-label-swap,
+  .animate-marquee {
+    animation: none;
+  }
+}

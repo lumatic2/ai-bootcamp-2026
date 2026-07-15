@@ -460,7 +460,7 @@ export function Translator() {
                       onClick={() => parseChart("search")}
                       className="shrink-0"
                     >
-                      {parsing ? "찾는 중..." : "자동 검색 (베타)"}
+                      {parsing ? "웹에서 찾는 중 (1분쯤 걸려요)" : "자동 검색 (베타)"}
                     </Button>
                   </div>
                   <textarea

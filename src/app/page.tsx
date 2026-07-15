@@ -1,7 +1,9 @@
 import { ArrowDown } from "lucide-react";
 
+import { BrandMarquee } from "@/components/brand-marquee";
 import { Button } from "@/components/ui/button";
 import { LoginDialog } from "@/components/login-dialog";
+import { RotatingLabel } from "@/components/rotating-label";
 import { SizeChat } from "@/components/size-chat";
 import { Translator } from "@/components/translator";
 
@@ -26,17 +28,17 @@ export default function Home() {
       </header>
 
       <section className="border-b bg-card">
-        <div className="mx-auto flex max-w-3xl flex-col items-center px-5 py-12 text-center sm:px-8 sm:py-16">
+        <div className="mx-auto flex max-w-3xl flex-col items-center px-5 pt-12 text-center sm:px-8 sm:pt-16">
           <p className="eyebrow mb-4 text-evidence">처음 보는 브랜드도 내 사이즈로</p>
-          <h1 className="text-3xl leading-[1.15] font-semibold tracking-[-0.04em] text-balance sm:text-5xl">
-            줄자 없이,
+          <h1 className="text-3xl leading-[1.2] font-semibold tracking-[-0.04em] text-balance sm:text-5xl">
+            내 사이즈는 <RotatingLabel />,
             <br />
-            <span className="text-muted-foreground">잘 맞는 옷 하나로</span> 사이즈를 번역합니다
+            <span className="text-muted-foreground">브랜드마다 이름만 다릅니다</span>
           </h1>
           <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
-            같은 M도 브랜드마다 크기는 제각각입니다.
+            줄자 없이, 잘 맞는 옷 하나만 고르세요.
             <br />
-            잘 맞는 옷 하나만 고르세요. 나머지는 너비가 찾아드려요.
+            나머지는 너비가 찾아드려요.
           </p>
           <div className="mt-7">
             <Button className="h-10 px-4" size="lg" nativeButton={false} render={<a href="#translate" />}>
@@ -44,6 +46,9 @@ export default function Home() {
               <ArrowDown data-icon="inline-end" />
             </Button>
           </div>
+        </div>
+        <div className="mx-auto max-w-3xl px-5 pt-8 pb-2 sm:px-8">
+          <BrandMarquee />
         </div>
       </section>
 
