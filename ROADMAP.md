@@ -21,12 +21,11 @@
 
 - Completed at: 2026-07-14
 - Summary: 팀 플레이북, Next.js/Tailwind/shadcn starter, DESIGN.md lint, Chrome smoke PASS
-<!-- harness:milestone id="B2" status="pending" priority="P0" -->
+<!-- harness:milestone id="B2" status="active" priority="P0" -->
 ### B2 — 팀 문제·솔루션 선정과 최소 실험 실행
 - DoD: 문제 증거, 반증 가능한 가설, 측정 지표, 최소 제품, 실제 관찰 데이터, 학습 결론이 한 실험 기록으로 연결된다.
-- Evidence: `experiments/01-team-mvp/README.md`와 실행 데이터
-- Gap: 제품 문제와 사용자는 팀 논의를 통해 결정해야 하며 현재 미확정이다.
-- Blocked by: 팀의 문제 후보 수집과 우선순위 결정
+- Evidence: `experiments/01-size-translator-accuracy/README.md`와 실행 데이터
+- Gap: 문제(A: 사이즈 도박)·솔루션(사이즈 번역기 "너비")·KPI는 2026-07-15 팀 미팅에서 확정됨(`references/research-clothes-20260715/`). 남은 것: MVP 구현, 배포, V0/V1 측정, 학습 기록.
 - Status: [ ]
 
 <!-- harness:milestone id="B3" status="pending" priority="P1" -->
@@ -38,8 +37,10 @@
 - Status: [ ]
 
 ## Next Candidates
-- B2는 팀이 문제와 최소 실험을 확정한 뒤 active로 승격한다.
 - B3는 B2의 데이터와 학습 결론이 나온 뒤 active로 승격한다.
+
+## 의사결정 이력 (추가)
+- 2026-07-15 — Problem A(사이즈 도박)·솔루션(사이즈 번역기, 가칭 "너비") 팀 확정. B2 blocker 해소로 active 승격. 근거: `references/research-clothes-20260715/06-problem-scoring.md`, `08-solution-convergence.md`.
 
 ## Archive Pointer
 완료 이력은 `BACKLOG.md` 참조.
