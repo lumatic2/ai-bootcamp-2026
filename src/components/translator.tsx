@@ -6,7 +6,6 @@ import {
   ArrowRight,
   Check,
   Link2,
-  MessageSquareQuote,
   Plus,
   RotateCcw,
   Search,
@@ -20,25 +19,15 @@ import { gaEvent } from "@/lib/ga";
 import { brands, DIM_LABELS, getBrand, type SizeRow } from "@/lib/sizecharts";
 import type { Anchor, Confidence, TranslateResult } from "@/lib/translate";
 
-type Mining = {
-  larger: number;
-  fit: number;
-  smaller: number;
-  quotes: { text: string; signal: string }[];
-};
-
 type ParsedChart = { sizes: SizeRow[]; note: string; sourceUrl: string };
+
+// 시드에 없는 브랜드의 내 옷: 파싱된 실측 행을 직접 앵커로 (Step 1 AI 검색)
+type CustomAnchor = { name: string; size: string; row: SizeRow };
 
 const CONFIDENCE_UI: Record<Confidence, { label: string; className: string }> = {
   high: { label: "신뢰도 높음", className: "bg-success text-primary-foreground" },
   mid: { label: "신뢰도 보통", className: "bg-warning text-primary-foreground" },
   low: { label: "신뢰도 낮음", className: "bg-danger text-primary-foreground" },
-};
-
-const SIGNAL_LABEL: Record<string, string> = {
-  larger: "크게 나와요",
-  fit: "정사이즈",
-  smaller: "작게 나와요",
 };
 
 function anchorKey(a: Anchor) {
@@ -48,11 +37,10 @@ function anchorKey(a: Anchor) {
 export function Translator() {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [anchors, setAnchors] = useState<Anchor[]>([]);
+  const [customAnchors, setCustomAnchors] = useState<CustomAnchor[]>([]);
   const [browsing, setBrowsing] = useState<string | null>(null);
   const [targetBrand, setTargetBrand] = useState<string | null>(null);
-  const [reviews, setReviews] = useState("");
   const [result, setResult] = useState<TranslateResult | null>(null);
-  const [mining, setMining] = useState<Mining | null>(null);
   const [comment, setComment] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -60,12 +48,23 @@ export function Translator() {
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
   const [filter1, setFilter1] = useState("");
   const [filter2, setFilter2] = useState("");
+  // Step 1 시드 밖 브랜드 블록
+  const [c1Open, setC1Open] = useState(false);
+  const [c1Name, setC1Name] = useState("");
+  const [c1Product, setC1Product] = useState("");
+  const [c1Text, setC1Text] = useState("");
+  const [c1Parsed, setC1Parsed] = useState<ParsedChart | null>(null);
+  const [c1Parsing, setC1Parsing] = useState(false);
+  // Step 2 시드 밖 브랜드 블록
   const [customOpen, setCustomOpen] = useState(false);
   const [customName, setCustomName] = useState("");
+  const [customProduct, setCustomProduct] = useState("");
   const [customText, setCustomText] = useState("");
   const [customParsed, setCustomParsed] = useState<ParsedChart | null>(null);
   const [parsing, setParsing] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  const totalAnchors = anchors.length + customAnchors.length;
 
   const startedRef = useRef(false);
   const mountedAtRef = useRef<number>(0);
@@ -95,7 +94,7 @@ export function Translator() {
       setTimeout(() => {
         setAnchors(shared);
         setTargetBrand(to);
-        void submit(shared, to, "");
+        void submit(shared, to);
       }, 0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -103,15 +102,29 @@ export function Translator() {
 
   const browsingBrand = browsing ? getBrand(browsing) : undefined;
 
-  function addAnchor(brandId: string, size: string) {
+  function markStarted() {
     if (!startedRef.current) {
       startedRef.current = true;
       gaEvent("start_input");
     }
+  }
+
+  function addAnchor(brandId: string, size: string) {
+    markStarted();
     const next: Anchor = { brandId, size };
     setAnchors((prev) => {
       const withoutSameBrand = prev.filter((a) => a.brandId !== brandId);
-      return [...withoutSameBrand, next].slice(0, 5);
+      if (withoutSameBrand.length + customAnchors.length >= 5) return prev;
+      return [...withoutSameBrand, next];
+    });
+  }
+
+  function addCustomAnchor(name: string, size: string, row: SizeRow) {
+    markStarted();
+    setCustomAnchors((prev) => {
+      const withoutSame = prev.filter((c) => c.name !== name);
+      if (anchors.length + withoutSame.length >= 5) return prev;
+      return [...withoutSame, { name, size, row }];
     });
   }
 
@@ -119,32 +132,34 @@ export function Translator() {
     setAnchors((prev) => prev.filter((a) => anchorKey(a) !== key));
   }
 
+  function removeCustomAnchor(name: string) {
+    setCustomAnchors((prev) => prev.filter((c) => c.name !== name));
+  }
+
   async function submit(
     aList: Anchor[] = anchors,
     tb: string | null = targetBrand,
-    reviewText: string = reviews,
     custom: { name: string; sizes: SizeRow[] } | null = null,
   ) {
-    if (aList.length === 0 || (!tb && !custom)) return;
+    if ((aList.length === 0 && customAnchors.length === 0) || (!tb && !custom)) return;
     setLoading(true);
     setError(null);
-    setMining(null);
     setComment(null);
 
+    // 시드 앵커 + 시드 밖 앵커(실측 행 동봉)를 한 배열로 보낸다
+    const payloadAnchors = [
+      ...aList,
+      ...customAnchors.map((c) => ({ name: c.name, size: c.size, row: c.row })),
+    ];
     const translateReq = fetch("/api/translate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(
-        custom ? { anchors: aList, targetCustom: custom } : { anchors: aList, targetBrand: tb },
+        custom
+          ? { anchors: payloadAnchors, targetCustom: custom }
+          : { anchors: payloadAnchors, targetBrand: tb },
       ),
     });
-    const miningReq = reviewText.trim()
-      ? fetch("/api/mine-reviews", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ reviews: reviewText }),
-        })
-      : null;
 
     try {
       const res = await translateReq;
@@ -158,8 +173,8 @@ export function Translator() {
       setResult(data);
       setStep(3);
       setCopied(false);
-      // 결과를 URL로 재현할 수 있게 남긴다 (직접 입력한 표는 재현이 안 되니 제외)
-      if (!custom && tb) {
+      // 결과를 URL로 재현할 수 있게 남긴다 (직접 입력한 표·시드 밖 앵커는 재현이 안 되니 제외)
+      if (!custom && tb && customAnchors.length === 0) {
         const a = aList.map((x) => `${x.brandId}~${encodeURIComponent(x.size)}`).join(",");
         window.history.replaceState(null, "", `?a=${a}&to=${tb}#translate`);
       }
@@ -187,11 +202,6 @@ export function Translator() {
         .then((r) => (r.ok ? r.json() : null))
         .then((d) => d?.comment && setComment(d.comment))
         .catch(() => {});
-
-      if (miningReq) {
-        const mres = await miningReq;
-        if (mres.ok) setMining(await mres.json());
-      }
     } catch {
       gaEvent("predict_unavailable", { reason: "network" });
       setError("네트워크가 잠시 불안정했어요. 다시 시도해 주세요.");
@@ -200,17 +210,16 @@ export function Translator() {
     }
   }
 
-  async function parseChart(mode: "paste" | "search") {
-    setParsing(true);
+  async function fetchChart(
+    mode: "paste" | "search",
+    payload: { brandName?: string; productName?: string; text?: string },
+  ): Promise<ParsedChart | null> {
     setError(null);
-    setCustomParsed(null);
     try {
       const res = await fetch("/api/parse-chart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(
-          mode === "paste" ? { mode, text: customText } : { mode, brandName: customName },
-        ),
+        body: JSON.stringify({ mode, ...payload }),
       });
       if (!res.ok) {
         gaEvent("predict_unavailable", { reason: `parse-${mode}` });
@@ -219,28 +228,52 @@ export function Translator() {
             ? "자동으로는 못 찾았어요. 상품 페이지의 사이즈표를 복사해서 붙여넣어 주세요."
             : "사이즈표를 인식하지 못했어요. 실측 표 부분만 복사해서 다시 붙여넣어 주세요.",
         );
-        return;
+        return null;
       }
-      setCustomParsed(await res.json());
+      return (await res.json()) as ParsedChart;
     } catch {
       setError("네트워크가 잠시 불안정했어요. 다시 시도해 주세요.");
-    } finally {
-      setParsing(false);
+      return null;
     }
   }
 
+  async function parseChart1(mode: "paste" | "search") {
+    setC1Parsing(true);
+    setC1Parsed(null);
+    const parsed = await fetchChart(
+      mode,
+      mode === "paste"
+        ? { text: c1Text }
+        : { brandName: c1Name, productName: c1Product },
+    );
+    if (parsed) setC1Parsed(parsed);
+    setC1Parsing(false);
+  }
+
+  async function parseChart2(mode: "paste" | "search") {
+    setParsing(true);
+    setCustomParsed(null);
+    const parsed = await fetchChart(
+      mode,
+      mode === "paste"
+        ? { text: customText }
+        : { brandName: customName, productName: customProduct },
+    );
+    if (parsed) setCustomParsed(parsed);
+    setParsing(false);
+  }
+
   function repeatQuery() {
-    gaEvent("repeat_query", { source_brand: anchors[0]?.brandId ?? "" });
+    gaEvent("repeat_query", { source_brand: anchors[0]?.brandId ?? customAnchors[0]?.name ?? "" });
     setTargetBrand(null);
-    setReviews("");
     setResult(null);
-    setMining(null);
     setComment(null);
     setAdopted(false);
     setFeedback(null);
     setError(null);
     setCustomOpen(false);
     setCustomName("");
+    setCustomProduct("");
     setCustomText("");
     setCustomParsed(null);
     setCopied(false);
@@ -251,17 +284,22 @@ export function Translator() {
 
   function resetAll() {
     setAnchors([]);
+    setCustomAnchors([]);
     setBrowsing(null);
     setTargetBrand(null);
-    setReviews("");
     setResult(null);
-    setMining(null);
     setComment(null);
     setAdopted(false);
     setFeedback(null);
     setError(null);
+    setC1Open(false);
+    setC1Name("");
+    setC1Product("");
+    setC1Text("");
+    setC1Parsed(null);
     setCustomOpen(false);
     setCustomName("");
+    setCustomProduct("");
     setCustomText("");
     setCustomParsed(null);
     setCopied(false);
@@ -302,7 +340,7 @@ export function Translator() {
               여러 벌 고를수록 추천이 정확해져요. 최대 5벌까지 담을 수 있어요.
             </p>
 
-            {anchors.length > 0 && (
+            {totalAnchors > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
                 {anchors.map((a) => (
                   <span
@@ -314,6 +352,22 @@ export function Translator() {
                       type="button"
                       aria-label="선택 해제"
                       onClick={() => removeAnchor(anchorKey(a))}
+                    >
+                      <X className="size-3.5" aria-hidden="true" />
+                    </button>
+                  </span>
+                ))}
+                {customAnchors.map((c) => (
+                  <span
+                    key={`custom::${c.name}`}
+                    className="flex items-center gap-1.5 rounded-full border border-evidence bg-evidence px-3 py-1.5 text-xs font-medium text-primary-foreground"
+                  >
+                    <Sparkles className="size-3" aria-hidden="true" />
+                    {c.name} <span className="font-mono">{c.size}</span>
+                    <button
+                      type="button"
+                      aria-label="선택 해제"
+                      onClick={() => removeCustomAnchor(c.name)}
                     >
                       <X className="size-3.5" aria-hidden="true" />
                     </button>
@@ -385,12 +439,113 @@ export function Translator() {
               </div>
             )}
 
+            <div className="mt-4 rounded-lg border border-dashed p-4">
+              <button
+                type="button"
+                onClick={() => setC1Open((v) => !v)}
+                className="flex w-full items-center gap-1.5 text-sm font-medium text-evidence"
+              >
+                <Sparkles className="size-4" aria-hidden="true" />
+                내 옷 브랜드가 없나요? AI로 사이즈표 가져오기
+              </button>
+              {c1Open && (
+                <div className="mt-4 space-y-3">
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    <Input
+                      value={c1Name}
+                      onChange={(e) => setC1Name(e.target.value)}
+                      placeholder="브랜드명 (예: 나이키)"
+                    />
+                    <Input
+                      value={c1Product}
+                      onChange={(e) => setC1Product(e.target.value)}
+                      placeholder="상품명 (선택, 예: 드라이핏 티)"
+                    />
+                  </div>
+                  <Button
+                    variant="outline"
+                    disabled={!c1Name.trim() || c1Parsing}
+                    onClick={() => parseChart1("search")}
+                    className="w-full"
+                  >
+                    {c1Parsing ? "웹에서 찾는 중 (1분쯤 걸려요)" : "자동 검색 (베타)"}
+                  </Button>
+                  <textarea
+                    value={c1Text}
+                    onChange={(e) => setC1Text(e.target.value)}
+                    rows={3}
+                    placeholder="또는 상품 페이지의 실측 사이즈표를 복사해서 붙여넣기"
+                    className="w-full rounded-md border bg-background p-3 text-sm outline-none focus:border-primary"
+                  />
+                  {c1Text.trim() && !c1Parsed && (
+                    <Button
+                      variant="outline"
+                      disabled={c1Parsing}
+                      onClick={() => parseChart1("paste")}
+                      className="w-full"
+                    >
+                      {c1Parsing ? "인식 중..." : "붙여넣은 사이즈표 인식"}
+                    </Button>
+                  )}
+                  {c1Parsed && (
+                    <div className="rounded-md border bg-muted/40 p-3 text-sm">
+                      <p className="font-medium">
+                        {c1Parsed.sizes.length}개 사이즈를 찾았어요. 입는 사이즈를 골라주세요:
+                      </p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {c1Parsed.sizes.map((s) => {
+                          const name = c1Name.trim() || "직접 입력";
+                          const selected = customAnchors.some(
+                            (c) => c.name === name && c.size === s.label,
+                          );
+                          return (
+                            <button
+                              key={s.label}
+                              type="button"
+                              onClick={() => addCustomAnchor(name, s.label, s)}
+                              className={`rounded-md border px-3.5 py-2 font-mono text-sm transition-colors ${
+                                selected
+                                  ? "border-primary bg-primary text-primary-foreground"
+                                  : "bg-background hover:bg-muted"
+                              }`}
+                            >
+                              {s.label}
+                              {!selected && <Plus className="ml-1 inline size-3" aria-hidden="true" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      {c1Parsed.note && (
+                        <p className="mt-2 text-xs text-muted-foreground">{c1Parsed.note}</p>
+                      )}
+                      {c1Parsed.sourceUrl && (
+                        <a
+                          href={c1Parsed.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-1 block truncate text-xs text-evidence underline"
+                        >
+                          출처 확인: {c1Parsed.sourceUrl}
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {error && (
+              <p className="mt-4 rounded-md border border-danger/40 bg-danger/5 p-3 text-sm text-danger">
+                {error}
+              </p>
+            )}
+
             <Button
               className="mt-7 h-11 w-full"
-              disabled={anchors.length === 0}
+              disabled={totalAnchors === 0}
               onClick={() => setStep(2)}
             >
-              {anchors.length > 0 ? `${anchors.length}벌로 다음` : "다음"}{" "}
+              {totalAnchors > 0 ? `${totalAnchors}벌로 다음` : "다음"}{" "}
               <ArrowRight data-icon="inline-end" />
             </Button>
           </div>
@@ -448,21 +603,26 @@ export function Translator() {
               </button>
               {customOpen && (
                 <div className="mt-4 space-y-3">
-                  <div className="flex gap-2">
+                  <div className="flex flex-col gap-2 sm:flex-row">
                     <Input
                       value={customName}
                       onChange={(e) => setCustomName(e.target.value)}
                       placeholder="브랜드명 (예: 유니클로)"
                     />
-                    <Button
-                      variant="outline"
-                      disabled={!customName.trim() || parsing}
-                      onClick={() => parseChart("search")}
-                      className="shrink-0"
-                    >
-                      {parsing ? "웹에서 찾는 중 (1분쯤 걸려요)" : "자동 검색 (베타)"}
-                    </Button>
+                    <Input
+                      value={customProduct}
+                      onChange={(e) => setCustomProduct(e.target.value)}
+                      placeholder="상품명 (선택, 예: 에어리즘 크루넥)"
+                    />
                   </div>
+                  <Button
+                    variant="outline"
+                    disabled={!customName.trim() || parsing}
+                    onClick={() => parseChart2("search")}
+                    className="w-full"
+                  >
+                    {parsing ? "웹에서 찾는 중 (1분쯤 걸려요)" : "자동 검색 (베타)"}
+                  </Button>
                   <textarea
                     value={customText}
                     onChange={(e) => setCustomText(e.target.value)}
@@ -471,7 +631,7 @@ export function Translator() {
                     className="w-full rounded-md border bg-background p-3 text-sm outline-none focus:border-primary"
                   />
                   {customText.trim() && !customParsed && (
-                    <Button variant="outline" disabled={parsing} onClick={() => parseChart("paste")} className="w-full">
+                    <Button variant="outline" disabled={parsing} onClick={() => parseChart2("paste")} className="w-full">
                       {parsing ? "인식 중..." : "붙여넣은 사이즈표 인식"}
                     </Button>
                   )}
@@ -500,22 +660,6 @@ export function Translator() {
               )}
             </div>
 
-            <div className="mt-6">
-              <p className="text-sm text-muted-foreground">
-                사려는 상품의 리뷰가 있다면 붙여넣어 주세요. (선택)
-                <span className="block text-xs">
-                  AI가 리뷰 속 &ldquo;크게 나와요&rdquo;, &ldquo;작게 나와요&rdquo; 신호를 찾아드려요.
-                </span>
-              </p>
-              <textarea
-                value={reviews}
-                onChange={(e) => setReviews(e.target.value)}
-                rows={4}
-                placeholder="리뷰 텍스트 붙여넣기 (선택)"
-                className="mt-2 w-full rounded-md border bg-background p-3 text-sm outline-none focus:border-primary"
-              />
-            </div>
-
             {error && (
               <p className="mt-4 rounded-md border border-danger/40 bg-danger/5 p-3 text-sm text-danger">
                 {error}
@@ -527,7 +671,7 @@ export function Translator() {
               disabled={(!targetBrand && !customParsed) || loading}
               onClick={() =>
                 customParsed
-                  ? submit(anchors, null, reviews, {
+                  ? submit(anchors, null, {
                       name: customName.trim() || "직접 입력 브랜드",
                       sizes: customParsed.sizes,
                     })
@@ -569,7 +713,7 @@ export function Translator() {
             )}
 
             <div className="mt-5 rounded-lg border bg-muted/40 p-4">
-              <p className="eyebrow text-muted-foreground">근거 1 · 실측 비교 (cm)</p>
+              <p className="eyebrow text-muted-foreground">근거 · 실측 비교 (cm)</p>
               <table className="mt-3 w-full text-sm">
                 <thead>
                   <tr className="text-left text-xs text-muted-foreground">
@@ -600,30 +744,6 @@ export function Translator() {
                 기준 상품: {result.targetProduct}
               </p>
             </div>
-
-            {mining && (mining.larger + mining.fit + mining.smaller > 0 || mining.quotes.length > 0) && (
-              <div className="mt-4 rounded-lg border bg-muted/40 p-4">
-                <p className="eyebrow flex items-center gap-1.5 text-muted-foreground">
-                  <MessageSquareQuote className="size-3.5" aria-hidden="true" />
-                  근거 2 · 리뷰 핏 신호 (AI 추출)
-                </p>
-                <p className="mt-3 font-mono text-sm">
-                  크게 {mining.larger} · 정사이즈 {mining.fit} · 작게 {mining.smaller}
-                </p>
-                {mining.quotes.length > 0 && (
-                  <ul className="mt-3 space-y-1.5">
-                    {mining.quotes.map((q) => (
-                      <li key={q.text} className="text-sm text-muted-foreground">
-                        &ldquo;{q.text}&rdquo;
-                        <span className="ml-1.5 text-xs text-evidence">
-                          {SIGNAL_LABEL[q.signal] ?? q.signal}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
 
             <div className="mt-7 space-y-3">
               {!adopted ? (
@@ -689,7 +809,7 @@ export function Translator() {
                 <Button variant="ghost" className="h-10 flex-1" onClick={repeatQuery}>
                   <RotateCcw data-icon="inline-start" /> 다른 브랜드도 해보기
                 </Button>
-                {result.targetBrandId !== "custom" && (
+                {result.targetBrandId !== "custom" && customAnchors.length === 0 && (
                   <Button
                     variant="ghost"
                     className="h-10 flex-1"

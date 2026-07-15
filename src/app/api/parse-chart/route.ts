@@ -42,6 +42,8 @@ export async function POST(req: Request) {
   const mode = body?.mode === "search" ? "search" : "paste";
   const text = typeof body?.text === "string" ? body.text.trim() : "";
   const brandName = typeof body?.brandName === "string" ? body.brandName.trim().slice(0, 40) : "";
+  // 상품명까지 주면 "나이키 반팔티" 같은 뭉뚱그린 검색 대신 그 상품의 실측표를 노린다
+  const productName = typeof body?.productName === "string" ? body.productName.trim().slice(0, 60) : "";
 
   if (mode === "paste" && !text) {
     return NextResponse.json({ error: "empty-text" }, { status: 400 });
@@ -76,9 +78,11 @@ export async function POST(req: Request) {
       content = data?.choices?.[0]?.message?.content;
     } else {
       // 검색 각도를 바꿔가며 최대 2회 시도 (공식몰·무신사 → 블로그·리뷰의 실측 인용)
+      const subject = productName ? `"${brandName}"의 상품 "${productName}"` : `브랜드 "${brandName}"의 남성 기본 반팔 티셔츠`;
+      const kw = productName ? `${brandName} ${productName}` : `${brandName} 반팔티`;
       const queries = [
-        `웹 검색을 여러 번 사용해서, 브랜드 "${brandName}"의 남성 기본 반팔 티셔츠 실측 사이즈표(총장·어깨너비·가슴·소매, cm)를 찾아라. 좋은 출처: 브랜드 공식몰 상품 페이지의 사이즈 정보, 무신사 상품 설명, 사이즈 스펙을 그대로 옮겨 적은 쇼핑 블로그·리뷰 글. 페이지 본문에서 실제로 읽은 수치만 쓰고, 검색 결과에 없는 숫자는 절대 만들지 마라. 2개 사이즈만 찾아도 반환하라. sourceUrl 에는 수치를 읽은 페이지 주소를 반드시 적어라.`,
-        `"${brandName} 반팔티 실측" 또는 "${brandName} 티셔츠 사이즈 총장 어깨"로 웹 검색해서, 블로그나 착용 후기에 인용된 실측 사이즈표를 찾아라. 본문에서 실제로 읽은 수치만 쓰고 sourceUrl 을 반드시 채워라. 2개 사이즈 이상이면 반환하라.`,
+        `웹 검색을 여러 번 사용해서, ${subject} 실측 사이즈표(총장·어깨너비·가슴·소매, cm)를 찾아라. 좋은 출처: 브랜드 공식몰 상품 페이지의 사이즈 정보, 무신사 상품 설명, 사이즈 스펙을 그대로 옮겨 적은 쇼핑 블로그·리뷰 글. 페이지 본문에서 실제로 읽은 수치만 쓰고, 검색 결과에 없는 숫자는 절대 만들지 마라. 2개 사이즈만 찾아도 반환하라. sourceUrl 에는 수치를 읽은 페이지 주소를 반드시 적어라. note 에는 어떤 상품의 표인지(상품명)를 적어라.`,
+        `"${kw} 실측" 또는 "${kw} 사이즈 총장 어깨"로 웹 검색해서, 블로그나 착용 후기에 인용된 실측 사이즈표를 찾아라. 본문에서 실제로 읽은 수치만 쓰고 sourceUrl 을 반드시 채워라. 2개 사이즈 이상이면 반환하라. note 에는 어떤 상품의 표인지(상품명)를 적어라.`,
       ];
       // 두 각도를 병렬로 쏘고 먼저 검증을 통과한 응답을 쓴다
       const attempt = async (q: string): Promise<string> => {

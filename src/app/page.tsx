@@ -84,8 +84,8 @@ export default function Home() {
               </p>
               <ul className="mt-3 space-y-1.5 text-xs text-muted-foreground">
                 <li>반팔 티셔츠 48개 브랜드 번역</li>
-                <li>리뷰 속 핏 신호 AI 분석</li>
-                <li>없는 브랜드는 사이즈표 붙여넣기로</li>
+                <li>없는 브랜드는 AI 웹 검색·붙여넣기로</li>
+                <li>사이즈 도우미 챗봇</li>
               </ul>
             </div>
             <div>

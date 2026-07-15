@@ -107,46 +107,58 @@ function sourceRowOf(sourceBrandId: string, sourceSize: string) {
 
 export type Anchor = { brandId: string; size: string };
 
+// 시드에 없는 브랜드의 내 옷: 파싱된 실측 행을 직접 앵커로 쓴다 (Step 1 AI 검색, 2026-07-15)
+export type CustomSource = { name: string; size: string; row: SizeRow };
+
 // 앵커 여러 벌 → 치수별 평균 벡터. 앵커가 많을수록 개별 상품 편차가 상쇄된다 (팀 제안 2026-07-15).
-function meanRow(anchors: Anchor[]): { row: SizeRow; label: string; first: Anchor } {
-  if (anchors.length === 0) throw new TranslateError("unknown-source-brand");
+function meanRow(
+  anchors: Anchor[],
+  customs: CustomSource[] = [],
+): { row: SizeRow; label: string; first: Anchor | null; total: number } {
   const resolved = anchors.map((a) => sourceRowOf(a.brandId, a.size));
+  const rows: SizeRow[] = [...resolved.map((r) => r.row), ...customs.map((c) => c.row)];
+  if (rows.length === 0) throw new TranslateError("unknown-source-brand");
   const dims: DimKey[] = ["chest", "shoulder", "length", "sleeve"];
   const row: SizeRow = { label: "내 옷 평균", length: null, shoulder: null, chest: null, sleeve: null };
   for (const dim of dims) {
-    const vals = resolved.map((r) => r.row[dim]).filter((v): v is number => v != null);
+    const vals = rows.map((r) => r[dim]).filter((v): v is number => v != null);
     if (vals.length > 0) {
       row[dim] = Math.round((vals.reduce((a, b) => a + b, 0) / vals.length) * 10) / 10;
     }
   }
-  const label = resolved.map((r) => `${r.src.name} ${r.row.label}`).join(" + ");
-  return { row, label, first: anchors[0] };
+  const label = [
+    ...resolved.map((r) => `${r.src.name} ${r.row.label}`),
+    ...customs.map((c) => `${c.name} ${c.size}`),
+  ].join(" + ");
+  return { row, label, first: anchors[0] ?? null, total: rows.length };
 }
 
 export function translate(
   anchors: Anchor[],
   targetBrandId: string,
+  customs: CustomSource[] = [],
 ): TranslateResult {
   const tgt = getBrand(targetBrandId);
   if (!tgt) throw new TranslateError("unknown-target-brand");
   if (anchors.some((a) => a.brandId === tgt.id)) throw new TranslateError("same-brand");
-  const { row, label, first } = meanRow(anchors);
+  const { row, label, first, total } = meanRow(anchors, customs);
 
-  const { best, second, margin, comparedDims, confidence } = rank(row, tgt.sizes, anchors.length >= 2);
+  const { best, second, margin, comparedDims, confidence } = rank(row, tgt.sizes, total >= 2);
 
   return {
-    sourceBrandId: first.brandId,
-    sourceBrandName: getBrand(first.brandId)!.name,
-    sourceSize: first.size,
+    sourceBrandId: first?.brandId ?? "custom",
+    sourceBrandName: first ? getBrand(first.brandId)!.name : customs[0].name,
+    sourceSize: first?.size ?? customs[0].size,
     sourceLabel: label,
-    anchorCount: anchors.length,
+    anchorCount: total,
     targetBrandId: tgt.id,
     targetBrandName: tgt.name,
     targetProduct: tgt.product,
     targetUrl: tgt.url,
     recommended: best.label,
     runnerUp: second?.label ?? null,
-    confidence,
+    // 시드 밖 앵커(웹·사용자 제공 실측)가 섞이면 신뢰도 상한을 '보통'으로 캡
+    confidence: customs.length > 0 && confidence === "high" ? "mid" : confidence,
     deltas: best.deltas,
     comparedDims,
     distance: Math.round(best.distance * 100) / 100,
@@ -159,16 +171,17 @@ export function translateCustom(
   anchors: Anchor[],
   customName: string,
   customSizes: SizeRow[],
+  customs: CustomSource[] = [],
 ): TranslateResult {
-  const { row, label, first } = meanRow(anchors);
-  const { best, second, margin, comparedDims, confidence } = rank(row, customSizes, anchors.length >= 2);
+  const { row, label, first, total } = meanRow(anchors, customs);
+  const { best, second, margin, comparedDims, confidence } = rank(row, customSizes, total >= 2);
 
   return {
-    sourceBrandId: first.brandId,
-    sourceBrandName: getBrand(first.brandId)!.name,
-    sourceSize: first.size,
+    sourceBrandId: first?.brandId ?? "custom",
+    sourceBrandName: first ? getBrand(first.brandId)!.name : customs[0].name,
+    sourceSize: first?.size ?? customs[0].size,
     sourceLabel: label,
-    anchorCount: anchors.length,
+    anchorCount: total,
     targetBrandId: "custom",
     targetBrandName: customName,
     targetProduct: "사용자 제공 사이즈표",
