@@ -1,4 +1,5 @@
 import { ArrowDown } from "lucide-react";
+import Image from "next/image";
 
 import { BrandMarquee } from "@/components/brand-marquee";
 import { Button } from "@/components/ui/button";
@@ -13,9 +14,13 @@ export default function Home() {
       <header className="border-b bg-card">
         <div className="mx-auto flex min-h-14 max-w-3xl items-center justify-between px-5 sm:px-8">
           <div className="flex items-center gap-3">
-            <span className="grid size-8 place-items-center rounded-md bg-primary text-xs font-bold text-primary-foreground">
-              너비
-            </span>
+            <Image
+              src="/images/logo-nubi.png"
+              alt="너비 로고"
+              width={217}
+              height={160}
+              className="h-8 w-auto rounded-md"
+            />
             <div>
               <p className="text-sm font-semibold">너비 · 사이즈 번역기</p>
               <p className="font-mono text-[0.65rem] text-muted-foreground">
@@ -33,7 +38,7 @@ export default function Home() {
           <h1 className="text-3xl leading-[1.2] font-semibold tracking-[-0.04em] text-balance sm:text-5xl">
             내 사이즈는 <RotatingLabel />,
             <br />
-            <span className="text-muted-foreground">다음 브랜드에서는 뭘까요?</span>
+            <span className="text-muted-foreground">다른 브랜드에서는 뭘까요?</span>
           </h1>
           <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
             줄자 없이, 잘 맞는 옷 하나만 고르세요.
@@ -59,9 +64,13 @@ export default function Home() {
           <div className="grid gap-8 sm:grid-cols-3">
             <div>
               <p className="flex items-center gap-2 text-sm font-semibold">
-                <span className="grid size-6 place-items-center rounded bg-primary text-[0.6rem] font-bold text-primary-foreground">
-                  너비
-                </span>
+                <Image
+                  src="/images/logo-nubi.png"
+                  alt="너비 로고"
+                  width={217}
+                  height={160}
+                  className="h-6 w-auto rounded"
+                />
                 사이즈 번역기
               </p>
               <p className="mt-3 text-xs leading-5 text-muted-foreground">

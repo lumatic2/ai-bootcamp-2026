@@ -20,6 +20,7 @@
 | 10 | 20260715-nubi-search-fix-interactions | 2026-07-15 | 자동검색 수리·챗봇 tool calling·히어로 인터랙션 A+B | ✅ | passed |
 | 11 | 20260715-nubi-hero-label-polish | 2026-07-15 | 로테이팅 라벨 잘림 수정·헤드라인 문구 교체 | ✅ | passed |
 | 12 | 20260715-nubi-favicon | 2026-07-15 | 너비 측정 심볼 favicon 생성·교체 | ✅ | passed |
+| 13 | 20260715-nubi-brand-assets | 2026-07-15 | favicon 원본 교체·워드마크 로고 반전 적용·헤드라인 조사 수정 | ✅ | passed |
 
 ## 운영 원칙
 
