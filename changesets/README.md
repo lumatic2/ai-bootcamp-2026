@@ -11,6 +11,7 @@
 | 1 | 20260714-bootcamp-foundation | 2026-07-14 | 팀 workflow + web/design starter | ✅ | passed |
 | 2 | 20260714-deployment-architecture | 2026-07-14 | Vercel 호스팅 + Cloudflare DNS 결정 및 OAuth 인증 | ✅ | passed |
 | 3 | 20260715-nubi-mvp-scaffold | 2026-07-15 | 너비 MVP: 3스텝 플로우+번역엔진+시드+GA4 | ✅ | passed |
+| 4 | 20260715-nubi-deploy | 2026-07-15 | Vercel 프로덕션 배포 + 도메인 연결 | ✅ | passed |
 
 ## 운영 원칙
 
