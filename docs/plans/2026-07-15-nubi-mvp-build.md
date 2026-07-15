@@ -1,6 +1,6 @@
 # PLAN — "너비"(사이즈 번역기) MVP 구축·측정 (B2)
 
-Status: proposed
+Status: approved
 
 > 생성: 2026-07-15 · 산출물: mixed (changeset ×2, playbook, experiment evidence) · scope: B2 milestone — 스캐폴딩·배포는 오늘, 구현 완성·측정은 내일 팀 세션
 
@@ -56,11 +56,11 @@ planning_gate:
 - 신뢰도 표현: **상/중/하** (% 금지 — 오답 시 신뢰 손상 관리)
 - 예측 불가 UX: **지원 브랜드 목록을 입력 단계에서 명시** (실패 노출 최소화)
 - 결과 피드백: **"맞았어요/틀렸어요" 버튼 필수** (= 핏 적중률 KPI 수집기)
-- 도박 비용 공유 카드(S5): slice 3 — 여유 시에만, 우선순위 컷 대상
+- 도박 비용 공유 카드(S5): **제외 확정** (2026-07-15 사용자)
 - 데이터: 정적 JSON 시드(E0 수집 9브랜드 + 팀 구글시트 유입분). DB 없음
 - 아키텍처: Next.js 단일앱, API route 2개(`/api/translate`, `/api/mine-reviews`), OpenAI 서버측 호출, Vercel 배포
-- 측정: GA4 이벤트 6종. **측정 ID는 발급 대기** — env 변수 자리만 배선해 진행, ID 도착 즉시 주입 (스캐폴딩 blocker 아님)
-- 펜딩 입력(결정 아님): GA4 측정 ID, 팀 시트의 추가 실측 데이터
+- 측정: GA4 이벤트 6종. 측정 ID **G-42Z5R1WD7Z 확보** (2026-07-15) — env 주입
+- 펜딩 입력(결정 아님): 팀 시트의 추가 실측 데이터 (제작 중 — 도착 시 시드 병합)
 
 ## Step 트리
 - [ ] **step-1-scaffold-changeset** — "너비" MVP 전체 골격을 한 changeset으로 구현한다.
@@ -82,7 +82,7 @@ planning_gate:
   - 파일: `playbooks/mvp-build-day.md`, `playbooks/README.md` 인덱스
   - 의존성: step-1 구조 확정
   - 검증: 시간대별 절차 + thin slice별 완료 기준 + V0/V1 측정 스크립트 + 근거 섹션(리서치 링크) 존재
-  - 실패 검증: 미기입 표식(미정 항목) 검색 0건
+  - 실패 검증: 미기입 표식 검색 0건
   - 커밋 경계: `playbook: mvp build day` 단일 커밋
 - [ ] **step-4-team-build-measure** — (내일, 팀 세션) thin slice 2·3 완성, V0 팀원 교차검증, V1 블라인드 15~20명 배포·측정.
   - 산출물: experiment evidence (`experiments/01-size-translator-accuracy/` V0/V1 데이터)
@@ -109,4 +109,5 @@ planning_gate:
 - 서비스명 확정 시 메타·카피 교체
 
 ## 진행 로그
-- 2026-07-15 plan 작성. 승인 대기.
+- 2026-07-15 plan 작성.
+- 2026-07-15 사용자 승인 — GA4 ID 전달·잔여 결정 확정과 함께 구현 지시("너가 설치해주고").

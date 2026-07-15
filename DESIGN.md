@@ -1,7 +1,7 @@
 ---
-version: "alpha"
-name: Bootcamp Workbench
-description: Provisional neutral system for testing product ideas before the team selects a visual direction.
+version: "1.0"
+name: Neobi Size Translator
+description: Monochrome, measurement-first system for Neobi. Near-black primary follows Korean fashion commerce convention (Musinsa-style) so the tool reads as part of the shopping flow; status colors are reserved for prediction confidence.
 colors:
   primary: "#18181B"
   on-primary: "#FFFFFF"
@@ -88,11 +88,11 @@ components:
 
 ## Overview
 
-Bootcamp Workbench is a deliberately neutral, provisional design system. It should feel clear, calm, and operational so the team can compare ideas without a fashionable visual style deciding the product too early.
+Neobi (너비) translates clothing sizes across brands. The visual system stays monochrome and measurement-first: numbers, tables, and one clear recommendation per screen. Rationale for keeping the near-black palette (2026-07-15 team decision): Korean fashion e-commerce that our persona already trusts (Musinsa) is black-and-white minimal, and a size tool must look like an instrument, not a fashion statement. Trend-styled palettes were rejected because a wrong-but-pretty answer damages trust faster than a plain one.
 
 ## Colors
 
-Use near-black for primary actions and blue only for evidence links, selected states, and measurement signals. Status colors communicate experimental outcomes rather than decoration.
+Use near-black for primary actions and blue only for evidence highlights and selected states. Status colors are reserved for prediction confidence: success = high confidence, warning = medium, danger = low or a measurement gap of 2cm or more. Never use confidence colors decoratively.
 
 ## Typography
 
