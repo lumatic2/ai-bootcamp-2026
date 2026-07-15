@@ -12,3 +12,8 @@ out/
 !.env.example
 *.tsbuildinfo
 next-env.d.ts
+
+.DS_Store
+.playwright-mcp/
+references/*.zip
+references/* 복사본.zip
