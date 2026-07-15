@@ -33,10 +33,10 @@ export default function Home() {
             <br />
             <span className="text-muted-foreground">잘 맞는 옷 하나로</span> 사이즈를 번역합니다
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">
-            같은 M이라도 브랜드마다 가슴단면이 5cm까지 다릅니다. 내 몸 치수를 몰라도 괜찮아요.
-            지금 잘 맞는 옷의 브랜드와 사이즈만 고르면, 처음 사는 브랜드에서 몇을 사야 할지
-            실측 데이터와 리뷰로 알려드립니다.
+          <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
+            같은 M도 브랜드마다 크기는 제각각입니다.
+            <br />
+            잘 맞는 옷 하나만 고르세요. 나머지는 너비가 찾아드려요.
           </p>
           <div className="mt-7">
             <Button className="h-10 px-4" size="lg" nativeButton={false} render={<a href="#translate" />}>

@@ -16,6 +16,7 @@
 | 6 | 20260715-nubi-share-polish | 2026-07-15 | OG·공유URL·QR·GA 실수신 검증 | ✅ | passed |
 | 7 | 20260715-nubi-ui-llm-expand | 2026-07-15 | 미지원 브랜드 LLM 파싱·로그인 껍데기·브랜드 검색·GA 문서 | ✅ | passed |
 | 8 | 20260715-nubi-v2-multianchor-ai | 2026-07-15 | 다중 앵커·AI 핏코멘트·챗봇·카피 정리·푸터 | ✅ | passed |
+| 9 | 20260715-nubi-polish2 | 2026-07-15 | 히어로 카피 압축·LOGIN 텍스트·소셜 로그인 모달·이미지 보관 | ✅ | passed |
 
 ## 운영 원칙
 
