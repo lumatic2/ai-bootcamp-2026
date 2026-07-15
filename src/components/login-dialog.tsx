@@ -76,7 +76,7 @@ export function LoginDialog() {
               카카오로 3초 만에 시작
             </Button>
             <p className="text-center text-xs text-muted-foreground">
-              데모 버전 — 계정 없이도 모든 기능을 쓸 수 있어요.
+              데모 버전이라 계정 없이도 모든 기능을 쓸 수 있어요.
             </p>
           </form>
         )}
