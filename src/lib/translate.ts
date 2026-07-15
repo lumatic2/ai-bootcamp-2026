@@ -68,20 +68,8 @@ function score(source: SizeRow, target: SizeRow) {
   return { distance: acc / weightSum, deltas };
 }
 
-export function translate(
-  sourceBrandId: string,
-  sourceSize: string,
-  targetBrandId: string,
-): TranslateResult {
-  const src = getBrand(sourceBrandId);
-  if (!src) throw new TranslateError("unknown-source-brand");
-  const row = src.sizes.find((s) => s.label === sourceSize);
-  if (!row) throw new TranslateError("unknown-source-size");
-  const tgt = getBrand(targetBrandId);
-  if (!tgt) throw new TranslateError("unknown-target-brand");
-  if (src.id === tgt.id) throw new TranslateError("same-brand");
-
-  const scored = tgt.sizes
+function rank(row: SizeRow, targetSizes: SizeRow[]) {
+  const scored = targetSizes
     .map((t) => {
       const s = score(row, t);
       return s ? { label: t.label, ...s } : null;
@@ -101,6 +89,29 @@ export function translate(
   if (best.distance <= 0.8 && margin >= 0.5 && comparedDims >= 3) confidence = "high";
   else if (best.distance > 1.8 || comparedDims <= 1 || margin < 0.25) confidence = "low";
 
+  return { best, second, margin, comparedDims, confidence };
+}
+
+function sourceRowOf(sourceBrandId: string, sourceSize: string) {
+  const src = getBrand(sourceBrandId);
+  if (!src) throw new TranslateError("unknown-source-brand");
+  const row = src.sizes.find((s) => s.label === sourceSize);
+  if (!row) throw new TranslateError("unknown-source-size");
+  return { src, row };
+}
+
+export function translate(
+  sourceBrandId: string,
+  sourceSize: string,
+  targetBrandId: string,
+): TranslateResult {
+  const { src, row } = sourceRowOf(sourceBrandId, sourceSize);
+  const tgt = getBrand(targetBrandId);
+  if (!tgt) throw new TranslateError("unknown-target-brand");
+  if (src.id === tgt.id) throw new TranslateError("same-brand");
+
+  const { best, second, margin, comparedDims, confidence } = rank(row, tgt.sizes);
+
   return {
     sourceBrandId: src.id,
     sourceBrandName: src.name,
@@ -112,6 +123,35 @@ export function translate(
     recommended: best.label,
     runnerUp: second?.label ?? null,
     confidence,
+    deltas: best.deltas,
+    comparedDims,
+    distance: Math.round(best.distance * 100) / 100,
+    margin: second ? Math.round(margin * 100) / 100 : -1,
+  };
+}
+
+// 시드에 없는 브랜드 — LLM이 파싱한 사이즈표를 대상으로 번역 (/api/parse-chart 경유)
+export function translateCustom(
+  sourceBrandId: string,
+  sourceSize: string,
+  customName: string,
+  customSizes: SizeRow[],
+): TranslateResult {
+  const { src, row } = sourceRowOf(sourceBrandId, sourceSize);
+  const { best, second, margin, comparedDims, confidence } = rank(row, customSizes);
+
+  return {
+    sourceBrandId: src.id,
+    sourceBrandName: src.name,
+    sourceSize: row.label,
+    targetBrandId: "custom",
+    targetBrandName: customName,
+    targetProduct: "사용자 제공 사이즈표",
+    targetUrl: "",
+    recommended: best.label,
+    runnerUp: second?.label ?? null,
+    // 사용자/웹 제공 표는 검증 안 된 데이터 — 신뢰도 상한을 '보통'으로 캡
+    confidence: confidence === "high" ? "mid" : confidence,
     deltas: best.deltas,
     comparedDims,
     distance: Math.round(best.distance * 100) / 100,

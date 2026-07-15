@@ -1,11 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, MessageSquareQuote, RotateCcw, X } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  Link2,
+  MessageSquareQuote,
+  RotateCcw,
+  Search,
+  Sparkles,
+  X,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { gaEvent } from "@/lib/ga";
-import { brands, DIM_LABELS, getBrand } from "@/lib/sizecharts";
+import { brands, DIM_LABELS, getBrand, type SizeRow } from "@/lib/sizecharts";
 import type { Confidence, TranslateResult } from "@/lib/translate";
 
 type Mining = {
@@ -14,6 +25,8 @@ type Mining = {
   smaller: number;
   quotes: { text: string; signal: string }[];
 };
+
+type ParsedChart = { sizes: SizeRow[]; note: string; sourceUrl: string };
 
 const CONFIDENCE_UI: Record<Confidence, { label: string; className: string }> = {
   high: { label: "신뢰도 높음", className: "bg-success text-primary-foreground" },
@@ -39,6 +52,14 @@ export function Translator() {
   const [error, setError] = useState<string | null>(null);
   const [adopted, setAdopted] = useState(false);
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
+  const [filter1, setFilter1] = useState("");
+  const [filter2, setFilter2] = useState("");
+  const [customOpen, setCustomOpen] = useState(false);
+  const [customName, setCustomName] = useState("");
+  const [customText, setCustomText] = useState("");
+  const [customParsed, setCustomParsed] = useState<ParsedChart | null>(null);
+  const [parsing, setParsing] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const startedRef = useRef(false);
   const mountedAtRef = useRef<number>(0);
@@ -76,8 +97,9 @@ export function Translator() {
     ss: string | null = sourceSize,
     tb: string | null = targetBrand,
     reviewText: string = reviews,
+    custom: { name: string; sizes: SizeRow[] } | null = null,
   ) {
-    if (!sb || !ss || !tb) return;
+    if (!sb || !ss || (!tb && !custom)) return;
     setLoading(true);
     setError(null);
     setMining(null);
@@ -85,7 +107,11 @@ export function Translator() {
     const translateReq = fetch("/api/translate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sourceBrand: sb, sourceSize: ss, targetBrand: tb }),
+      body: JSON.stringify(
+        custom
+          ? { sourceBrand: sb, sourceSize: ss, targetCustom: custom }
+          : { sourceBrand: sb, sourceSize: ss, targetBrand: tb },
+      ),
     });
     const miningReq = reviewText.trim()
       ? fetch("/api/mine-reviews", {
@@ -106,9 +132,12 @@ export function Translator() {
       const data: TranslateResult = await res.json();
       setResult(data);
       setStep(3);
-      // 결과를 URL로 재현·공유 가능하게 (카톡 공유 → 동일 결과 자동 재생)
-      const qs = new URLSearchParams({ from: sb, size: ss, to: tb }).toString();
-      window.history.replaceState(null, "", `?${qs}#translate`);
+      setCopied(false);
+      // 결과를 URL로 재현·공유 가능하게 (커스텀 표는 URL 재현 불가라 제외)
+      if (!custom && tb) {
+        const qs = new URLSearchParams({ from: sb, size: ss, to: tb }).toString();
+        window.history.replaceState(null, "", `?${qs}#translate`);
+      }
       gaEvent("view_result", {
         source_brand: data.sourceBrandId,
         target_brand: data.targetBrandId,
@@ -129,6 +158,35 @@ export function Translator() {
     }
   }
 
+  async function parseChart(mode: "paste" | "search") {
+    setParsing(true);
+    setError(null);
+    setCustomParsed(null);
+    try {
+      const res = await fetch("/api/parse-chart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(
+          mode === "paste" ? { mode, text: customText } : { mode, brandName: customName },
+        ),
+      });
+      if (!res.ok) {
+        gaEvent("predict_unavailable", { reason: `parse-${mode}` });
+        setError(
+          mode === "search"
+            ? "자동으로 못 찾았어요. 상품 페이지의 사이즈표를 복사해 붙여넣어 주세요."
+            : "사이즈표를 인식하지 못했어요. 실측 표 부분만 복사해서 다시 붙여넣어 주세요.",
+        );
+        return;
+      }
+      setCustomParsed(await res.json());
+    } catch {
+      setError("네트워크 오류가 났어요. 다시 시도해 주세요.");
+    } finally {
+      setParsing(false);
+    }
+  }
+
   function repeatQuery() {
     gaEvent("repeat_query", { source_brand: sourceBrand ?? "" });
     setTargetBrand(null);
@@ -138,6 +196,13 @@ export function Translator() {
     setAdopted(false);
     setFeedback(null);
     setError(null);
+    setCustomOpen(false);
+    setCustomName("");
+    setCustomText("");
+    setCustomParsed(null);
+    setCopied(false);
+    setFilter2("");
+    window.history.replaceState(null, "", window.location.pathname + "#translate");
     setStep(2);
   }
 
@@ -181,8 +246,17 @@ export function Translator() {
               지금 갖고 있는 옷 중, <span className="text-evidence">제일 잘 맞는 반팔티</span>는
               어느 브랜드인가요?
             </h2>
-            <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
-              {brands.map((b) => (
+            <div className="relative mt-5">
+              <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+              <Input
+                value={filter1}
+                onChange={(e) => setFilter1(e.target.value)}
+                placeholder={`브랜드 검색 (${brands.length}개 지원)`}
+                className="pl-9"
+              />
+            </div>
+            <div className="mt-3 grid max-h-64 grid-cols-2 gap-2 overflow-y-auto sm:grid-cols-3">
+              {brands.filter((b) => b.name.toLowerCase().includes(filter1.trim().toLowerCase())).map((b) => (
                 <button
                   key={b.id}
                   type="button"
@@ -235,14 +309,28 @@ export function Translator() {
             <h2 className="text-xl font-semibold">
               어느 브랜드 반팔티를 <span className="text-evidence">사려고</span> 하나요?
             </h2>
-            <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            <div className="relative mt-5">
+              <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+              <Input
+                value={filter2}
+                onChange={(e) => setFilter2(e.target.value)}
+                placeholder={`브랜드 검색 (${brands.length}개 지원)`}
+                className="pl-9"
+              />
+            </div>
+            <div className="mt-3 grid max-h-64 grid-cols-2 gap-2 overflow-y-auto sm:grid-cols-3">
               {brands
                 .filter((b) => b.id !== sourceBrand)
+                .filter((b) => b.name.toLowerCase().includes(filter2.trim().toLowerCase()))
                 .map((b) => (
                   <button
                     key={b.id}
                     type="button"
-                    onClick={() => setTargetBrand(b.id)}
+                    onClick={() => {
+                      setTargetBrand(b.id);
+                      setCustomOpen(false);
+                      setCustomParsed(null);
+                    }}
                     className={`rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${
                       targetBrand === b.id
                         ? "border-primary bg-primary text-primary-foreground"
@@ -252,6 +340,72 @@ export function Translator() {
                     {b.name}
                   </button>
                 ))}
+            </div>
+
+            <div className="mt-4 rounded-lg border border-dashed p-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setCustomOpen((v) => !v);
+                  if (!customOpen) setTargetBrand(null);
+                }}
+                className="flex w-full items-center gap-1.5 text-sm font-medium text-evidence"
+              >
+                <Sparkles className="size-4" aria-hidden="true" />
+                찾는 브랜드가 없나요? AI로 사이즈표 가져오기
+              </button>
+              {customOpen && (
+                <div className="mt-4 space-y-3">
+                  <div className="flex gap-2">
+                    <Input
+                      value={customName}
+                      onChange={(e) => setCustomName(e.target.value)}
+                      placeholder="브랜드명 (예: 유니클로)"
+                    />
+                    <Button
+                      variant="outline"
+                      disabled={!customName.trim() || parsing}
+                      onClick={() => parseChart("search")}
+                      className="shrink-0"
+                    >
+                      {parsing ? "찾는 중..." : "자동 검색 (베타)"}
+                    </Button>
+                  </div>
+                  <textarea
+                    value={customText}
+                    onChange={(e) => setCustomText(e.target.value)}
+                    rows={3}
+                    placeholder="또는 상품 페이지의 실측 사이즈표를 복사해 붙여넣기"
+                    className="w-full rounded-md border bg-background p-3 text-sm outline-none focus:border-primary"
+                  />
+                  {customText.trim() && !customParsed && (
+                    <Button variant="outline" disabled={parsing} onClick={() => parseChart("paste")} className="w-full">
+                      {parsing ? "인식 중..." : "붙여넣은 사이즈표 인식"}
+                    </Button>
+                  )}
+                  {customParsed && (
+                    <div className="rounded-md border bg-muted/40 p-3 text-sm">
+                      <p className="font-medium">
+                        ✓ {customParsed.sizes.length}개 사이즈 인식됨 (
+                        {customParsed.sizes.map((s) => s.label).join(" · ")})
+                      </p>
+                      {customParsed.note && (
+                        <p className="mt-1 text-xs text-muted-foreground">{customParsed.note}</p>
+                      )}
+                      {customParsed.sourceUrl && (
+                        <a
+                          href={customParsed.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-1 block truncate text-xs text-evidence underline"
+                        >
+                          출처 확인: {customParsed.sourceUrl}
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="mt-6">
@@ -276,8 +430,15 @@ export function Translator() {
 
             <Button
               className="mt-7 h-11 w-full"
-              disabled={!targetBrand || loading}
-              onClick={() => submit()}
+              disabled={(!targetBrand && !customParsed) || loading}
+              onClick={() =>
+                customParsed
+                  ? submit(sourceBrand, sourceSize, null, reviews, {
+                      name: customName.trim() || "직접 입력 브랜드",
+                      sizes: customParsed.sizes,
+                    })
+                  : submit()
+              }
             >
               {loading ? "번역 중..." : "사이즈 번역하기"}
               {!loading && <ArrowRight data-icon="inline-end" />}
@@ -422,9 +583,22 @@ export function Translator() {
                 )}
               </div>
 
-              <Button variant="ghost" className="h-10 w-full" onClick={repeatQuery}>
-                <RotateCcw data-icon="inline-start" /> 다른 브랜드도 해보기
-              </Button>
+              <div className="flex gap-2">
+                <Button variant="ghost" className="h-10 flex-1" onClick={repeatQuery}>
+                  <RotateCcw data-icon="inline-start" /> 다른 브랜드도 해보기
+                </Button>
+                {result.targetBrandId !== "custom" && (
+                  <Button
+                    variant="ghost"
+                    className="h-10 flex-1"
+                    onClick={() => {
+                      navigator.clipboard.writeText(window.location.href).then(() => setCopied(true));
+                    }}
+                  >
+                    <Link2 data-icon="inline-start" /> {copied ? "복사됨!" : "결과 링크 복사"}
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         )}

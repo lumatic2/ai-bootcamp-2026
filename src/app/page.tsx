@@ -1,6 +1,7 @@
 import { ArrowDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { LoginDialog } from "@/components/login-dialog";
 import { Translator } from "@/components/translator";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
               </p>
             </div>
           </div>
+          <LoginDialog />
         </div>
       </header>
 
