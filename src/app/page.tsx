@@ -33,7 +33,7 @@ export default function Home() {
           <h1 className="text-3xl leading-[1.2] font-semibold tracking-[-0.04em] text-balance sm:text-5xl">
             내 사이즈는 <RotatingLabel />,
             <br />
-            <span className="text-muted-foreground">브랜드마다 이름만 다릅니다</span>
+            <span className="text-muted-foreground">다음 브랜드에서는 뭘까요?</span>
           </h1>
           <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
             줄자 없이, 잘 맞는 옷 하나만 고르세요.

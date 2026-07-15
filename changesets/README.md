@@ -18,6 +18,8 @@
 | 8 | 20260715-nubi-v2-multianchor-ai | 2026-07-15 | 다중 앵커·AI 핏코멘트·챗봇·카피 정리·푸터 | ✅ | passed |
 | 9 | 20260715-nubi-polish2 | 2026-07-15 | 히어로 카피 압축·LOGIN 텍스트·소셜 로그인 모달·이미지 보관 | ✅ | passed |
 | 10 | 20260715-nubi-search-fix-interactions | 2026-07-15 | 자동검색 수리·챗봇 tool calling·히어로 인터랙션 A+B | ✅ | passed |
+| 11 | 20260715-nubi-hero-label-polish | 2026-07-15 | 로테이팅 라벨 잘림 수정·헤드라인 문구 교체 | ✅ | passed |
+| 11 | 20260715-nubi-favicon | 2026-07-15 | 너비 측정 심볼 favicon 생성·교체 | 0/5 | in_progress |
 
 ## 운영 원칙
 
