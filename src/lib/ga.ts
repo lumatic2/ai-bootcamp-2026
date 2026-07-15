@@ -1,5 +1,6 @@
-// GA4 이벤트 헬퍼 — KPI 6종 계약: docs/presentation-2026-07-15.md §3
-// start_input · view_result · adopt_size · feedback_fit · repeat_query · predict_unavailable
+// GA4 이벤트 헬퍼 — KPI 계약: docs/presentation-2026-07-15.md §3
+// 핵심 6종: start_input · view_result · adopt_size · feedback_fit · repeat_query · predict_unavailable
+// 부가 3종: view_grid(전 브랜드 그리드) · mall_referral(몰 유입) · outbound_click(판매처 유출)
 
 type GaParams = Record<string, string | number | boolean>;
 
@@ -15,7 +16,10 @@ export type GaEventName =
   | "adopt_size"
   | "feedback_fit"
   | "repeat_query"
-  | "predict_unavailable";
+  | "predict_unavailable"
+  | "view_grid"
+  | "mall_referral"
+  | "outbound_click";
 
 export function gaEvent(name: GaEventName, params: GaParams = {}) {
   if (typeof window === "undefined") return;

@@ -14,7 +14,7 @@ export function RotatingLabel() {
   }, []);
 
   return (
-    <span className="inline-grid w-[3.4ch] place-items-center overflow-hidden align-baseline font-mono">
+    <span className="inline-grid w-[3.4ch] place-items-center overflow-hidden align-baseline font-mono shadow-[inset_0_-0.16em_0_0_var(--signal)]">
       <span key={index} className="animate-label-swap inline-block">
         {LABELS[index]}
       </span>

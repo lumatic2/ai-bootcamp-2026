@@ -7,9 +7,14 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-geist-sans);
+  --font-sans:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-mono:
+    var(--font-space-grotesk), "Pretendard Variable", Pretendard, ui-monospace, monospace;
+  --font-heading:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -29,6 +34,11 @@
   --color-evidence: var(--evidence);
   --color-success: var(--success);
   --color-warning: var(--warning);
+  --color-signal: var(--signal);
+  --color-signal-soft: var(--signal-soft);
+  --color-match-high: var(--match-high);
+  --color-match-mid: var(--match-mid);
+  --color-match-low: var(--match-low);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -36,28 +46,35 @@
   --radius-2xl: calc(var(--radius) * 1.8);
 }
 
+/* 팀 디자인 스펙(references/nubi-style-spec/SPEC.md) 기반 리스킨 2026-07-15:
+   오프화이트 canvas + 검정 잉크 + 신호용 라임. 라임은 선택·적합도·핵심 강조에만 쓴다. */
 :root {
-  --background: #fafafa;
-  --foreground: #18181b;
+  --background: #f6f6f0;
+  --foreground: #141414;
   --card: #ffffff;
-  --card-foreground: #18181b;
+  --card-foreground: #141414;
   --popover: #ffffff;
-  --popover-foreground: #18181b;
-  --primary: #18181b;
+  --popover-foreground: #141414;
+  --primary: #141414;
   --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #18181b;
-  --muted: #f4f4f5;
-  --muted-foreground: #52525b;
-  --accent: #dbeafe;
-  --accent-foreground: #1d4ed8;
-  --destructive: #b91c1c;
-  --border: #d4d4d8;
-  --input: #d4d4d8;
-  --ring: #2563eb;
-  --evidence: #2563eb;
-  --success: #15803d;
-  --warning: #b45309;
+  --secondary: #efefe8;
+  --secondary-foreground: #141414;
+  --muted: #efefe8;
+  --muted-foreground: #71716b;
+  --accent: #e7e7df;
+  --accent-foreground: #141414;
+  --destructive: #c83f34;
+  --border: #deded6;
+  --input: #bdbdb4;
+  --ring: #5367ff;
+  --evidence: #141414;
+  --success: #18845b;
+  --warning: #b56c13;
+  --signal: #c8ff3d;
+  --signal-soft: #efffc7;
+  --match-high: #b7ef36;
+  --match-mid: #ffd76a;
+  --match-low: #e4e4dc;
   --radius: 0.625rem;
 }
 
@@ -75,7 +92,7 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--evidence) 20%, transparent);
+    background: color-mix(in srgb, var(--signal) 45%, transparent);
   }
 }
 

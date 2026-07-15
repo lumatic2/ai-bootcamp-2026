@@ -22,6 +22,8 @@
 | 12 | 20260715-nubi-favicon | 2026-07-15 | 너비 측정 심볼 favicon 생성·교체 | ✅ | passed |
 | 13 | 20260715-nubi-brand-assets | 2026-07-15 | favicon 원본 교체·워드마크 로고 반전 적용·헤드라인 조사 수정 | ✅ | passed |
 | 14 | 20260715-nubi-step1-search | 2026-07-15 | favicon 원복·Step1 AI 검색(커스텀 앵커)·리뷰 입력 제거·상품명 검색 | ✅ | passed |
+| 15 | 20260715-nubi-icon-b | 2026-07-15 | 시안 B 화살표 SVG 파비콘 설치 | ✅ | passed |
+| 16 | 20260715-nubi-spec-adoption | 2026-07-15 | 팀 스펙 채택: 풀 리스킨·48브랜드 그리드·몰 연결고리 | ✅ | passed |
 
 ## 운영 원칙
 

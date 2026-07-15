@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
   Check,
+  ExternalLink,
   Link2,
   Plus,
   RotateCcw,
@@ -17,18 +18,35 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { gaEvent } from "@/lib/ga";
 import { brands, DIM_LABELS, getBrand, type SizeRow } from "@/lib/sizecharts";
-import type { Anchor, Confidence, TranslateResult } from "@/lib/translate";
+import {
+  translate,
+  type Anchor,
+  type Confidence,
+  type CustomSource,
+  type TranslateResult,
+} from "@/lib/translate";
 
 type ParsedChart = { sizes: SizeRow[]; note: string; sourceUrl: string };
 
 // 시드에 없는 브랜드의 내 옷: 파싱된 실측 행을 직접 앵커로 (Step 1 AI 검색)
 type CustomAnchor = { name: string; size: string; row: SizeRow };
 
+// 스펙 원칙: 낮은 적합도를 오류(빨강)처럼 칠하지 않는다 — 라임/노랑/중립 회색 3단
 const CONFIDENCE_UI: Record<Confidence, { label: string; className: string }> = {
-  high: { label: "신뢰도 높음", className: "bg-success text-primary-foreground" },
-  mid: { label: "신뢰도 보통", className: "bg-warning text-primary-foreground" },
-  low: { label: "신뢰도 낮음", className: "bg-danger text-primary-foreground" },
+  high: { label: "신뢰도 높음", className: "bg-match-high text-foreground" },
+  mid: { label: "신뢰도 보통", className: "bg-match-mid text-foreground" },
+  low: { label: "신뢰도 낮음", className: "bg-match-low text-foreground" },
 };
+
+// 적합도: 가중 실측 거리(distance)를 사용자가 읽을 수 있는 %로 변환 (스펙 §13)
+function fitPercent(distance: number) {
+  return Math.max(45, Math.min(100, Math.round(100 - distance * 12.5)));
+}
+function fitLabel(pct: number) {
+  if (pct >= 90) return { text: "매우 비슷해요", className: "bg-match-high text-foreground" };
+  if (pct >= 75) return { text: "비슷한 편이에요", className: "bg-match-mid text-foreground" };
+  return { text: "차이가 있어요", className: "bg-match-low text-foreground" };
+}
 
 function anchorKey(a: Anchor) {
   return `${a.brandId}::${a.size}`;
@@ -65,6 +83,7 @@ export function Translator() {
   const [copied, setCopied] = useState(false);
 
   const totalAnchors = anchors.length + customAnchors.length;
+  const [gridOpen, setGridOpen] = useState(false);
 
   const startedRef = useRef(false);
   const mountedAtRef = useRef<number>(0);
@@ -97,10 +116,46 @@ export function Translator() {
         void submit(shared, to);
       }, 0);
     }
+    // 몰 → 너비 딥링크: ?target=<brandId> 로 들어오면 사려는 브랜드를 미리 선택 (docs/mall-integration.md)
+    const presetTarget = params.get("target");
+    if (shared.length === 0 && presetTarget && getBrand(presetTarget)) {
+      setTimeout(() => {
+        setTargetBrand(presetTarget);
+        gaEvent("mall_referral", { target: presetTarget });
+      }, 0);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const browsingBrand = browsing ? getBrand(browsing) : undefined;
+
+  // 결과 화면: 전 브랜드 일괄 번역 — 엔진을 클라이언트에서 직접 돌려 적합도순 그리드 (팀 스펙 §11)
+  const gridRows = useMemo(() => {
+    if (step !== 3 || totalAnchors === 0) return [];
+    const customs: CustomSource[] = customAnchors.map((c) => ({
+      name: c.name,
+      size: c.size,
+      row: c.row,
+    }));
+    return brands
+      .filter((b) => !anchors.some((a) => a.brandId === b.id))
+      .map((b) => {
+        try {
+          return translate(anchors, b.id, customs);
+        } catch {
+          return null;
+        }
+      })
+      .filter((r): r is TranslateResult => r !== null)
+      .sort((a, b) => a.distance - b.distance);
+  }, [step, anchors, customAnchors, totalAnchors]);
+
+  useEffect(() => {
+    if (step === 3 && gridRows.length > 0) {
+      gaEvent("view_grid", { count: gridRows.length });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
 
   function markStarted() {
     if (!startedRef.current) {
@@ -312,28 +367,36 @@ export function Translator() {
   return (
     <section id="translate" className="mx-auto w-full max-w-xl px-5 py-10 sm:px-0">
       <div className="rounded-xl border bg-card p-5 sm:p-7">
-        <div className="mb-6 flex items-center justify-between">
-          <p className="eyebrow text-evidence">
-            {step === 1 && "STEP 1 / 3 · 잘 맞는 옷"}
-            {step === 2 && "STEP 2 / 3 · 사려는 옷"}
-            {step === 3 && "STEP 3 / 3 · 번역 결과"}
-          </p>
-          {step > 1 && (
-            <button
-              type="button"
-              onClick={() => (step === 3 ? repeatQuery() : resetAll())}
-              className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-            >
-              <ArrowLeft className="size-3.5" aria-hidden="true" />
-              {step === 3 ? "다시 고르기" : "처음으로"}
-            </button>
-          )}
+        <div className="mb-6">
+          <div className="flex items-center justify-between">
+            <p className="eyebrow text-evidence">
+              {step === 1 && "STEP 1 / 3 · 잘 맞는 옷"}
+              {step === 2 && "STEP 2 / 3 · 사려는 옷"}
+              {step === 3 && "STEP 3 / 3 · 번역 결과"}
+            </p>
+            {step > 1 && (
+              <button
+                type="button"
+                onClick={() => (step === 3 ? repeatQuery() : resetAll())}
+                className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+              >
+                <ArrowLeft className="size-3.5" aria-hidden="true" />
+                {step === 3 ? "다시 고르기" : "처음으로"}
+              </button>
+            )}
+          </div>
+          <div className="mt-3 h-1 rounded-full bg-secondary">
+            <div
+              className="h-1 rounded-full bg-signal transition-[width] duration-[220ms]"
+              style={{ width: `${(step / 3) * 100}%` }}
+            />
+          </div>
         </div>
 
         {step === 1 && (
           <div>
             <h2 className="text-xl font-semibold">
-              지금 갖고 있는 옷 중에서 <span className="text-evidence">제일 잘 맞는 반팔티</span>를
+              지금 갖고 있는 옷 중에서 <span className="bg-signal px-1">제일 잘 맞는 반팔티</span>를
               골라주세요
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
@@ -554,7 +617,7 @@ export function Translator() {
         {step === 2 && (
           <div>
             <h2 className="text-xl font-semibold">
-              어느 브랜드 반팔티를 <span className="text-evidence">사려고</span> 하나요?
+              어느 브랜드 반팔티를 <span className="bg-signal px-1">사려고</span> 하나요?
             </h2>
             <div className="relative mt-5">
               <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
@@ -678,7 +741,7 @@ export function Translator() {
                   : submit()
               }
             >
-              {loading ? "번역하는 중..." : "사이즈 번역하기"}
+              {loading ? "실측 비교 중 (가슴·어깨·총장·소매)..." : "사이즈 번역하기"}
               {!loading && <ArrowRight data-icon="inline-end" />}
             </Button>
           </div>
@@ -706,8 +769,8 @@ export function Translator() {
             )}
 
             {comment && (
-              <p className="mt-4 flex items-start gap-2 rounded-lg border border-evidence/30 bg-evidence/5 p-3 text-sm leading-6">
-                <Sparkles className="mt-0.5 size-4 shrink-0 text-evidence" aria-hidden="true" />
+              <p className="mt-4 flex items-start gap-2 rounded-lg bg-signal-soft p-3 text-sm leading-6">
+                <Sparkles className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
                 {comment}
               </p>
             )}
@@ -732,17 +795,34 @@ export function Translator() {
                       <td className="py-1.5">{d.source}</td>
                       <td className="py-1.5">{d.target}</td>
                       <td
-                        className={`py-1.5 ${Math.abs(d.delta) >= 2 ? "text-danger" : "text-muted-foreground"}`}
+                        className={`py-1.5 ${Math.abs(d.delta) >= 2 ? "font-semibold text-foreground" : "text-muted-foreground"}`}
                       >
-                        {d.delta > 0 ? `+${d.delta}` : d.delta}
+                        {Math.abs(d.delta) <= 0.5 ? "거의 같음" : d.delta > 0 ? `+${d.delta}` : d.delta}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <p className="mt-2 text-xs text-muted-foreground">
-                기준 상품: {result.targetProduct}
-              </p>
+              <div className="mt-2 flex items-center justify-between gap-2">
+                <p className="text-xs text-muted-foreground">기준 상품: {result.targetProduct}</p>
+                {result.targetUrl && (
+                  <a
+                    href={result.targetUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      let host = "";
+                      try {
+                        host = new URL(result.targetUrl).hostname;
+                      } catch {}
+                      gaEvent("outbound_click", { target_brand: result.targetBrandId, url_host: host });
+                    }}
+                    className="flex shrink-0 items-center gap-1 rounded-sm border bg-card px-2.5 py-1.5 text-xs font-medium hover:bg-muted"
+                  >
+                    판매처에서 보기 <ExternalLink className="size-3" aria-hidden="true" />
+                  </a>
+                )}
+              </div>
             </div>
 
             <div className="mt-7 space-y-3">
@@ -822,6 +902,65 @@ export function Translator() {
                 )}
               </div>
             </div>
+
+            {gridRows.length > 0 && (
+              <div className="mt-8 border-t pt-6">
+                <p className="eyebrow text-muted-foreground">전 브랜드 한눈에 · 적합도순</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  같은 기준 옷으로 {gridRows.length}개 브랜드를 한 번에 번역했어요. 카드를 누르면
+                  상세 비교로 바뀝니다.
+                </p>
+                <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  {(gridOpen ? gridRows : gridRows.slice(0, 9)).map((r) => {
+                    const pct = fitPercent(r.distance);
+                    const fl = fitLabel(pct);
+                    const chest = r.deltas.find((d) => d.dim === "chest");
+                    return (
+                      <button
+                        key={r.targetBrandId}
+                        type="button"
+                        onClick={() => {
+                          setTargetBrand(r.targetBrandId);
+                          void submit(anchors, r.targetBrandId);
+                        }}
+                        className={`rounded-md border p-3 text-left transition-colors hover:bg-muted ${
+                          r.targetBrandId === result.targetBrandId
+                            ? "border-primary bg-background"
+                            : "bg-background"
+                        }`}
+                      >
+                        <p className="truncate text-xs font-semibold">{r.targetBrandName}</p>
+                        <p className="mt-1 font-mono text-lg leading-none font-semibold">
+                          {r.recommended}
+                        </p>
+                        <span
+                          className={`mt-2 inline-block rounded-xs px-1.5 py-0.5 text-[0.65rem] font-semibold ${fl.className}`}
+                        >
+                          {pct}% · {fl.text}
+                        </span>
+                        {chest && (
+                          <p className="mt-1.5 text-[0.7rem] text-muted-foreground">
+                            가슴{" "}
+                            {Math.abs(chest.delta) <= 0.5
+                              ? "거의 같음"
+                              : `${chest.delta > 0 ? "+" : ""}${chest.delta}cm`}
+                          </p>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+                {gridRows.length > 9 && (
+                  <Button
+                    variant="ghost"
+                    className="mt-3 h-10 w-full"
+                    onClick={() => setGridOpen((v) => !v)}
+                  >
+                    {gridOpen ? "접기" : `전체 ${gridRows.length}개 브랜드 보기`}
+                  </Button>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>
