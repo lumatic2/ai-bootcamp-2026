@@ -29,14 +29,50 @@ export type ProductRow = {
   fit: RowFit;
 };
 
+type SortKey = "fit" | "priceAsc" | "priceDesc";
+
+const SORTS: { key: SortKey; label: string }[] = [
+  { key: "fit", label: "적합도순" },
+  { key: "priceAsc", label: "낮은 가격순" },
+  { key: "priceDesc", label: "높은 가격순" },
+];
+
 export function ProductGrid({ rows }: { rows: ProductRow[] }) {
   const [open, setOpen] = useState(false);
+  const [sort, setSort] = useState<SortKey>("fit");
   const [expandedUrl, setExpandedUrl] = useState<string | null>(null);
   const [feedbackMap, setFeedbackMap] = useState<Record<string, "hit" | "miss">>({});
-  const shown = open ? rows : rows.slice(0, 12);
+  const sorted =
+    sort === "fit"
+      ? rows
+      : [...rows].sort((a, b) => {
+          // 가격 없는 상품은 정렬 뒤로
+          if (a.product.price === null) return 1;
+          if (b.product.price === null) return -1;
+          return sort === "priceAsc"
+            ? a.product.price - b.product.price
+            : b.product.price - a.product.price;
+        });
+  const shown = open ? sorted : sorted.slice(0, 12);
 
   return (
     <div className="mt-5">
+      <div className="mb-3 flex flex-wrap gap-1.5">
+        {SORTS.map((s) => (
+          <button
+            key={s.key}
+            type="button"
+            onClick={() => setSort(s.key)}
+            className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+              sort === s.key
+                ? "border-primary bg-primary text-primary-foreground"
+                : "bg-card hover:bg-muted"
+            }`}
+          >
+            {s.label}
+          </button>
+        ))}
+      </div>
       <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4">
         {shown.map(({ product: p, pct, badgeClassName, fit }) => {
           const expanded = expandedUrl === p.url;
