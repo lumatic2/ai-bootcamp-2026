@@ -16,11 +16,11 @@ export default function Home() {
         <div className="mx-auto flex min-h-14 max-w-3xl items-center justify-between px-5 sm:px-8">
           <div className="flex items-center gap-3">
             <Image
-              src="/images/logo-nubi.png"
+              src="/images/logo-nubi-mark.png"
               alt="너비 로고"
-              width={217}
-              height={160}
-              className="h-8 w-auto rounded-md"
+              width={512}
+              height={512}
+              className="h-8 w-auto"
             />
             <div>
               <p className="text-sm font-semibold">너비 · 사이즈 번역기</p>
@@ -71,11 +71,11 @@ export default function Home() {
             <div>
               <p className="flex items-center gap-2 text-sm font-semibold">
                 <Image
-                  src="/images/logo-nubi.png"
+                  src="/images/logo-nubi-mark.png"
                   alt="너비 로고"
-                  width={217}
-                  height={160}
-                  className="h-6 w-auto rounded"
+                  width={512}
+                  height={512}
+                  className="h-6 w-auto"
                 />
                 사이즈 번역기
               </p>
