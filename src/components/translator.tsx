@@ -173,6 +173,8 @@ export function Translator() {
   const [browsingProduct, setBrowsingProduct] = useState<ProductChartItem | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [filter1, setFilter1] = useState("");
+  const brandListRef = useRef<HTMLDivElement>(null);
+  const [brandFade, setBrandFade] = useState({ top: false, bottom: false });
   const [search2, setSearch2] = useState("");
   // Step 1 시드 밖 브랜드 블록 (AI 검색/붙여넣기)
   const [c1Open, setC1Open] = useState(false);
@@ -440,6 +442,19 @@ export function Translator() {
     setMSleeve("");
   }
 
+  function updateBrandFade() {
+    const el = brandListRef.current;
+    if (!el) return;
+    setBrandFade({
+      top: el.scrollTop > 0,
+      bottom: el.scrollTop + el.clientHeight < el.scrollHeight - 1,
+    });
+  }
+
+  useEffect(() => {
+    updateBrandFade();
+  }, [filter1]);
+
   function handleSearchChange(v: string) {
     if (!searchFiredRef.current && v.trim() !== "") {
       searchFiredRef.current = true;
@@ -544,33 +559,51 @@ export function Translator() {
                 className="pl-9"
               />
             </div>
-            <div className="mt-3 grid max-h-56 grid-cols-2 gap-2 overflow-y-auto sm:grid-cols-3">
-              {orderedBrands
-                .filter((b) => b.name.toLowerCase().includes(filter1.trim().toLowerCase()))
-                .map((b) => (
-                  <button
-                    key={b.id}
-                    type="button"
-                    onClick={() => {
-                      setBrowsing(b.id);
-                      setBrowsingProduct(null);
-                    }}
-                    className={`pressable rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${
-                      browsing === b.id
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : anchors.some((a) => a.brandId === b.id) ||
-                            customAnchors.some((c) => c.brandId === b.id)
-                          ? "border-primary bg-background"
-                          : "bg-background hover:bg-muted"
-                    }`}
-                  >
-                    {b.name}
-                    {(anchors.some((a) => a.brandId === b.id) ||
-                      customAnchors.some((c) => c.brandId === b.id)) && (
-                      <Check className="ml-1 inline size-3.5" aria-hidden="true" />
-                    )}
-                  </button>
-                ))}
+            <div className="relative mt-3">
+              <div
+                ref={brandListRef}
+                onScroll={updateBrandFade}
+                className="grid max-h-56 grid-cols-2 gap-2 overflow-y-auto py-1 sm:grid-cols-3"
+              >
+                {orderedBrands
+                  .filter((b) => b.name.toLowerCase().includes(filter1.trim().toLowerCase()))
+                  .map((b) => (
+                    <button
+                      key={b.id}
+                      type="button"
+                      onClick={() => {
+                        setBrowsing(b.id);
+                        setBrowsingProduct(null);
+                      }}
+                      className={`pressable rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${
+                        browsing === b.id
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : anchors.some((a) => a.brandId === b.id) ||
+                              customAnchors.some((c) => c.brandId === b.id)
+                            ? "border-primary bg-background"
+                            : "bg-background hover:bg-muted"
+                      }`}
+                    >
+                      {b.name}
+                      {(anchors.some((a) => a.brandId === b.id) ||
+                        customAnchors.some((c) => c.brandId === b.id)) && (
+                        <Check className="ml-1 inline size-3.5" aria-hidden="true" />
+                      )}
+                    </button>
+                  ))}
+              </div>
+              <div
+                aria-hidden="true"
+                className={`pointer-events-none absolute inset-x-0 top-0 h-5 bg-gradient-to-b from-background to-transparent transition-opacity duration-150 ${
+                  brandFade.top ? "opacity-100" : "opacity-0"
+                }`}
+              />
+              <div
+                aria-hidden="true"
+                className={`pointer-events-none absolute inset-x-0 bottom-0 h-5 bg-gradient-to-t from-background to-transparent transition-opacity duration-150 ${
+                  brandFade.bottom ? "opacity-100" : "opacity-0"
+                }`}
+              />
             </div>
 
             {browsingBrand && browsingProducts.length > 0 && (
@@ -578,13 +611,13 @@ export function Translator() {
                 <p className="text-sm text-muted-foreground">
                   {browsingBrand.name}에서 어떤 상품을 갖고 있나요?
                 </p>
-                <div className="mt-2 grid max-h-64 grid-cols-3 gap-2 overflow-y-auto sm:grid-cols-4">
+                <div className="mt-2 grid max-h-64 grid-cols-3 gap-2 overflow-y-auto p-1 sm:grid-cols-4">
                   {browsingProducts.map((p) => (
                     <button
                       key={p.id}
                       type="button"
                       onClick={() => setBrowsingProduct(p)}
-                      className={`pressable overflow-hidden rounded-md border text-left transition-colors ${
+                      className={`card-hover-lift overflow-hidden rounded-md border text-left transition-colors ${
                         browsingProduct?.id === p.id
                           ? "border-primary bg-background"
                           : "bg-background hover:bg-muted"
@@ -674,17 +707,17 @@ export function Translator() {
               </div>
             )}
 
-            <div className="mt-4 rounded-lg border border-dashed p-4">
+            <div className="mt-4 overflow-hidden rounded-lg border border-dashed">
               <button
                 type="button"
                 onClick={() => setC1Open((v) => !v)}
-                className="pressable flex w-full items-center gap-1.5 rounded-md text-sm font-medium text-evidence"
+                className="pressable flex w-full items-center gap-1.5 rounded-lg p-4 text-sm font-medium text-evidence"
               >
                 <Sparkles className="size-4" aria-hidden="true" />
                 내 옷 브랜드가 없나요? AI로 사이즈표 가져오기
               </button>
               {c1Open && (
-                <div className="mt-4 space-y-3">
+                <div className="space-y-3 px-4 pb-4">
                   <div className="flex flex-col gap-2 sm:flex-row">
                     <Input
                       value={c1Name}
@@ -780,17 +813,17 @@ export function Translator() {
               )}
             </div>
 
-            <div className="mt-4 rounded-lg border border-dashed p-4">
+            <div className="mt-4 overflow-hidden rounded-lg border border-dashed">
               <button
                 type="button"
                 onClick={() => setMOpen((v) => !v)}
-                className="pressable flex w-full items-center gap-1.5 rounded-md text-sm font-medium text-muted-foreground"
+                className="pressable flex w-full items-center gap-1.5 rounded-lg p-4 text-sm font-medium text-muted-foreground"
               >
                 <Ruler className="size-4" aria-hidden="true" />
                 줄자 없이 어려우면? 실측 치수로 직접 입력
               </button>
               {mOpen && (
-                <div className="mt-4 space-y-3">
+                <div className="space-y-3 px-4 pb-4">
                   <div className="grid grid-cols-2 gap-3">
                     <label className="block text-xs text-muted-foreground">
                       총장(cm)

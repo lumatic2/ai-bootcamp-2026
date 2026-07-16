@@ -117,36 +117,17 @@ export function ProductGrid({
           const basis = basisMap[p.url] ?? null;
           const reason = reasonMap[p.url] ?? null;
           const cardStateClassName = expanded
-            ? "relative z-10 ring-1 ring-primary shadow-md"
+            ? "relative z-10 ring-1 ring-primary shadow-lg -translate-y-[3px] scale-[1.01] sm:scale-[1.02] transition-[transform,filter,opacity] duration-200 motion-reduce:transition-none motion-reduce:transform-none"
             : anyExpanded
-              ? "opacity-80 transition-opacity hover:opacity-100"
-              : "";
+              ? "opacity-95 blur-[0.6px] hover:blur-none focus-within:blur-none transition-[transform,filter,opacity] duration-200 motion-reduce:transition-none motion-reduce:transform-none"
+              : "transition-[transform,filter,opacity] duration-200 motion-reduce:transition-none motion-reduce:transform-none";
           return (
             <div
               key={p.url}
               className={`rounded-md border bg-background ${cardStateClassName} ${expanded ? "" : "card-hover-lift"}`}
             >
               <div className="overflow-hidden rounded-md">
-              <a
-                href={p.url}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => {
-                  let host = "";
-                  try {
-                    host = new URL(p.url).hostname;
-                  } catch {}
-                  const target = p.brandId ?? p.brand;
-                  gaEvent("outbound_click", { target_brand: target, url_host: host });
-                  gaEvent("adopt_size", {
-                    via: "card",
-                    target_brand: target,
-                    recommended: fit.recommended,
-                    confidence: fit.confidence,
-                  });
-                }}
-                className="block"
-              >
+              <div className="block">
                 <div className="relative aspect-[4/5] bg-muted">
                   {p.image && (
                     <Image
@@ -174,12 +155,13 @@ export function ProductGrid({
                     <p className="mt-1 text-sm font-semibold">{p.price.toLocaleString()}원</p>
                   )}
                 </div>
-              </a>
+              </div>
               <div className="flex gap-1.5 px-2.5 pb-2.5">
                 <a
                   href={p.url}
                   target="_blank"
                   rel="noreferrer"
+                  aria-label={`추천 ${fit.recommended}로 판매처 열기`}
                   onClick={() => {
                     let host = "";
                     try {
@@ -203,12 +185,13 @@ export function ProductGrid({
                       priority_dimension: priorityDimension,
                     });
                   }}
-                  className="flex flex-1 items-center justify-center rounded-sm bg-primary px-2 py-1.5 text-[0.7rem] font-semibold text-primary-foreground hover:opacity-90"
+                  className="flex h-10 flex-1 items-center justify-center whitespace-nowrap rounded-sm bg-primary px-2 text-[13px] font-semibold text-primary-foreground hover:opacity-90"
                 >
-                  추천 {fit.recommended} 사이즈로 보러가기
+                  추천 {fit.recommended}로 보러가기
                 </a>
                 <button
                   type="button"
+                  aria-expanded={expanded}
                   onClick={() => {
                     const willExpand = !expanded;
                     setExpandedUrl(willExpand ? p.url : null);
@@ -221,7 +204,7 @@ export function ProductGrid({
                       });
                     }
                   }}
-                  className="flex items-center justify-center gap-1 rounded-sm border bg-card px-2 py-1.5 text-[0.7rem] font-medium hover:bg-muted"
+                  className="flex h-10 shrink-0 items-center justify-center gap-1 rounded-sm border bg-card px-2 text-[0.7rem] font-medium hover:bg-muted"
                 >
                   비교{" "}
                   <ChevronDown

@@ -19,22 +19,12 @@ export function SizeChat() {
   const [messages, setMessages] = useState<Msg[]>([GREETING]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const [labelCollapsed, setLabelCollapsed] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    // 데스크톱(정밀 포인터+hover)은 라벨 상시 표시, 그 외(모바일)는 5초 후 접힘
-    const isDesktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (isDesktop) return;
-    const timer = window.setTimeout(() => setLabelCollapsed(true), 5000);
-    return () => window.clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     function onScroll() {
@@ -136,30 +126,28 @@ export function SizeChat() {
           type="button"
           onClick={scrollToTop}
           aria-label="맨 위로 이동"
-          className="fixed right-4 bottom-20 z-50 flex size-11 items-center justify-center rounded-full border bg-card text-foreground shadow-lg hover:bg-muted"
+          className="fixed right-4 bottom-20 z-50 flex size-11 items-center justify-center rounded-full border bg-card text-foreground shadow-lg ring-2 ring-[#f6f6f0] hover:bg-muted"
         >
           <ArrowUp className="size-5" aria-hidden="true" />
         </button>
       )}
-      <div className="fixed right-4 bottom-4 z-50 flex items-center gap-2">
-        {!open && !labelCollapsed && (
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            className="rounded-full border bg-card px-3 py-2 text-xs font-medium whitespace-nowrap text-foreground shadow-lg hover:bg-muted"
-          >
-            사이즈·핏 질문하기
-          </button>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-label="사이즈·핏 질문하기"
+        className="group fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 inline-flex h-13 items-center rounded-full bg-primary px-4 text-primary-foreground shadow-lg ring-2 ring-[#f6f6f0] shadow-[0_4px_12px_rgb(0_0_0/0.25)] transition-transform hover:scale-105"
+      >
+        {open ? (
+          <X className="size-5 shrink-0" aria-hidden="true" />
+        ) : (
+          <MessageCircle className="size-5 shrink-0" aria-hidden="true" />
         )}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="사이즈 도우미 열기"
-          className="flex size-13 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105"
+        <span
+          className="ml-2 max-w-[10rem] overflow-hidden text-sm font-medium whitespace-nowrap opacity-100 transition-[max-width,opacity,margin-left] duration-200 motion-reduce:transition-none sm:ml-0 sm:max-w-0 sm:opacity-0 sm:group-hover:ml-2 sm:group-hover:max-w-[10rem] sm:group-hover:opacity-100 sm:group-focus-visible:ml-2 sm:group-focus-visible:max-w-[10rem] sm:group-focus-visible:opacity-100"
         >
-          {open ? <X className="size-5" aria-hidden="true" /> : <MessageCircle className="size-5" aria-hidden="true" />}
-        </button>
-      </div>
+          사이즈·핏 질문하기
+        </span>
+      </button>
     </>
   );
 }
