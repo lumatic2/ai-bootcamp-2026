@@ -3,944 +3,134 @@
   "unit": "cm",
   "chestBasis": "flat-width",
   "collectedAt": "2026-07-15",
-  "source": "references/research-clothes-20260715/09-size-chart-feasibility.md",
+  "source": "references/research-clothes-20260715/09-size-chart-feasibility.md + 팀시트 TOP100 수기 + TOP500 옵션열 라벨복구 (2026-07-16 교차검증) + 대형브랜드 3종 AI 검색(출처 URL 보존)",
   "brands": [
     {
-      "id": "musinsa-standard",
-      "name": "무신사 스탠다드",
-      "product": "릴렉스 핏 크루 넥 티셔츠",
-      "url": "https://www.musinsa.com/products/996177",
+      "id": "613",
+      "name": "613서울",
+      "product": "크랙 식스 포인트 로고 반팔 티셔츠 (블랙)",
+      "url": "https://www.musinsa.com/products/6370967",
       "sizes": [
         {
           "label": "S",
-          "length": 68.5,
-          "shoulder": 49.5,
-          "chest": 53,
-          "sleeve": 23
+          "length": 62.0,
+          "shoulder": 49.0,
+          "chest": 52.0,
+          "sleeve": 20.0
         },
         {
           "label": "M",
-          "length": 70.5,
-          "shoulder": 51.5,
-          "chest": 55.5,
-          "sleeve": 25
+          "length": 66.0,
+          "shoulder": 51.0,
+          "chest": 54.0,
+          "sleeve": 21.0
         },
         {
           "label": "L",
-          "length": 72,
-          "shoulder": 53,
-          "chest": 58,
-          "sleeve": 26
+          "length": 70.0,
+          "shoulder": 53.0,
+          "chest": 566.0,
+          "sleeve": 22.0
         },
         {
           "label": "XL",
-          "length": 73.5,
-          "shoulder": 54.5,
-          "chest": 60.5,
-          "sleeve": 27
+          "length": 74.0,
+          "shoulder": 55.0,
+          "chest": 58.0,
+          "sleeve": 23.0
         },
         {
           "label": "2XL",
-          "length": 74.5,
-          "shoulder": 56,
-          "chest": 63,
-          "sleeve": 27.5
+          "length": 78.0,
+          "shoulder": 58.0,
+          "chest": 64.0,
+          "sleeve": 24.0
+        },
+        {
+          "label": "3XL(빅사이즈)",
+          "length": 82.0,
+          "shoulder": 62.0,
+          "chest": 76.0,
+          "sleeve": 29.0
+        }
+      ]
+    },
+    {
+      "id": "t500-384",
+      "name": "가까이 유니언즈",
+      "product": "스파이럴 메쉬 절개 크롭 티셔츠 블랙",
+      "url": "https://www.musinsa.com/products/6615959",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 63,
+          "shoulder": 53,
+          "chest": 56,
+          "sleeve": 21
+        },
+        {
+          "label": "L",
+          "length": 65,
+          "shoulder": 55,
+          "chest": 58,
+          "sleeve": 22
+        },
+        {
+          "label": "XL",
+          "length": 67,
+          "shoulder": 57,
+          "chest": 60,
+          "sleeve": 23
+        }
+      ]
+    },
+    {
+      "id": "brand-350",
+      "name": "그라픽",
+      "product": "픽키스타 반팔 티셔츠 10 Color [GRSE_9603]",
+      "url": "https://www.musinsa.com/products/6702417",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 66.0,
+          "shoulder": 42.0,
+          "chest": 50.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "L",
+          "length": 68.0,
+          "shoulder": 44.0,
+          "chest": 52.0,
+          "sleeve": 23.0
+        },
+        {
+          "label": "XL",
+          "length": 70.0,
+          "shoulder": 46.0,
+          "chest": 54.0,
+          "sleeve": 24.0
+        },
+        {
+          "label": "2XL",
+          "length": 72.0,
+          "shoulder": 48.0,
+          "chest": 56.0,
+          "sleeve": 25.0
         },
         {
           "label": "3XL",
-          "length": 74.5,
-          "shoulder": 57.5,
-          "chest": 65.5,
-          "sleeve": 27.5
-        }
-      ]
-    },
-    {
-      "id": "covernat",
-      "name": "커버낫",
-      "product": "쿨 코튼 티셔츠",
-      "url": "https://www.musinsa.com/products/1943792",
-      "sizes": [
-        {
-          "label": "XS",
-          "length": 64,
-          "shoulder": 46,
-          "chest": 49.5,
-          "sleeve": 20.4
-        },
-        {
-          "label": "S",
-          "length": 66,
-          "shoulder": 48,
-          "chest": 52,
-          "sleeve": 21.1
-        },
-        {
-          "label": "M",
-          "length": 69,
-          "shoulder": 51,
-          "chest": 55.5,
-          "sleeve": 22.3
-        },
-        {
-          "label": "L",
-          "length": 71,
-          "shoulder": 53,
-          "chest": 58,
-          "sleeve": 23
-        },
-        {
-          "label": "XL",
-          "length": 73,
-          "shoulder": 55,
-          "chest": 60.5,
-          "sleeve": 23.7
-        },
-        {
-          "label": "XXL",
-          "length": 74,
-          "shoulder": 57,
-          "chest": 63,
-          "sleeve": 24.4
-        }
-      ]
-    },
-    {
-      "id": "spao",
-      "name": "스파오",
-      "product": "베이직 반팔 티셔츠",
-      "url": "https://www.musinsa.com/products/5093308",
-      "sizes": [
-        {
-          "label": "S (090)",
-          "length": 65.5,
-          "shoulder": 44,
-          "chest": 48,
-          "sleeve": 22
-        },
-        {
-          "label": "M (095)",
-          "length": 67.5,
-          "shoulder": 45.5,
-          "chest": 50.5,
-          "sleeve": 23
-        },
-        {
-          "label": "L (100)",
-          "length": 69.5,
-          "shoulder": 47,
-          "chest": 53,
-          "sleeve": 24
-        },
-        {
-          "label": "XL (105)",
-          "length": 71.5,
-          "shoulder": 48.5,
-          "chest": 55.5,
-          "sleeve": 25
-        }
-      ]
-    },
-    {
-      "id": "markgonzales",
-      "name": "마크곤잘레스",
-      "product": "그래픽 반팔 티셔츠",
-      "url": "https://www.musinsa.com/products/4747531",
-      "sizes": [
-        {
-          "label": "090",
-          "length": 68,
-          "shoulder": 50,
-          "chest": 57,
-          "sleeve": 23
-        },
-        {
-          "label": "095",
-          "length": 70,
-          "shoulder": 51.5,
-          "chest": 59,
-          "sleeve": 23.5
-        },
-        {
-          "label": "100",
-          "length": 72,
-          "shoulder": 53,
-          "chest": 61,
-          "sleeve": 24
-        },
-        {
-          "label": "105",
-          "length": 74,
-          "shoulder": 54.5,
-          "chest": 63,
-          "sleeve": 24.5
-        }
-      ]
-    },
-    {
-      "id": "yale",
-      "name": "예일",
-      "product": "스몰아치 반팔 티셔츠",
-      "url": "https://www.musinsa.com/products/2442409",
-      "sizes": [
-        {
-          "label": "S",
-          "length": 65,
-          "shoulder": 48,
-          "chest": 54,
-          "sleeve": 21
-        },
-        {
-          "label": "M",
-          "length": 69,
-          "shoulder": 52,
-          "chest": 57.5,
-          "sleeve": 23
-        },
-        {
-          "label": "L",
-          "length": 71,
-          "shoulder": 54,
-          "chest": 60,
-          "sleeve": 24
-        },
-        {
-          "label": "XL",
-          "length": 73,
-          "shoulder": 56,
-          "chest": 62.5,
-          "sleeve": 25
-        },
-        {
-          "label": "XXL",
-          "length": 76,
-          "shoulder": 58,
-          "chest": 66,
-          "sleeve": 25
-        }
-      ]
-    },
-    {
-      "id": "stussy",
-      "name": "스투시",
-      "product": "베이직 반팔 티셔츠",
-      "url": "https://www.musinsa.com/products/1382809",
-      "sizes": [
-        {
-          "label": "S",
-          "length": 69,
-          "shoulder": 48,
-          "chest": 53.5,
-          "sleeve": 20
-        },
-        {
-          "label": "M",
-          "length": 72,
-          "shoulder": 51,
-          "chest": 55.5,
-          "sleeve": 22
-        },
-        {
-          "label": "L",
-          "length": 76,
-          "shoulder": 54,
-          "chest": 57.5,
-          "sleeve": 23
-        }
-      ]
-    },
-    {
-      "id": "thisisneverthat",
-      "name": "디스이즈네버댓",
-      "product": "T-Logo 티셔츠",
-      "url": "https://www.musinsa.com/products/969666",
-      "sizes": [
-        {
-          "label": "S",
-          "length": 65.5,
-          "shoulder": 46,
-          "chest": 51.5,
-          "sleeve": 18
-        },
-        {
-          "label": "M",
-          "length": 70.5,
-          "shoulder": 49,
-          "chest": 54.5,
-          "sleeve": 19.5
-        },
-        {
-          "label": "L",
-          "length": 72.5,
-          "shoulder": 51.5,
-          "chest": 57.5,
-          "sleeve": 21
-        },
-        {
-          "label": "XL",
-          "length": 75.5,
-          "shoulder": 55.5,
-          "chest": 61.5,
-          "sleeve": 22.5
-        }
-      ]
-    },
-    {
-      "id": "adidas",
-      "name": "아디다스",
-      "product": "3-스트라이프 티셔츠 (래글런 — 어깨 실측 없음)",
-      "url": "https://www.musinsa.com/products/1040865",
-      "sizes": [
-        {
-          "label": "S",
-          "length": 70,
-          "shoulder": null,
-          "chest": 45,
-          "sleeve": null
-        },
-        {
-          "label": "M",
-          "length": 71,
-          "shoulder": null,
-          "chest": 47,
-          "sleeve": null
-        },
-        {
-          "label": "L",
-          "length": 74,
-          "shoulder": null,
-          "chest": 49,
-          "sleeve": null
-        },
-        {
-          "label": "XL",
-          "length": 75,
-          "shoulder": null,
-          "chest": 51,
-          "sleeve": null
-        },
-        {
-          "label": "XXL",
-          "length": 76,
-          "shoulder": null,
-          "chest": 53,
-          "sleeve": null
-        }
-      ],
-      "notes": "래글런 소매 — 어깨너비 미제공, 소매길이는 목선 기준 측정이라 비교 불가로 null 처리"
-    },
-    {
-      "id": "thenorthface",
-      "name": "노스페이스",
-      "product": "TNF 반팔 라운드티 (가슴둘레 원표기 ÷2 환산)",
-      "url": "https://www.musinsa.com/products/4559153",
-      "sizes": [
-        {
-          "label": "090 (S)",
-          "length": 64,
-          "shoulder": 43,
-          "chest": 48.5,
-          "sleeve": 20
-        },
-        {
-          "label": "095 (M)",
-          "length": 69,
-          "shoulder": 44.5,
-          "chest": 52,
-          "sleeve": 21
-        },
-        {
-          "label": "100 (L)",
-          "length": 71,
-          "shoulder": 46,
-          "chest": 54.5,
-          "sleeve": 22
-        },
-        {
-          "label": "105 (XL)",
-          "length": 73,
-          "shoulder": 47.5,
-          "chest": 57,
-          "sleeve": 23
-        },
-        {
-          "label": "110 (XXL)",
-          "length": 75,
-          "shoulder": 49,
-          "chest": 59.5,
-          "sleeve": 24
-        }
-      ],
-      "notes": "원본은 가슴둘레(97/104/109/114/119) — flat-width 로 ÷2 환산"
-    },
-    {
-      "id": "filluminate",
-      "name": "필루미네이트",
-      "product": "데일리 롤업 레이어드 ST 크롭 티셔츠-3Color",
-      "url": "https://www.musinsa.com/products/6708161",
-      "sizes": [
-        {
-          "label": "S",
-          "length": 65.0,
-          "shoulder": 49.5,
-          "chest": 52.0,
-          "sleeve": 19.0
-        },
-        {
-          "label": "M",
-          "length": 66.5,
-          "shoulder": 51.0,
-          "chest": 54.5,
-          "sleeve": 20.5
-        },
-        {
-          "label": "L",
-          "length": 68.0,
-          "shoulder": 52.5,
-          "chest": 57.0,
-          "sleeve": 22.0
-        }
-      ]
-    },
-    {
-      "id": "compagno",
-      "name": "꼼파뇨",
-      "product": "가든 피스 피그먼트 반팔티 브라운",
-      "url": "https://www.musinsa.com/products/6668086",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 73.0,
-          "shoulder": 56.5,
-          "chest": 59.0,
-          "sleeve": 22.5
-        },
-        {
-          "label": "L",
-          "length": 75.0,
-          "shoulder": 57.5,
-          "chest": 62.0,
-          "sleeve": 23.5
-        }
-      ]
-    },
-    {
-      "id": "xiaoxiko",
-      "name": "시아오시코",
-      "product": "피그먼트 헨리넥 머슬핏 반팔",
-      "url": "https://www.musinsa.com/products/6673687",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 65.0,
-          "shoulder": 45.0,
-          "chest": 47.0,
-          "sleeve": 21.0
-        },
-        {
-          "label": "L",
-          "length": 66.0,
-          "shoulder": 47.0,
-          "chest": 48.0,
-          "sleeve": 22.0
-        }
-      ]
-    },
-    {
-      "id": "snowpeak",
-      "name": "스노우피크 어패럴",
-      "product": "[스노우피크 I 도라에몽] 캠핑 반팔 티셔츠 (S26MUFTS94) Of",
-      "url": "https://www.musinsa.com/products/6632593",
-      "sizes": [
-        {
-          "label": "90(S)",
-          "length": 66.0,
-          "shoulder": 44.0,
-          "chest": 53.0,
-          "sleeve": 23.0
-        },
-        {
-          "label": "95(M)",
-          "length": 68.0,
-          "shoulder": 46.0,
-          "chest": 55.5,
-          "sleeve": 23.5
-        },
-        {
-          "label": "100(L)",
-          "length": 70.0,
-          "shoulder": 48.0,
-          "chest": 58.0,
-          "sleeve": 24.0
-        },
-        {
-          "label": "105(XL)",
-          "length": 72.0,
-          "shoulder": 50.0,
-          "chest": 60.5,
-          "sleeve": 24.5
-        },
-        {
-          "label": "110(2XL)",
           "length": 74.0,
-          "shoulder": 52.0,
-          "chest": 62.0,
-          "sleeve": 25.0
-        }
-      ]
-    },
-    {
-      "id": "alvinclo",
-      "name": "앨빈클로",
-      "product": "RIDE HARD 헨리넥 크롭핏 반팔티 AST3680 (2COLOR)",
-      "url": "https://www.musinsa.com/products/6723404",
-      "sizes": [
-        {
-          "label": "L",
-          "length": 62.5,
-          "shoulder": 52.0,
-          "chest": 56.0,
-          "sleeve": 18.0
-        },
-        {
-          "label": "XL",
-          "length": 65.0,
-          "shoulder": 54.0,
-          "chest": 58.0,
-          "sleeve": 19.0
-        }
-      ]
-    },
-    {
-      "id": "travel",
-      "name": "트래블",
-      "product": "커브드 라인 래글런 반팔티 차콜",
-      "url": "https://www.musinsa.com/products/3182421",
-      "sizes": [
-        {
-          "label": "SMALL",
-          "length": 63.0,
-          "shoulder": null,
-          "chest": 49.0,
-          "sleeve": 47.0
-        },
-        {
-          "label": "MEDIUM",
-          "length": 70.0,
-          "shoulder": null,
-          "chest": 56.0,
-          "sleeve": 53.0
-        },
-        {
-          "label": "LARGE",
-          "length": 72.0,
-          "shoulder": null,
-          "chest": 58.5,
-          "sleeve": 56.0
-        },
-        {
-          "label": "EXTRA LARGE",
-          "length": 74.0,
-          "shoulder": null,
-          "chest": 61.0,
-          "sleeve": 59.0
-        }
-      ]
-    },
-    {
-      "id": "milo-archive",
-      "name": "밀로 아카이브",
-      "product": "[Pokémon] 블랭크 티셔츠 [딥 차콜]",
-      "url": "https://www.musinsa.com/products/6656624",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 67.5,
-          "shoulder": 53.0,
-          "chest": 60.0,
-          "sleeve": 21.0
-        },
-        {
-          "label": "L",
-          "length": 69.5,
-          "shoulder": 55.5,
-          "chest": 62.0,
-          "sleeve": 22.0
-        },
-        {
-          "label": "XL",
-          "length": 71.5,
-          "shoulder": 58.0,
-          "chest": 64.0,
-          "sleeve": 23.0
-        }
-      ]
-    },
-    {
-      "id": "yosemite",
-      "name": "요세미티",
-      "product": "배색 롤업 레이어드 반팔티 YT-3Y31",
-      "url": "https://www.musinsa.com/products/6760735",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 63.0,
-          "shoulder": 52.0,
-          "chest": 53.0,
-          "sleeve": 22.0
-        },
-        {
-          "label": "L",
-          "length": 66.0,
-          "shoulder": 55.0,
-          "chest": 56.0,
-          "sleeve": 23.0
-        },
-        {
-          "label": "XL",
-          "length": 69.0,
-          "shoulder": 58.0,
-          "chest": 59.0,
-          "sleeve": 24.0
-        }
-      ]
-    },
-    {
-      "id": "gildan",
-      "name": "길단",
-      "product": "Gildan X 디자인컬렉션 세미 크롭티셔츠 모음전",
-      "url": "https://www.musinsa.com/products/6704378",
-      "sizes": [
-        {
-          "label": "S",
-          "length": 60.0,
-          "shoulder": 41.0,
-          "chest": 45.7,
-          "sleeve": 17.8
-        },
-        {
-          "label": "M",
-          "length": 63.0,
-          "shoulder": 46.0,
-          "chest": 50.8,
-          "sleeve": 19.1
-        },
-        {
-          "label": "L",
-          "length": 66.0,
-          "shoulder": 51.0,
-          "chest": 55.9,
-          "sleeve": 20.3
-        },
-        {
-          "label": "XL",
-          "length": 69.0,
-          "shoulder": 56.0,
-          "chest": 61.0,
-          "sleeve": null
-        }
-      ]
-    },
-    {
-      "id": "champion",
-      "name": "챔피온",
-      "product": "조그택 반팔 티셔츠 Navy",
-      "url": "https://www.musinsa.com/products/6626012",
-      "sizes": [
-        {
-          "label": "XS",
-          "length": 64.0,
-          "shoulder": 47.0,
-          "chest": 52.5,
-          "sleeve": 20.5
-        },
-        {
-          "label": "S",
-          "length": 66.0,
-          "shoulder": 49.0,
-          "chest": 55.0,
-          "sleeve": 21.5
-        },
-        {
-          "label": "M",
-          "length": 68.0,
-          "shoulder": 51.0,
-          "chest": 57.5,
-          "sleeve": 22.5
-        },
-        {
-          "label": "L",
-          "length": 70.0,
-          "shoulder": 53.0,
-          "chest": 60.0,
-          "sleeve": 23.5
-        },
-        {
-          "label": "XL",
-          "length": 72.0,
-          "shoulder": 55.0,
-          "chest": 62.5,
-          "sleeve": 24.5
-        },
-        {
-          "label": "XXL",
-          "length": 73.5,
-          "shoulder": 57.0,
-          "chest": 65.0,
-          "sleeve": 25.0
-        }
-      ]
-    },
-    {
-      "id": "creegan",
-      "name": "크리건",
-      "product": "CLUB JERSEY TEE (3color)",
-      "url": "https://www.musinsa.com/products/6653694",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 68.0,
           "shoulder": 50.0,
-          "chest": 54.0,
-          "sleeve": 20.0
-        },
-        {
-          "label": "L",
-          "length": 70.0,
-          "shoulder": 52.0,
-          "chest": 57.0,
-          "sleeve": 21.0
-        },
-        {
-          "label": "XL",
-          "length": 72.0,
-          "shoulder": 54.5,
-          "chest": 60.0,
-          "sleeve": 22.0
-        }
-      ]
-    },
-    {
-      "id": "barbour",
-      "name": "바버",
-      "product": "인터내셔널 스몰 로고 반소매 티셔츠 - 화이트 / MTS0141WH51",
-      "url": "https://www.musinsa.com/products/4820869",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 70.0,
-          "shoulder": 43.0,
-          "chest": 49.0,
-          "sleeve": 22.0
-        },
-        {
-          "label": "L",
-          "length": 71.0,
-          "shoulder": 44.0,
-          "chest": 51.0,
-          "sleeve": 22.0
-        },
-        {
-          "label": "XL",
-          "length": 76.0,
-          "shoulder": 48.0,
-          "chest": 55.0,
-          "sleeve": 23.0
-        }
-      ]
-    },
-    {
-      "id": "leare",
-      "name": "르아르",
-      "product": "90s 빈티지핏 피그먼트 티셔츠 [레몬]",
-      "url": "https://www.musinsa.com/products/6156294",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 64.0,
-          "shoulder": 40.0,
-          "chest": 50.0,
-          "sleeve": 19.5
-        },
-        {
-          "label": "L",
-          "length": 66.0,
-          "shoulder": 42.0,
-          "chest": 52.0,
-          "sleeve": 20.0
-        },
-        {
-          "label": "XL",
-          "length": 68.0,
-          "shoulder": 44.0,
-          "chest": 54.0,
-          "sleeve": 20.5
-        },
-        {
-          "label": "2XL",
-          "length": 70.0,
-          "shoulder": 46.0,
-          "chest": 56.0,
-          "sleeve": 21.0
-        }
-      ]
-    },
-    {
-      "id": "brand-939",
-      "name": "맥우드건",
-      "product": "스탠시 3571 와플 스탠다드핏 올리브카키 반팔티",
-      "url": "https://www.musinsa.com/products/4100940",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 68.0,
-          "shoulder": 46.0,
-          "chest": 49.5,
-          "sleeve": 19.0
-        },
-        {
-          "label": "L",
-          "length": 70.0,
-          "shoulder": 48.0,
-          "chest": 52.0,
-          "sleeve": 21.0
-        },
-        {
-          "label": "XL",
-          "length": 72.0,
-          "shoulder": 50.0,
-          "chest": 54.5,
-          "sleeve": 23.0
-        }
-      ]
-    },
-    {
-      "id": "brand-412",
-      "name": "도톤",
-      "product": "SKETCH STAR T-SHIRTS (Black)",
-      "url": "https://www.musinsa.com/products/6737137",
-      "sizes": [
-        {
-          "label": "S",
-          "length": 65.0,
-          "shoulder": 42.0,
-          "chest": 46.0,
-          "sleeve": 20.0
-        },
-        {
-          "label": "M",
-          "length": 71.0,
-          "shoulder": 48.0,
-          "chest": 52.0,
-          "sleeve": 20.0
-        },
-        {
-          "label": "L",
-          "length": 75.0,
-          "shoulder": 54.0,
           "chest": 58.0,
-          "sleeve": 21.0
-        }
-      ]
-    },
-    {
-      "id": "brand-977",
-      "name": "엑스오엑스",
-      "product": "리브드 헨리넥 반팔 티셔츠(3color)",
-      "url": "https://www.musinsa.com/products/6349194",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 65.0,
-          "shoulder": 49.0,
-          "chest": 54.0,
-          "sleeve": 20.0
-        },
-        {
-          "label": "L",
-          "length": 66.5,
-          "shoulder": 50.5,
-          "chest": 56.0,
-          "sleeve": 21.0
-        },
-        {
-          "label": "XL",
-          "length": 68.0,
-          "shoulder": 52.0,
-          "chest": 58.0,
-          "sleeve": 22.0
-        }
-      ]
-    },
-    {
-      "id": "brand-525",
-      "name": "더마일",
-      "product": "ATHLETIC MILE CREW [NAVY]",
-      "url": "https://www.musinsa.com/products/4178398",
-      "sizes": [
-        {
-          "label": "XS",
-          "length": 66.0,
-          "shoulder": 44.0,
-          "chest": 49.0,
-          "sleeve": 19.0
-        },
-        {
-          "label": "S",
-          "length": 70.0,
-          "shoulder": 47.0,
-          "chest": 52.0,
-          "sleeve": 20.0
-        },
-        {
-          "label": "M",
-          "length": 73.0,
-          "shoulder": 51.0,
-          "chest": 56.0,
-          "sleeve": 22.0
-        },
-        {
-          "label": "L",
-          "length": 76.5,
-          "shoulder": 54.0,
-          "chest": 59.0,
-          "sleeve": 24.0
-        },
-        {
-          "label": "XL",
-          "length": 80.0,
-          "shoulder": 57.0,
-          "chest": 62.0,
           "sleeve": 26.0
-        }
-      ]
-    },
-    {
-      "id": "brand-973",
-      "name": "데이",
-      "product": "세미 크롭 헨리넥 와플 반팔 티셔츠_4 COLOR",
-      "url": "https://www.musinsa.com/products/6651289",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 63.0,
-          "shoulder": 45.0,
-          "chest": 52.5,
-          "sleeve": 17.5
         },
         {
-          "label": "L",
-          "length": 65.0,
-          "shoulder": 47.0,
-          "chest": 54.5,
-          "sleeve": 18.5
-        },
-        {
-          "label": "XL",
-          "length": 67.0,
-          "shoulder": 49.0,
-          "chest": 56.5,
-          "sleeve": 19.5
+          "label": "4XL",
+          "length": 76.0,
+          "shoulder": 52.0,
+          "chest": 60.0,
+          "sleeve": 27.0
         }
       ]
     },
@@ -1009,67 +199,279 @@
       ]
     },
     {
-      "id": "brand-283",
-      "name": "마인드브릿지",
-      "product": "[ON]그래픽 오버핏 링거 반팔 티셔츠 - 2color",
-      "url": "https://www.musinsa.com/products/6103286",
+      "id": "t500-442",
+      "name": "글랙",
+      "product": "GT181 웰크 사인 링거 티셔츠 (BLACK)",
+      "url": "https://www.musinsa.com/products/6347641",
       "sizes": [
         {
-          "label": "095",
-          "length": 68.5,
-          "shoulder": 52.4,
-          "chest": 56.5,
-          "sleeve": 24.0
+          "label": "M",
+          "length": 61,
+          "shoulder": 46,
+          "chest": 56,
+          "sleeve": 14
         },
         {
-          "label": "100",
-          "length": 70.0,
-          "shoulder": 54.0,
-          "chest": 59.0,
-          "sleeve": 25.0
-        },
-        {
-          "label": "105",
-          "length": 72.5,
-          "shoulder": 55.6,
-          "chest": 61.5,
-          "sleeve": 26.0
-        },
-        {
-          "label": "110",
-          "length": 75.0,
-          "shoulder": 57.6,
-          "chest": 65.0,
-          "sleeve": 27.5
+          "label": "L",
+          "length": 64,
+          "shoulder": 48,
+          "chest": 58,
+          "sleeve": 15
         }
       ]
     },
     {
-      "id": "brand-652",
-      "name": "브랜디드",
-      "product": "SOFT SLUB CROP T-SHIRT [MELANGE GRAY]",
-      "url": "https://www.musinsa.com/products/6638236",
+      "id": "gildan",
+      "name": "길단",
+      "product": "Gildan X 디자인컬렉션 세미 크롭티셔츠 모음전",
+      "url": "https://www.musinsa.com/products/6704378",
       "sizes": [
+        {
+          "label": "S",
+          "length": 60.0,
+          "shoulder": 41.0,
+          "chest": 45.7,
+          "sleeve": 17.8
+        },
         {
           "label": "M",
           "length": 63.0,
-          "shoulder": 49.5,
-          "chest": 54.0,
-          "sleeve": 17.5
+          "shoulder": 46.0,
+          "chest": 50.8,
+          "sleeve": 19.1
         },
         {
           "label": "L",
-          "length": 65.0,
-          "shoulder": 51.5,
-          "chest": 56.0,
-          "sleeve": 18.5
+          "length": 66.0,
+          "shoulder": 51.0,
+          "chest": 55.9,
+          "sleeve": 20.3
         },
         {
           "label": "XL",
-          "length": 67.0,
-          "shoulder": 53.5,
+          "length": 69.0,
+          "shoulder": 56.0,
+          "chest": 61.0,
+          "sleeve": null
+        }
+      ]
+    },
+    {
+      "id": "t100-5",
+      "name": "길라아카이브",
+      "product": "SLOGAN BOAT NECK T-SHIRTS_NAVY",
+      "url": "https://www.musinsa.com/products/6263734",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 49.5,
+          "shoulder": 36,
+          "chest": 38.5,
+          "sleeve": 13.5
+        }
+      ]
+    },
+    {
+      "id": "compagno",
+      "name": "꼼파뇨",
+      "product": "가든 피스 피그먼트 반팔티 브라운",
+      "url": "https://www.musinsa.com/products/6668086",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 73.0,
+          "shoulder": 56.5,
+          "chest": 59.0,
+          "sleeve": 22.5
+        },
+        {
+          "label": "L",
+          "length": 75.0,
+          "shoulder": 57.5,
+          "chest": 62.0,
+          "sleeve": 23.5
+        }
+      ]
+    },
+    {
+      "id": "nike",
+      "name": "나이키",
+      "product": "드라이핏 24/7 반팔티 (AI 검색 수집)",
+      "url": "https://web.croket.co.kr/seller/product/661cd605e99830467c267225",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 71.5,
+          "shoulder": 46,
+          "chest": 50.5,
+          "sleeve": 24
+        },
+        {
+          "label": "M",
+          "length": 74,
+          "shoulder": 48.5,
+          "chest": 53.5,
+          "sleeve": 24.5
+        }
+      ]
+    },
+    {
+      "id": "t500-268",
+      "name": "낫온리포투데이",
+      "product": "[광만두 콜라보] YARR 크롭 반소매 티셔츠 [블랙]",
+      "url": "https://www.musinsa.com/products/6496850",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 61,
+          "shoulder": 50,
+          "chest": 54.5,
+          "sleeve": 21
+        },
+        {
+          "label": "L",
+          "length": 63,
+          "shoulder": 52,
+          "chest": 56.5,
+          "sleeve": 22
+        },
+        {
+          "label": "XL",
+          "length": 65,
+          "shoulder": 54,
+          "chest": 58.5,
+          "sleeve": 23
+        }
+      ]
+    },
+    {
+      "id": "brand-19",
+      "name": "노드유",
+      "product": "쿨 썸머 워셔블 카라 크롭 하프 가디건 [아이보리]",
+      "url": "https://www.musinsa.com/products/6634023",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 64.0,
+          "shoulder": 47.0,
+          "chest": 56.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "L",
+          "length": 66.0,
+          "shoulder": 49.0,
           "chest": 58.0,
-          "sleeve": 19.5
+          "sleeve": 23.0
+        }
+      ]
+    },
+    {
+      "id": "t500-139",
+      "name": "노매뉴얼",
+      "product": "W.B T-SHIRT - BLACK",
+      "url": "https://www.musinsa.com/products/5849398",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 68,
+          "shoulder": 47.5,
+          "chest": 53,
+          "sleeve": 22.5
+        },
+        {
+          "label": "M",
+          "length": 70,
+          "shoulder": 50,
+          "chest": 55.5,
+          "sleeve": 23.5
+        },
+        {
+          "label": "L",
+          "length": 72,
+          "shoulder": 52.5,
+          "chest": 58,
+          "sleeve": 24.5
+        },
+        {
+          "label": "XL",
+          "length": 74,
+          "shoulder": 55,
+          "chest": 60.5,
+          "sleeve": 25.5
+        }
+      ]
+    },
+    {
+      "id": "thenorthface",
+      "name": "노스페이스",
+      "product": "TNF 반팔 라운드티 (가슴둘레 원표기 ÷2 환산)",
+      "url": "https://www.musinsa.com/products/4559153",
+      "sizes": [
+        {
+          "label": "090 (S)",
+          "length": 64,
+          "shoulder": 43,
+          "chest": 48.5,
+          "sleeve": 20
+        },
+        {
+          "label": "095 (M)",
+          "length": 69,
+          "shoulder": 44.5,
+          "chest": 52,
+          "sleeve": 21
+        },
+        {
+          "label": "100 (L)",
+          "length": 71,
+          "shoulder": 46,
+          "chest": 54.5,
+          "sleeve": 22
+        },
+        {
+          "label": "105 (XL)",
+          "length": 73,
+          "shoulder": 47.5,
+          "chest": 57,
+          "sleeve": 23
+        },
+        {
+          "label": "110 (XXL)",
+          "length": 75,
+          "shoulder": 49,
+          "chest": 59.5,
+          "sleeve": 24
+        }
+      ],
+      "notes": "원본은 가슴둘레(97/104/109/114/119) — flat-width 로 ÷2 환산"
+    },
+    {
+      "id": "t500-381",
+      "name": "노이커먼",
+      "product": "SPORTS CLUB TEE GY",
+      "url": "https://www.musinsa.com/products/5059051",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 69,
+          "shoulder": 45,
+          "chest": 53,
+          "sleeve": 22
+        },
+        {
+          "label": "M",
+          "length": 72,
+          "shoulder": 53,
+          "chest": 58,
+          "sleeve": 25
+        },
+        {
+          "label": "L",
+          "length": 76,
+          "shoulder": 53,
+          "chest": 58,
+          "sleeve": 25
         }
       ]
     },
@@ -1117,67 +519,350 @@
       ]
     },
     {
-      "id": "brand-212",
-      "name": "비바라비다",
-      "product": "Ana 반팔 티셔츠",
-      "url": "https://www.musinsa.com/products/6688194",
+      "id": "t500-398",
+      "name": "니티드",
+      "product": "(UNISEX) 피그먼트 팜트리 그래픽 티셔츠 CHARCOAL",
+      "url": "https://www.musinsa.com/products/5109627",
       "sizes": [
         {
-          "label": "S",
-          "length": 66.5,
-          "shoulder": 47.0,
-          "chest": 49.0,
-          "sleeve": 21.0
-        },
-        {
           "label": "M",
-          "length": 70.0,
-          "shoulder": 50.0,
-          "chest": 54.0,
-          "sleeve": 22.0
+          "length": 68,
+          "shoulder": 52,
+          "chest": 58,
+          "sleeve": 23
         },
         {
           "label": "L",
-          "length": 73.0,
-          "shoulder": 52.5,
-          "chest": 58.0,
-          "sleeve": 24.0
+          "length": 70,
+          "shoulder": 54,
+          "chest": 60,
+          "sleeve": 25
         },
         {
           "label": "XL",
-          "length": 75.5,
-          "shoulder": 56.0,
-          "chest": 63.0,
-          "sleeve": 25.0
+          "length": 72,
+          "shoulder": 56,
+          "chest": 62,
+          "sleeve": 27
         }
       ]
     },
     {
-      "id": "brand-793",
-      "name": "메종미네드",
-      "product": "[현영현영해 PICK] STRIPE LAYERED HALF T CHARC",
-      "url": "https://www.musinsa.com/products/6075608",
+      "id": "t500-481",
+      "name": "다이닛",
+      "product": "[YOON SOAP X DEINET] OVERSIZE T-SHIRT IN MELANGE GREY",
+      "url": "https://www.musinsa.com/products/6476342",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 69.5,
+          "shoulder": 57,
+          "chest": 60,
+          "sleeve": 21.5
+        }
+      ]
+    },
+    {
+      "id": "t500-457",
+      "name": "대한민국 육군",
+      "product": "타이거 메쉬 반소매 티셔츠 - 블랙",
+      "url": "https://www.musinsa.com/products/6679895",
       "sizes": [
         {
           "label": "S",
-          "length": 63.0,
-          "shoulder": 48.0,
-          "chest": 50.0,
-          "sleeve": 19.5
+          "length": 66,
+          "shoulder": 43,
+          "chest": 49,
+          "sleeve": 21
         },
         {
           "label": "M",
-          "length": 65.0,
-          "shoulder": 50.0,
-          "chest": 52.5,
-          "sleeve": 20.5
+          "length": 67.5,
+          "shoulder": 45,
+          "chest": 51.5,
+          "sleeve": 21.5
         },
         {
           "label": "L",
+          "length": 69,
+          "shoulder": 47,
+          "chest": 54,
+          "sleeve": 22
+        },
+        {
+          "label": "XL",
+          "length": 70.5,
+          "shoulder": 49,
+          "chest": 56.5,
+          "sleeve": 22.5
+        },
+        {
+          "label": "2XL",
+          "length": 72,
+          "shoulder": 51,
+          "chest": 59,
+          "sleeve": 23
+        }
+      ]
+    },
+    {
+      "id": "brand-525",
+      "name": "더마일",
+      "product": "ATHLETIC MILE CREW [NAVY]",
+      "url": "https://www.musinsa.com/products/4178398",
+      "sizes": [
+        {
+          "label": "XS",
+          "length": 66.0,
+          "shoulder": 44.0,
+          "chest": 49.0,
+          "sleeve": 19.0
+        },
+        {
+          "label": "S",
+          "length": 70.0,
+          "shoulder": 47.0,
+          "chest": 52.0,
+          "sleeve": 20.0
+        },
+        {
+          "label": "M",
+          "length": 73.0,
+          "shoulder": 51.0,
+          "chest": 56.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "L",
+          "length": 76.5,
+          "shoulder": 54.0,
+          "chest": 59.0,
+          "sleeve": 24.0
+        },
+        {
+          "label": "XL",
+          "length": 80.0,
+          "shoulder": 57.0,
+          "chest": 62.0,
+          "sleeve": 26.0
+        }
+      ]
+    },
+    {
+      "id": "t500-431",
+      "name": "더바이닐하우스",
+      "product": "COWBOY PICTOGRAM RINGER TEE GREY",
+      "url": "https://www.musinsa.com/products/4981046",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 60,
+          "shoulder": 47.5,
+          "chest": 49,
+          "sleeve": 17
+        },
+        {
+          "label": "M",
+          "length": 63,
+          "shoulder": 50,
+          "chest": 52,
+          "sleeve": 18
+        },
+        {
+          "label": "L",
+          "length": 66,
+          "shoulder": 52.5,
+          "chest": 55,
+          "sleeve": 19
+        }
+      ]
+    },
+    {
+      "id": "t100-10",
+      "name": "더콜디스트모먼트",
+      "product": "(w) TCM print crop T (melange grey)",
+      "url": "https://www.musinsa.com/products/6299791",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 50,
+          "shoulder": 38,
+          "chest": 42.5,
+          "sleeve": 15
+        }
+      ]
+    },
+    {
+      "id": "brand-973",
+      "name": "데이",
+      "product": "세미 크롭 헨리넥 와플 반팔 티셔츠_4 COLOR",
+      "url": "https://www.musinsa.com/products/6651289",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 63.0,
+          "shoulder": 45.0,
+          "chest": 52.5,
+          "sleeve": 17.5
+        },
+        {
+          "label": "L",
+          "length": 65.0,
+          "shoulder": 47.0,
+          "chest": 54.5,
+          "sleeve": 18.5
+        },
+        {
+          "label": "XL",
           "length": 67.0,
+          "shoulder": 49.0,
+          "chest": 56.5,
+          "sleeve": 19.5
+        }
+      ]
+    },
+    {
+      "id": "t100-12",
+      "name": "데프가먼츠",
+      "product": "AROUND STONE T-SHIRTS",
+      "url": "https://www.musinsa.com/products/5211864",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 56,
+          "shoulder": 43,
+          "chest": 41.5,
+          "sleeve": 17
+        }
+      ]
+    },
+    {
+      "id": "brand-412",
+      "name": "도톤",
+      "product": "SKETCH STAR T-SHIRTS (Black)",
+      "url": "https://www.musinsa.com/products/6737137",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 65.0,
+          "shoulder": 42.0,
+          "chest": 46.0,
+          "sleeve": 20.0
+        },
+        {
+          "label": "M",
+          "length": 71.0,
+          "shoulder": 48.0,
+          "chest": 52.0,
+          "sleeve": 20.0
+        },
+        {
+          "label": "L",
+          "length": 75.0,
+          "shoulder": 54.0,
+          "chest": 58.0,
+          "sleeve": 21.0
+        }
+      ]
+    },
+    {
+      "id": "t500-409",
+      "name": "도프제이슨",
+      "product": "[패플서 Pick] 숄더 버튼 체크 레이어드 티셔츠 BLACK",
+      "url": "https://www.musinsa.com/products/6437150",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 62.5,
+          "shoulder": 52.5,
+          "chest": 52.5,
+          "sleeve": 20
+        },
+        {
+          "label": "L",
+          "length": 64,
+          "shoulder": 54,
+          "chest": 55,
+          "sleeve": 21
+        },
+        {
+          "label": "XL",
+          "length": 65.5,
+          "shoulder": 55.5,
+          "chest": 57.5,
+          "sleeve": 22
+        }
+      ]
+    },
+    {
+      "id": "brand-853",
+      "name": "드로우핏",
+      "product": "와플 헨리넥 하프 티셔츠 [MELANGE]",
+      "url": "https://www.musinsa.com/products/4990664",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 70.5,
           "shoulder": 52.0,
           "chest": 55.0,
-          "sleeve": 21.5
+          "sleeve": 21.0
+        },
+        {
+          "label": "L",
+          "length": 72.5,
+          "shoulder": 54.0,
+          "chest": 57.5,
+          "sleeve": 22.0
+        },
+        {
+          "label": "XL",
+          "length": 74.5,
+          "shoulder": 56.0,
+          "chest": 60.0,
+          "sleeve": 23.0
+        }
+      ]
+    },
+    {
+      "id": "t500-65",
+      "name": "드릭스",
+      "product": "럭비 오버핏 메시 저지 하프 슬리브_블랙",
+      "url": "https://www.musinsa.com/products/5045551",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 70,
+          "shoulder": 50,
+          "chest": 58,
+          "sleeve": 27
+        },
+        {
+          "label": "M",
+          "length": 72,
+          "shoulder": 53,
+          "chest": 66,
+          "sleeve": 31
+        },
+        {
+          "label": "L",
+          "length": 74,
+          "shoulder": 55,
+          "chest": 68,
+          "sleeve": 32
+        },
+        {
+          "label": "XL",
+          "length": 76,
+          "shoulder": 57,
+          "chest": 70,
+          "sleeve": 33
+        },
+        {
+          "label": "XXL",
+          "length": 78,
+          "shoulder": 59,
+          "chest": 72,
+          "sleeve": 34
         }
       ]
     },
@@ -1218,6 +903,150 @@
       ]
     },
     {
+      "id": "thisisneverthat",
+      "name": "디스이즈네버댓",
+      "product": "T-Logo 티셔츠",
+      "url": "https://www.musinsa.com/products/969666",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 65.5,
+          "shoulder": 46,
+          "chest": 51.5,
+          "sleeve": 18
+        },
+        {
+          "label": "M",
+          "length": 70.5,
+          "shoulder": 49,
+          "chest": 54.5,
+          "sleeve": 19.5
+        },
+        {
+          "label": "L",
+          "length": 72.5,
+          "shoulder": 51.5,
+          "chest": 57.5,
+          "sleeve": 21
+        },
+        {
+          "label": "XL",
+          "length": 75.5,
+          "shoulder": 55.5,
+          "chest": 61.5,
+          "sleeve": 22.5
+        }
+      ]
+    },
+    {
+      "id": "t500-345",
+      "name": "디스커스 애슬레틱",
+      "product": "아이스 코튼 티셔츠 2팩 화이트 & 블랙",
+      "url": "https://www.musinsa.com/products/4029367",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 67,
+          "shoulder": 46.5,
+          "chest": 52,
+          "sleeve": 22
+        },
+        {
+          "label": "M",
+          "length": 70,
+          "shoulder": 49,
+          "chest": 55,
+          "sleeve": 23
+        },
+        {
+          "label": "L",
+          "length": 73,
+          "shoulder": 51.5,
+          "chest": 58,
+          "sleeve": 24
+        },
+        {
+          "label": "XL",
+          "length": 76,
+          "shoulder": 54,
+          "chest": 61,
+          "sleeve": 25
+        },
+        {
+          "label": "2XL",
+          "length": 79,
+          "shoulder": 56.5,
+          "chest": 64,
+          "sleeve": 26
+        }
+      ]
+    },
+    {
+      "id": "t500-499",
+      "name": "디스펑트",
+      "product": "DREAM CATCHER PIGMENT T-SHIRT (CHARCOAL)",
+      "url": "https://www.musinsa.com/products/3278662",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 65,
+          "shoulder": 49,
+          "chest": 50,
+          "sleeve": 19.5
+        },
+        {
+          "label": "M",
+          "length": 70,
+          "shoulder": 50,
+          "chest": 52,
+          "sleeve": 21
+        },
+        {
+          "label": "L",
+          "length": 72,
+          "shoulder": 53,
+          "chest": 55,
+          "sleeve": 23
+        },
+        {
+          "label": "XL",
+          "length": 76,
+          "shoulder": 54,
+          "chest": 59,
+          "sleeve": 25
+        }
+      ]
+    },
+    {
+      "id": "t100-17",
+      "name": "디아도라",
+      "product": "텔레토비 드라이 크롭 그래픽 반팔 티셔츠 우먼 YELLOW",
+      "url": "https://www.musinsa.com/products/6743154",
+      "sizes": [
+        {
+          "label": "XS",
+          "length": 48,
+          "shoulder": null,
+          "chest": 44.5,
+          "sleeve": 18
+        },
+        {
+          "label": "S",
+          "length": 50,
+          "shoulder": null,
+          "chest": 47,
+          "sleeve": 18.5
+        },
+        {
+          "label": "M",
+          "length": 52,
+          "shoulder": null,
+          "chest": 44.5,
+          "sleeve": 19
+        }
+      ]
+    },
+    {
       "id": "brand-424",
       "name": "락케이크",
       "product": "Poeme Hotfix Printed Top - Black",
@@ -1240,24 +1069,575 @@
       ]
     },
     {
-      "id": "brand-744",
-      "name": "블루잉",
-      "product": "BLUEING ATHLETIC GRAPHIC TEE[BLACK]",
-      "url": "https://www.musinsa.com/products/6707785",
+      "id": "t100-19",
+      "name": "러브이즈트루",
+      "product": "EL ANGELIC GRAPHIC TEE(WHITE)",
+      "url": "https://www.musinsa.com/products/5927989",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 61,
+          "shoulder": 42,
+          "chest": 49,
+          "sleeve": 19
+        }
+      ]
+    },
+    {
+      "id": "t100-20",
+      "name": "런던다다",
+      "product": "Twist Neck Slim T-Shirt, 3colors",
+      "url": "https://www.musinsa.com/products/6699601",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 53,
+          "shoulder": 34,
+          "chest": 39,
+          "sleeve": null
+        },
+        {
+          "label": "M",
+          "length": 54,
+          "shoulder": 36,
+          "chest": 41,
+          "sleeve": null
+        },
+        {
+          "label": "L",
+          "length": 55,
+          "shoulder": 38,
+          "chest": 43,
+          "sleeve": null
+        }
+      ]
+    },
+    {
+      "id": "t500-66",
+      "name": "로긴 앤 로지",
+      "product": "Heart Patch Cotton T-shirt White (New)",
+      "url": "https://www.musinsa.com/products/6526404",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 55.5,
+          "shoulder": 37,
+          "chest": 45.5,
+          "sleeve": 16.5
+        },
+        {
+          "label": "M",
+          "length": 56.5,
+          "shoulder": 39,
+          "chest": 47.5,
+          "sleeve": 17
+        }
+      ]
+    },
+    {
+      "id": "leare",
+      "name": "르아르",
+      "product": "90s 빈티지핏 피그먼트 티셔츠 [레몬]",
+      "url": "https://www.musinsa.com/products/6156294",
       "sizes": [
         {
           "label": "M",
-          "length": 69.5,
-          "shoulder": 53.0,
+          "length": 64.0,
+          "shoulder": 40.0,
+          "chest": 50.0,
+          "sleeve": 19.5
+        },
+        {
+          "label": "L",
+          "length": 66.0,
+          "shoulder": 42.0,
+          "chest": 52.0,
+          "sleeve": 20.0
+        },
+        {
+          "label": "XL",
+          "length": 68.0,
+          "shoulder": 44.0,
+          "chest": 54.0,
+          "sleeve": 20.5
+        },
+        {
+          "label": "2XL",
+          "length": 70.0,
+          "shoulder": 46.0,
+          "chest": 56.0,
+          "sleeve": 21.0
+        }
+      ]
+    },
+    {
+      "id": "t500-30",
+      "name": "리메인세컨드",
+      "product": "체크 오버핏 반팔 셔츠 [차콜]",
+      "url": "https://www.musinsa.com/products/5849336",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 73,
+          "shoulder": 57,
+          "chest": 62,
+          "sleeve": 21.5
+        },
+        {
+          "label": "L",
+          "length": 74,
+          "shoulder": 59,
+          "chest": 64,
+          "sleeve": 22.5
+        }
+      ]
+    },
+    {
+      "id": "t500-331",
+      "name": "마리떼 프랑소와 저버",
+      "product": "W CLASSIC LOGO TEE black",
+      "url": "https://www.musinsa.com/products/1984335",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 55,
+          "shoulder": 36,
+          "chest": 45.5,
+          "sleeve": 17
+        },
+        {
+          "label": "M",
+          "length": 56,
+          "shoulder": 37.4,
+          "chest": 48,
+          "sleeve": 18
+        },
+        {
+          "label": "L",
+          "length": 57,
+          "shoulder": 38.8,
+          "chest": 50.5,
+          "sleeve": 19
+        }
+      ]
+    },
+    {
+      "id": "brand-283",
+      "name": "마인드브릿지",
+      "product": "[ON]그래픽 오버핏 링거 반팔 티셔츠 - 2color",
+      "url": "https://www.musinsa.com/products/6103286",
+      "sizes": [
+        {
+          "label": "095",
+          "length": 68.5,
+          "shoulder": 52.4,
+          "chest": 56.5,
+          "sleeve": 24.0
+        },
+        {
+          "label": "100",
+          "length": 70.0,
+          "shoulder": 54.0,
+          "chest": 59.0,
+          "sleeve": 25.0
+        },
+        {
+          "label": "105",
+          "length": 72.5,
+          "shoulder": 55.6,
+          "chest": 61.5,
+          "sleeve": 26.0
+        },
+        {
+          "label": "110",
+          "length": 75.0,
+          "shoulder": 57.6,
+          "chest": 65.0,
+          "sleeve": 27.5
+        }
+      ]
+    },
+    {
+      "id": "markgonzales",
+      "name": "마크곤잘레스",
+      "product": "그래픽 반팔 티셔츠",
+      "url": "https://www.musinsa.com/products/4747531",
+      "sizes": [
+        {
+          "label": "090",
+          "length": 68,
+          "shoulder": 50,
+          "chest": 57,
+          "sleeve": 23
+        },
+        {
+          "label": "095",
+          "length": 70,
+          "shoulder": 51.5,
+          "chest": 59,
+          "sleeve": 23.5
+        },
+        {
+          "label": "100",
+          "length": 72,
+          "shoulder": 53,
+          "chest": 61,
+          "sleeve": 24
+        },
+        {
+          "label": "105",
+          "length": 74,
+          "shoulder": 54.5,
+          "chest": 63,
+          "sleeve": 24.5
+        }
+      ]
+    },
+    {
+      "id": "brand-827",
+      "name": "마하그리드",
+      "product": "CORP TEE_4colors",
+      "url": "https://www.musinsa.com/products/3126011",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 65.0,
+          "shoulder": 46.5,
+          "chest": 53.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "M",
+          "length": 68.0,
+          "shoulder": 49.0,
           "chest": 56.0,
           "sleeve": 23.0
         },
         {
           "label": "L",
-          "length": 73.5,
-          "shoulder": 57.0,
-          "chest": 61.0,
+          "length": 71.0,
+          "shoulder": 51.5,
+          "chest": 59.0,
+          "sleeve": 24.0
+        },
+        {
+          "label": "XL",
+          "length": 74.0,
+          "shoulder": 54.0,
+          "chest": 62.0,
           "sleeve": 25.0
+        }
+      ]
+    },
+    {
+      "id": "brand-939",
+      "name": "맥우드건",
+      "product": "스탠시 3571 와플 스탠다드핏 올리브카키 반팔티",
+      "url": "https://www.musinsa.com/products/4100940",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 68.0,
+          "shoulder": 46.0,
+          "chest": 49.5,
+          "sleeve": 19.0
+        },
+        {
+          "label": "L",
+          "length": 70.0,
+          "shoulder": 48.0,
+          "chest": 52.0,
+          "sleeve": 21.0
+        },
+        {
+          "label": "XL",
+          "length": 72.0,
+          "shoulder": 50.0,
+          "chest": 54.5,
+          "sleeve": 23.0
+        }
+      ]
+    },
+    {
+      "id": "brand-793",
+      "name": "메종미네드",
+      "product": "[현영현영해 PICK] STRIPE LAYERED HALF T CHARC",
+      "url": "https://www.musinsa.com/products/6075608",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 63.0,
+          "shoulder": 48.0,
+          "chest": 50.0,
+          "sleeve": 19.5
+        },
+        {
+          "label": "M",
+          "length": 65.0,
+          "shoulder": 50.0,
+          "chest": 52.5,
+          "sleeve": 20.5
+        },
+        {
+          "label": "L",
+          "length": 67.0,
+          "shoulder": 52.0,
+          "chest": 55.0,
+          "sleeve": 21.5
+        }
+      ]
+    },
+    {
+      "id": "t100-26",
+      "name": "몽돌",
+      "product": "[4color] 컷오프 로고 반팔 티셔츠 MDTS048",
+      "url": "https://www.musinsa.com/products/4179028",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 57,
+          "shoulder": 36.5,
+          "chest": 46,
+          "sleeve": 15.5
+        },
+        {
+          "label": "M",
+          "length": 67,
+          "shoulder": 47,
+          "chest": 54.5,
+          "sleeve": 18.5
+        }
+      ]
+    },
+    {
+      "id": "musinsa-standard",
+      "name": "무신사 스탠다드",
+      "product": "릴렉스 핏 크루 넥 티셔츠",
+      "url": "https://www.musinsa.com/products/996177",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 68.5,
+          "shoulder": 49.5,
+          "chest": 53,
+          "sleeve": 23
+        },
+        {
+          "label": "M",
+          "length": 70.5,
+          "shoulder": 51.5,
+          "chest": 55.5,
+          "sleeve": 25
+        },
+        {
+          "label": "L",
+          "length": 72,
+          "shoulder": 53,
+          "chest": 58,
+          "sleeve": 26
+        },
+        {
+          "label": "XL",
+          "length": 73.5,
+          "shoulder": 54.5,
+          "chest": 60.5,
+          "sleeve": 27
+        },
+        {
+          "label": "2XL",
+          "length": 74.5,
+          "shoulder": 56,
+          "chest": 63,
+          "sleeve": 27.5
+        },
+        {
+          "label": "3XL",
+          "length": 74.5,
+          "shoulder": 57.5,
+          "chest": 65.5,
+          "sleeve": 27.5
+        }
+      ]
+    },
+    {
+      "id": "brand-835",
+      "name": "미나브",
+      "product": "[미나브X리제임스] 골지 크롭 반팔 티셔츠  [화이트]",
+      "url": "https://www.musinsa.com/products/6460242",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 62.5,
+          "shoulder": 45.0,
+          "chest": 50.5,
+          "sleeve": 19.0
+        },
+        {
+          "label": "L",
+          "length": 64.0,
+          "shoulder": 47.0,
+          "chest": 53.0,
+          "sleeve": 20.0
+        },
+        {
+          "label": "XL",
+          "length": 65.5,
+          "shoulder": 49.0,
+          "chest": 55.5,
+          "sleeve": 21.0
+        }
+      ]
+    },
+    {
+      "id": "t500-297",
+      "name": "미나수",
+      "product": "SMALL HEARTTRACK OVER FIT TEE_WHITE",
+      "url": "https://www.musinsa.com/products/3884752",
+      "sizes": [
+        {
+          "label": "F",
+          "length": 73.7,
+          "shoulder": 56,
+          "chest": 61,
+          "sleeve": 23
+        }
+      ]
+    },
+    {
+      "id": "t500-428",
+      "name": "미세키서울",
+      "product": "Misekiseoul short sleeves BLACK",
+      "url": "https://www.musinsa.com/products/4012766",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 62,
+          "shoulder": 42,
+          "chest": 49,
+          "sleeve": 17
+        }
+      ]
+    },
+    {
+      "id": "t500-306",
+      "name": "미치코런던 스포츠",
+      "product": "와플 헨리넥 머슬핏 반팔 티셔츠 멜란지 그레이",
+      "url": "https://www.musinsa.com/products/5972230",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 64,
+          "shoulder": 43.5,
+          "chest": 49.5,
+          "sleeve": 19.5
+        },
+        {
+          "label": "L",
+          "length": 66,
+          "shoulder": 45.5,
+          "chest": 52,
+          "sleeve": 20
+        },
+        {
+          "label": "XL",
+          "length": 68,
+          "shoulder": 47.5,
+          "chest": 54.5,
+          "sleeve": 20.5
+        },
+        {
+          "label": "XXL",
+          "length": 70,
+          "shoulder": 49.5,
+          "chest": 57,
+          "sleeve": 21
+        }
+      ]
+    },
+    {
+      "id": "milo-archive",
+      "name": "밀로 아카이브",
+      "product": "[Pokémon] 블랭크 티셔츠 [딥 차콜]",
+      "url": "https://www.musinsa.com/products/6656624",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 67.5,
+          "shoulder": 53.0,
+          "chest": 60.0,
+          "sleeve": 21.0
+        },
+        {
+          "label": "L",
+          "length": 69.5,
+          "shoulder": 55.5,
+          "chest": 62.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "XL",
+          "length": 71.5,
+          "shoulder": 58.0,
+          "chest": 64.0,
+          "sleeve": 23.0
+        }
+      ]
+    },
+    {
+      "id": "t500-142",
+      "name": "밈더워드로브",
+      "product": "313 프린팅 티셔츠_그레이",
+      "url": "https://www.musinsa.com/products/6272518",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 66,
+          "shoulder": 50,
+          "chest": 52.5,
+          "sleeve": 21.5
+        },
+        {
+          "label": "M",
+          "length": 68,
+          "shoulder": 52,
+          "chest": 55.5,
+          "sleeve": 22.5
+        },
+        {
+          "label": "L",
+          "length": 70,
+          "shoulder": 54,
+          "chest": 58.5,
+          "sleeve": 23.5
+        }
+      ]
+    },
+    {
+      "id": "barbour",
+      "name": "바버",
+      "product": "인터내셔널 스몰 로고 반소매 티셔츠 - 화이트 / MTS0141WH51",
+      "url": "https://www.musinsa.com/products/4820869",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 70.0,
+          "shoulder": 43.0,
+          "chest": 49.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "L",
+          "length": 71.0,
+          "shoulder": 44.0,
+          "chest": 51.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "XL",
+          "length": 76.0,
+          "shoulder": 48.0,
+          "chest": 55.0,
+          "sleeve": 23.0
         }
       ]
     },
@@ -1305,6 +1685,696 @@
       ]
     },
     {
+      "id": "t500-24",
+      "name": "브라운브레스",
+      "product": "PAISLEY TAG TEE - BLACK",
+      "url": "https://www.musinsa.com/products/6116285",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 67,
+          "shoulder": 50.5,
+          "chest": 54.5,
+          "sleeve": 21.5
+        },
+        {
+          "label": "M",
+          "length": 69,
+          "shoulder": 52.5,
+          "chest": 57,
+          "sleeve": 23
+        },
+        {
+          "label": "L",
+          "length": 71,
+          "shoulder": 54.5,
+          "chest": 59.5,
+          "sleeve": 24.5
+        },
+        {
+          "label": "XL",
+          "length": 73,
+          "shoulder": 56.5,
+          "chest": 62,
+          "sleeve": 26
+        },
+        {
+          "label": "2XL",
+          "length": 75,
+          "shoulder": 58.5,
+          "chest": 64.5,
+          "sleeve": 27.5
+        }
+      ]
+    },
+    {
+      "id": "brand-652",
+      "name": "브랜디드",
+      "product": "SOFT SLUB CROP T-SHIRT [MELANGE GRAY]",
+      "url": "https://www.musinsa.com/products/6638236",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 63.0,
+          "shoulder": 49.5,
+          "chest": 54.0,
+          "sleeve": 17.5
+        },
+        {
+          "label": "L",
+          "length": 65.0,
+          "shoulder": 51.5,
+          "chest": 56.0,
+          "sleeve": 18.5
+        },
+        {
+          "label": "XL",
+          "length": 67.0,
+          "shoulder": 53.5,
+          "chest": 58.0,
+          "sleeve": 19.5
+        }
+      ]
+    },
+    {
+      "id": "brand-744",
+      "name": "블루잉",
+      "product": "BLUEING ATHLETIC GRAPHIC TEE[BLACK]",
+      "url": "https://www.musinsa.com/products/6707785",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 69.5,
+          "shoulder": 53.0,
+          "chest": 56.0,
+          "sleeve": 23.0
+        },
+        {
+          "label": "L",
+          "length": 73.5,
+          "shoulder": 57.0,
+          "chest": 61.0,
+          "sleeve": 25.0
+        }
+      ]
+    },
+    {
+      "id": "brand-212",
+      "name": "비바라비다",
+      "product": "Ana 반팔 티셔츠",
+      "url": "https://www.musinsa.com/products/6688194",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 66.5,
+          "shoulder": 47.0,
+          "chest": 49.0,
+          "sleeve": 21.0
+        },
+        {
+          "label": "M",
+          "length": 70.0,
+          "shoulder": 50.0,
+          "chest": 54.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "L",
+          "length": 73.0,
+          "shoulder": 52.5,
+          "chest": 58.0,
+          "sleeve": 24.0
+        },
+        {
+          "label": "XL",
+          "length": 75.5,
+          "shoulder": 56.0,
+          "chest": 63.0,
+          "sleeve": 25.0
+        }
+      ]
+    },
+    {
+      "id": "t100-35",
+      "name": "비터셀즈",
+      "product": "에센셜 골지 하프 티-레몬",
+      "url": "https://www.musinsa.com/products/6200629",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 53,
+          "shoulder": 33,
+          "chest": 38.5,
+          "sleeve": 14.5
+        }
+      ]
+    },
+    {
+      "id": "t500-358",
+      "name": "빈트릴",
+      "product": "빈티지 해시태그 오버핏 반팔티(블랙)",
+      "url": "https://www.musinsa.com/products/6022589",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 68,
+          "shoulder": 52,
+          "chest": 55,
+          "sleeve": 22
+        },
+        {
+          "label": "M",
+          "length": 71.5,
+          "shoulder": 54,
+          "chest": 57.5,
+          "sleeve": 22.5
+        },
+        {
+          "label": "L",
+          "length": 73,
+          "shoulder": 56,
+          "chest": 60,
+          "sleeve": 23
+        },
+        {
+          "label": "XL",
+          "length": 74.5,
+          "shoulder": 58,
+          "chest": 62.5,
+          "sleeve": 23.5
+        }
+      ]
+    },
+    {
+      "id": "t500-84",
+      "name": "세컨드솔트",
+      "product": "스트랩 레이어드 골지 홀터넥 티셔츠 (멜란지그레이)",
+      "url": "https://www.musinsa.com/products/6507761",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 50,
+          "shoulder": 37.5,
+          "chest": 41,
+          "sleeve": 13.7
+        },
+        {
+          "label": "M",
+          "length": 52,
+          "shoulder": 39,
+          "chest": 43,
+          "sleeve": 14.7
+        }
+      ]
+    },
+    {
+      "id": "t100-36",
+      "name": "세터",
+      "product": "(W) 더블린 반팔 티셔츠 블랙",
+      "url": "https://www.musinsa.com/products/6204374",
+      "sizes": [
+        {
+          "label": "XS",
+          "length": 43.5,
+          "shoulder": 35,
+          "chest": 42.5,
+          "sleeve": 15.5
+        },
+        {
+          "label": "S",
+          "length": 44.5,
+          "shoulder": 37,
+          "chest": 45,
+          "sleeve": 16.5
+        },
+        {
+          "label": "M",
+          "length": 45.5,
+          "shoulder": 39,
+          "chest": 47.5,
+          "sleeve": 17.5
+        }
+      ]
+    },
+    {
+      "id": "t100-37",
+      "name": "셋업이엑스이",
+      "product": "LACE CROSS T-SHIRT / PINK",
+      "url": "https://www.musinsa.com/products/6687292",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 54,
+          "shoulder": 34,
+          "chest": 38,
+          "sleeve": 11
+        }
+      ]
+    },
+    {
+      "id": "t500-46",
+      "name": "소버먼트",
+      "product": "460G 컷 헤비 피그먼트 티셔츠-차콜-",
+      "url": "https://www.musinsa.com/products/1944612",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 69,
+          "shoulder": 56.5,
+          "chest": 58,
+          "sleeve": 22
+        },
+        {
+          "label": "M",
+          "length": 71,
+          "shoulder": 58,
+          "chest": 60,
+          "sleeve": 23
+        },
+        {
+          "label": "L",
+          "length": 73,
+          "shoulder": 59.5,
+          "chest": 62,
+          "sleeve": 24
+        },
+        {
+          "label": "XL",
+          "length": 75,
+          "shoulder": 61,
+          "chest": 64,
+          "sleeve": 25
+        }
+      ]
+    },
+    {
+      "id": "t100-38",
+      "name": "소흘",
+      "product": "Mist Off-Shoulder Snap T (네이비)",
+      "url": "https://www.musinsa.com/products/6663058",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 57,
+          "shoulder": null,
+          "chest": 39,
+          "sleeve": 14
+        }
+      ]
+    },
+    {
+      "id": "snowpeak",
+      "name": "스노우피크 어패럴",
+      "product": "[스노우피크 I 도라에몽] 캠핑 반팔 티셔츠 (S26MUFTS94) Of",
+      "url": "https://www.musinsa.com/products/6632593",
+      "sizes": [
+        {
+          "label": "90(S)",
+          "length": 66.0,
+          "shoulder": 44.0,
+          "chest": 53.0,
+          "sleeve": 23.0
+        },
+        {
+          "label": "95(M)",
+          "length": 68.0,
+          "shoulder": 46.0,
+          "chest": 55.5,
+          "sleeve": 23.5
+        },
+        {
+          "label": "100(L)",
+          "length": 70.0,
+          "shoulder": 48.0,
+          "chest": 58.0,
+          "sleeve": 24.0
+        },
+        {
+          "label": "105(XL)",
+          "length": 72.0,
+          "shoulder": 50.0,
+          "chest": 60.5,
+          "sleeve": 24.5
+        },
+        {
+          "label": "110(2XL)",
+          "length": 74.0,
+          "shoulder": 52.0,
+          "chest": 62.0,
+          "sleeve": 25.0
+        }
+      ]
+    },
+    {
+      "id": "t500-467",
+      "name": "스컬프터",
+      "product": "Lazy Sleeveless Layered Tee Mint",
+      "url": "https://www.musinsa.com/products/6204360",
+      "sizes": [
+        {
+          "label": "XS",
+          "length": 59,
+          "shoulder": 27,
+          "chest": 34.5,
+          "sleeve": null
+        },
+        {
+          "label": "S",
+          "length": 60,
+          "shoulder": 29,
+          "chest": 36.5,
+          "sleeve": null
+        },
+        {
+          "label": "M",
+          "length": 61,
+          "shoulder": 31,
+          "chest": 38,
+          "sleeve": null
+        },
+        {
+          "label": "L",
+          "length": 62,
+          "shoulder": 33,
+          "chest": 40.5,
+          "sleeve": null
+        }
+      ]
+    },
+    {
+      "id": "t500-131",
+      "name": "스켈리웩",
+      "product": "[류정란 × 스켈리웩] PULL UP 크롭 티셔츠[화이트]",
+      "url": "https://www.musinsa.com/products/6178824",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 60,
+          "shoulder": 52,
+          "chest": 55,
+          "sleeve": 18
+        },
+        {
+          "label": "M",
+          "length": 61,
+          "shoulder": 54,
+          "chest": 57,
+          "sleeve": 19
+        },
+        {
+          "label": "L",
+          "length": 62,
+          "shoulder": 56,
+          "chest": 59,
+          "sleeve": 20
+        }
+      ]
+    },
+    {
+      "id": "stussy",
+      "name": "스투시",
+      "product": "베이직 반팔 티셔츠",
+      "url": "https://www.musinsa.com/products/1382809",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 69,
+          "shoulder": 48,
+          "chest": 53.5,
+          "sleeve": 20
+        },
+        {
+          "label": "M",
+          "length": 72,
+          "shoulder": 51,
+          "chest": 55.5,
+          "sleeve": 22
+        },
+        {
+          "label": "L",
+          "length": 76,
+          "shoulder": 54,
+          "chest": 57.5,
+          "sleeve": 23
+        }
+      ]
+    },
+    {
+      "id": "spao",
+      "name": "스파오",
+      "product": "베이직 반팔 티셔츠",
+      "url": "https://www.musinsa.com/products/5093308",
+      "sizes": [
+        {
+          "label": "S (090)",
+          "length": 65.5,
+          "shoulder": 44,
+          "chest": 48,
+          "sleeve": 22
+        },
+        {
+          "label": "M (095)",
+          "length": 67.5,
+          "shoulder": 45.5,
+          "chest": 50.5,
+          "sleeve": 23
+        },
+        {
+          "label": "L (100)",
+          "length": 69.5,
+          "shoulder": 47,
+          "chest": 53,
+          "sleeve": 24
+        },
+        {
+          "label": "XL (105)",
+          "length": 71.5,
+          "shoulder": 48.5,
+          "chest": 55.5,
+          "sleeve": 25
+        }
+      ]
+    },
+    {
+      "id": "t500-97",
+      "name": "슬로우애시드",
+      "product": "러스티 로고 반팔티셔츠 [차콜]",
+      "url": "https://www.musinsa.com/products/3074122",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 67,
+          "shoulder": 49,
+          "chest": 53,
+          "sleeve": 21
+        },
+        {
+          "label": "M",
+          "length": 70,
+          "shoulder": 52,
+          "chest": 56,
+          "sleeve": 22
+        },
+        {
+          "label": "L",
+          "length": 73,
+          "shoulder": 55,
+          "chest": 59,
+          "sleeve": 23
+        },
+        {
+          "label": "XL",
+          "length": 76,
+          "shoulder": 58,
+          "chest": 62,
+          "sleeve": 24
+        }
+      ]
+    },
+    {
+      "id": "t500-487",
+      "name": "슬릭글로우",
+      "product": "[김샤브칼 PICK] 홀스 원숄더 티셔츠[차콜]",
+      "url": "https://www.musinsa.com/products/6286766",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 64.5,
+          "shoulder": 53,
+          "chest": 56.5,
+          "sleeve": 18.5
+        }
+      ]
+    },
+    {
+      "id": "xiaoxiko",
+      "name": "시아오시코",
+      "product": "피그먼트 헨리넥 머슬핏 반팔",
+      "url": "https://www.musinsa.com/products/6673687",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 65.0,
+          "shoulder": 45.0,
+          "chest": 47.0,
+          "sleeve": 21.0
+        },
+        {
+          "label": "L",
+          "length": 66.0,
+          "shoulder": 47.0,
+          "chest": 48.0,
+          "sleeve": 22.0
+        }
+      ]
+    },
+    {
+      "id": "brand-292",
+      "name": "썬러브",
+      "product": "Collage Tee Heather Grey",
+      "url": "https://www.musinsa.com/products/6179698",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 61.5,
+          "shoulder": 41.5,
+          "chest": 50.5,
+          "sleeve": 20.5
+        },
+        {
+          "label": "M",
+          "length": 66.0,
+          "shoulder": 46.0,
+          "chest": 55.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "L",
+          "length": 71.0,
+          "shoulder": 50.0,
+          "chest": 59.0,
+          "sleeve": 23.5
+        },
+        {
+          "label": "XL",
+          "length": 73.0,
+          "shoulder": 52.0,
+          "chest": 61.5,
+          "sleeve": 24.5
+        }
+      ]
+    },
+    {
+      "id": "t100-43",
+      "name": "쓰리바이쓰리",
+      "product": "본 스타 프레임 반팔 버건디",
+      "url": "https://www.musinsa.com/products/6702413",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 51,
+          "shoulder": 39,
+          "chest": 45,
+          "sleeve": 14
+        }
+      ]
+    },
+    {
+      "id": "adidas",
+      "name": "아디다스",
+      "product": "3-스트라이프 티셔츠 (래글런 — 어깨 실측 없음)",
+      "url": "https://www.musinsa.com/products/1040865",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 70,
+          "shoulder": null,
+          "chest": 45,
+          "sleeve": null
+        },
+        {
+          "label": "M",
+          "length": 71,
+          "shoulder": null,
+          "chest": 47,
+          "sleeve": null
+        },
+        {
+          "label": "L",
+          "length": 74,
+          "shoulder": null,
+          "chest": 49,
+          "sleeve": null
+        },
+        {
+          "label": "XL",
+          "length": 75,
+          "shoulder": null,
+          "chest": 51,
+          "sleeve": null
+        },
+        {
+          "label": "XXL",
+          "length": 76,
+          "shoulder": null,
+          "chest": 53,
+          "sleeve": null
+        }
+      ],
+      "notes": "래글런 소매 — 어깨너비 미제공, 소매길이는 목선 기준 측정이라 비교 불가로 null 처리"
+    },
+    {
+      "id": "t100-44",
+      "name": "아메스 월드와이드",
+      "product": "(unisex) BASIC LOGO TEE CHARCOAL",
+      "url": "https://www.musinsa.com/products/3225800",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 50.5,
+          "shoulder": 37.5,
+          "chest": 43,
+          "sleeve": 16.5
+        },
+        {
+          "label": "M",
+          "length": 68.5,
+          "shoulder": 50,
+          "chest": 54.5,
+          "sleeve": 20
+        },
+        {
+          "label": "L",
+          "length": 72.5,
+          "shoulder": 54,
+          "chest": 59,
+          "sleeve": 21.5
+        }
+      ]
+    },
+    {
+      "id": "brand-245",
+      "name": "아모우",
+      "product": "Two Star Ringer T-shirts RED",
+      "url": "https://www.musinsa.com/products/6350644",
+      "sizes": [
+        {
+          "label": "2",
+          "length": 66.0,
+          "shoulder": 56.5,
+          "chest": 58.5,
+          "sleeve": 20.0
+        },
+        {
+          "label": "3",
+          "length": 69.0,
+          "shoulder": 60.0,
+          "chest": 62.0,
+          "sleeve": 21.5
+        }
+      ]
+    },
+    {
       "id": "brand-255",
       "name": "아웃스탠딩",
       "product": "MIL SERIES TEE(NELLIS)_CHARCOAL",
@@ -1330,42 +2400,6 @@
           "shoulder": 51.0,
           "chest": 59.0,
           "sleeve": 22.0
-        }
-      ]
-    },
-    {
-      "id": "brand-783",
-      "name": "퍼스텝",
-      "product": "[2PACK] 트레이스 링거 반팔티셔츠 4종 JUST4766",
-      "url": "https://www.musinsa.com/products/6354954",
-      "sizes": [
-        {
-          "label": "M",
-          "length": 68.0,
-          "shoulder": 48.0,
-          "chest": 56.0,
-          "sleeve": 22.0
-        },
-        {
-          "label": "L",
-          "length": 70.0,
-          "shoulder": 50.0,
-          "chest": 58.0,
-          "sleeve": 23.0
-        },
-        {
-          "label": "XL",
-          "length": 72.0,
-          "shoulder": 52.0,
-          "chest": 60.0,
-          "sleeve": 24.0
-        },
-        {
-          "label": "2XL",
-          "length": 74.0,
-          "shoulder": 54.0,
-          "chest": 62.0,
-          "sleeve": 25.0
         }
       ]
     },
@@ -1413,193 +2447,921 @@
       ]
     },
     {
-      "id": "brand-350",
-      "name": "그라픽",
-      "product": "픽키스타 반팔 티셔츠 10 Color [GRSE_9603]",
-      "url": "https://www.musinsa.com/products/6702417",
+      "id": "t500-219",
+      "name": "알리스",
+      "product": "링 스터드 헨리넥 하프 티셔츠 [블랙]",
+      "url": "https://www.musinsa.com/products/5056712",
       "sizes": [
         {
           "label": "M",
-          "length": 66.0,
-          "shoulder": 42.0,
-          "chest": 50.0,
-          "sleeve": 22.0
+          "length": 68,
+          "shoulder": 51,
+          "chest": 56,
+          "sleeve": 24.5
         },
         {
           "label": "L",
-          "length": 68.0,
-          "shoulder": 44.0,
-          "chest": 52.0,
-          "sleeve": 23.0
+          "length": 70,
+          "shoulder": 53,
+          "chest": 58.5,
+          "sleeve": 25.5
         },
         {
           "label": "XL",
-          "length": 70.0,
-          "shoulder": 46.0,
-          "chest": 54.0,
-          "sleeve": 24.0
-        },
-        {
-          "label": "2XL",
-          "length": 72.0,
-          "shoulder": 48.0,
-          "chest": 56.0,
-          "sleeve": 25.0
-        },
-        {
-          "label": "3XL",
-          "length": 74.0,
-          "shoulder": 50.0,
-          "chest": 58.0,
-          "sleeve": 26.0
-        },
-        {
-          "label": "4XL",
-          "length": 76.0,
-          "shoulder": 52.0,
-          "chest": 60.0,
-          "sleeve": 27.0
+          "length": 72,
+          "shoulder": 55,
+          "chest": 61,
+          "sleeve": 26.5
         }
       ]
     },
     {
-      "id": "brand-245",
-      "name": "아모우",
-      "product": "Two Star Ringer T-shirts RED",
-      "url": "https://www.musinsa.com/products/6350644",
+      "id": "t100-48",
+      "name": "애즈유아",
+      "product": "키치 아일렛 오버핏 티셔츠 차콜",
+      "url": "https://www.musinsa.com/products/6446878",
       "sizes": [
         {
-          "label": "2",
-          "length": 66.0,
-          "shoulder": 56.5,
-          "chest": 58.5,
+          "label": "FREE",
+          "length": 69,
+          "shoulder": 53,
+          "chest": 57,
+          "sleeve": 23
+        }
+      ]
+    },
+    {
+      "id": "alvinclo",
+      "name": "앨빈클로",
+      "product": "RIDE HARD 헨리넥 크롭핏 반팔티 AST3680 (2COLOR)",
+      "url": "https://www.musinsa.com/products/6723404",
+      "sizes": [
+        {
+          "label": "L",
+          "length": 62.5,
+          "shoulder": 52.0,
+          "chest": 56.0,
+          "sleeve": 18.0
+        },
+        {
+          "label": "XL",
+          "length": 65.0,
+          "shoulder": 54.0,
+          "chest": 58.0,
+          "sleeve": 19.0
+        }
+      ]
+    },
+    {
+      "id": "t500-495",
+      "name": "어나더 아카이브",
+      "product": "FB 컬러블 그래피티 로고 반팔티_블랙",
+      "url": "https://www.musinsa.com/products/4771098",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 72,
+          "shoulder": 56,
+          "chest": 58,
+          "sleeve": 22
+        },
+        {
+          "label": "L",
+          "length": 74,
+          "shoulder": 58.5,
+          "chest": 61,
+          "sleeve": 23
+        }
+      ]
+    },
+    {
+      "id": "t500-37",
+      "name": "어반디타입",
+      "product": "풋볼 져지 티셔츠_화이트",
+      "url": "https://www.musinsa.com/products/3901720",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 66,
+          "shoulder": 48,
+          "chest": 54,
+          "sleeve": 21
+        },
+        {
+          "label": "M",
+          "length": 69,
+          "shoulder": 53,
+          "chest": 59,
+          "sleeve": 23.5
+        },
+        {
+          "label": "L",
+          "length": 73,
+          "shoulder": 56,
+          "chest": 61.5,
+          "sleeve": 25
+        }
+      ]
+    },
+    {
+      "id": "t500-36",
+      "name": "언타이틀 서울",
+      "product": "언타이틀 크레스트 폴로 크롭 반팔 블랙",
+      "url": "https://www.musinsa.com/products/6183528",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 63.5,
+          "shoulder": 47,
+          "chest": 52.5,
+          "sleeve": 21
+        },
+        {
+          "label": "L",
+          "length": 65.5,
+          "shoulder": 49,
+          "chest": 55,
+          "sleeve": 23
+        }
+      ]
+    },
+    {
+      "id": "t100-50",
+      "name": "에브리시",
+      "product": "베이직 롤업 배색 반팔 티셔츠 (네이비)",
+      "url": "https://www.musinsa.com/products/6702634",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 50,
+          "shoulder": 39,
+          "chest": 43,
+          "sleeve": 19
+        }
+      ]
+    },
+    {
+      "id": "t100-51",
+      "name": "에스이에스티",
+      "product": "Hearts Slim Fit T-shirts Lime",
+      "url": "https://www.musinsa.com/products/6732631",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 51,
+          "shoulder": 34,
+          "chest": 39,
+          "sleeve": 13
+        }
+      ]
+    },
+    {
+      "id": "t500-413",
+      "name": "에스피오나지",
+      "product": "Vintage Washed Border Tee Black",
+      "url": "https://www.musinsa.com/products/6225265",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 70,
+          "shoulder": 53,
+          "chest": 58,
+          "sleeve": 21
+        },
+        {
+          "label": "L",
+          "length": 72,
+          "shoulder": 55,
+          "chest": 60,
+          "sleeve": 22
+        },
+        {
+          "label": "XL",
+          "length": 74,
+          "shoulder": 57,
+          "chest": 62,
+          "sleeve": 23
+        }
+      ]
+    },
+    {
+      "id": "t500-369",
+      "name": "에이이에이이",
+      "product": "DOT SMALL LETTER TEE [WHITE]",
+      "url": "https://www.musinsa.com/products/4876148",
+      "sizes": [
+        {
+          "label": "OS",
+          "length": 51,
+          "shoulder": 33,
+          "chest": 36.5,
+          "sleeve": 13
+        }
+      ]
+    },
+    {
+      "id": "brand-977",
+      "name": "엑스오엑스",
+      "product": "리브드 헨리넥 반팔 티셔츠(3color)",
+      "url": "https://www.musinsa.com/products/6349194",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 65.0,
+          "shoulder": 49.0,
+          "chest": 54.0,
           "sleeve": 20.0
         },
         {
-          "label": "3",
+          "label": "L",
+          "length": 66.5,
+          "shoulder": 50.5,
+          "chest": 56.0,
+          "sleeve": 21.0
+        },
+        {
+          "label": "XL",
+          "length": 68.0,
+          "shoulder": 52.0,
+          "chest": 58.0,
+          "sleeve": 22.0
+        }
+      ]
+    },
+    {
+      "id": "yale",
+      "name": "예일",
+      "product": "스몰아치 반팔 티셔츠",
+      "url": "https://www.musinsa.com/products/2442409",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 65,
+          "shoulder": 48,
+          "chest": 54,
+          "sleeve": 21
+        },
+        {
+          "label": "M",
+          "length": 69,
+          "shoulder": 52,
+          "chest": 57.5,
+          "sleeve": 23
+        },
+        {
+          "label": "L",
+          "length": 71,
+          "shoulder": 54,
+          "chest": 60,
+          "sleeve": 24
+        },
+        {
+          "label": "XL",
+          "length": 73,
+          "shoulder": 56,
+          "chest": 62.5,
+          "sleeve": 25
+        },
+        {
+          "label": "XXL",
+          "length": 76,
+          "shoulder": 58,
+          "chest": 66,
+          "sleeve": 25
+        }
+      ]
+    },
+    {
+      "id": "t500-76",
+      "name": "오와이",
+      "product": "BOLD LETTERS TEE - NAVY",
+      "url": "https://www.musinsa.com/products/6408400",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 58.5,
+          "shoulder": 40,
+          "chest": 44,
+          "sleeve": 17
+        },
+        {
+          "label": "M",
+          "length": 66,
+          "shoulder": 47,
+          "chest": 54,
+          "sleeve": 21
+        },
+        {
+          "label": "L",
+          "length": 72,
+          "shoulder": 51,
+          "chest": 59,
+          "sleeve": 23
+        }
+      ]
+    },
+    {
+      "id": "t100-53",
+      "name": "오운서",
+      "product": "[라영 × 오운서] OSP 스탠다드 보트넥 티셔츠 (6 Colors)",
+      "url": "https://www.musinsa.com/products/6771740",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 52,
+          "shoulder": 37,
+          "chest": 40,
+          "sleeve": 13.5
+        },
+        {
+          "label": "M",
+          "length": 53,
+          "shoulder": 38,
+          "chest": 43,
+          "sleeve": 15
+        }
+      ]
+    },
+    {
+      "id": "yosemite",
+      "name": "요세미티",
+      "product": "배색 롤업 레이어드 반팔티 YT-3Y31",
+      "url": "https://www.musinsa.com/products/6760735",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 63.0,
+          "shoulder": 52.0,
+          "chest": 53.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "L",
+          "length": 66.0,
+          "shoulder": 55.0,
+          "chest": 56.0,
+          "sleeve": 23.0
+        },
+        {
+          "label": "XL",
           "length": 69.0,
-          "shoulder": 60.0,
-          "chest": 62.0,
+          "shoulder": 58.0,
+          "chest": 59.0,
+          "sleeve": 24.0
+        }
+      ]
+    },
+    {
+      "id": "t100-55",
+      "name": "유니버스 가먼트",
+      "product": "[가훤pick] Happy 패밀리 크롭 티셔츠_BLUE",
+      "url": "https://www.musinsa.com/products/6722992",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 58,
+          "shoulder": 49,
+          "chest": 59,
+          "sleeve": 13
+        },
+        {
+          "label": "L",
+          "length": 68,
+          "shoulder": 59,
+          "chest": 69,
+          "sleeve": 17
+        }
+      ]
+    },
+    {
+      "id": "t100-56",
+      "name": "유라고",
+      "product": "Vintage estival t-shirt_3colors",
+      "url": "https://www.musinsa.com/products/6689505",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 66,
+          "shoulder": 47,
+          "chest": 53.5,
+          "sleeve": 19
+        }
+      ]
+    },
+    {
+      "id": "t500-304",
+      "name": "유희",
+      "product": "I LOVE OFF-SHOULDER T-SHIRTS_LIGHT BLUE",
+      "url": "https://www.musinsa.com/products/5835418",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 68,
+          "shoulder": 54,
+          "chest": 61,
+          "sleeve": 18
+        }
+      ]
+    },
+    {
+      "id": "t100-57",
+      "name": "이스케이프프롬",
+      "product": "스타 카모 ESCF 로고 콜라주 프린트 슬림핏 반팔티 아이보리",
+      "url": "https://www.musinsa.com/products/5088374",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 46,
+          "shoulder": 32.5,
+          "chest": 39,
+          "sleeve": 14
+        },
+        {
+          "label": "L",
+          "length": 48,
+          "shoulder": 36.5,
+          "chest": 44,
+          "sleeve": 15.5
+        }
+      ]
+    },
+    {
+      "id": "t100-59",
+      "name": "제너럴아이디어",
+      "product": "스냅 헨리넥 티셔츠 [KHAKI] / GF2LTS528",
+      "url": "https://www.musinsa.com/products/6408788",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 47.5,
+          "shoulder": null,
+          "chest": 39.5,
+          "sleeve": 18.5
+        },
+        {
+          "label": "M",
+          "length": 48.5,
+          "shoulder": null,
+          "chest": 41.5,
+          "sleeve": 19.5
+        },
+        {
+          "label": "L",
+          "length": 49.5,
+          "shoulder": null,
+          "chest": 43.5,
+          "sleeve": 20.5
+        },
+        {
+          "label": "XL",
+          "length": 50.5,
+          "shoulder": null,
+          "chest": 45.5,
           "sleeve": 21.5
         }
       ]
     },
     {
-      "id": "brand-19",
-      "name": "노드유",
-      "product": "쿨 썸머 워셔블 카라 크롭 하프 가디건 [아이보리]",
-      "url": "https://www.musinsa.com/products/6634023",
+      "id": "t100-60",
+      "name": "제로시",
+      "product": "(W) ZRS Symbol Applique Tee (MINT)",
+      "url": "https://www.musinsa.com/products/6706361",
       "sizes": [
         {
-          "label": "M",
-          "length": 64.0,
-          "shoulder": 47.0,
-          "chest": 56.0,
-          "sleeve": 22.0
-        },
-        {
-          "label": "L",
-          "length": 66.0,
-          "shoulder": 49.0,
-          "chest": 58.0,
-          "sleeve": 23.0
+          "label": "FREE",
+          "length": 57.8,
+          "shoulder": 41,
+          "chest": 44,
+          "sleeve": 16.5
         }
       ]
     },
     {
-      "id": "brand-292",
-      "name": "썬러브",
-      "product": "Collage Tee Heather Grey",
-      "url": "https://www.musinsa.com/products/6179698",
+      "id": "t500-441",
+      "name": "주앙옴므",
+      "product": "본 투 라이즈 링거 하프 슬리브 (멜란지 그레이)",
+      "url": "https://www.musinsa.com/products/6250702",
       "sizes": [
         {
           "label": "S",
-          "length": 61.5,
-          "shoulder": 41.5,
-          "chest": 50.5,
-          "sleeve": 20.5
+          "length": 63,
+          "shoulder": 54,
+          "chest": 53,
+          "sleeve": 17
         },
         {
           "label": "M",
-          "length": 66.0,
-          "shoulder": 46.0,
-          "chest": 55.0,
-          "sleeve": 22.0
+          "length": 65,
+          "shoulder": 56,
+          "chest": 55,
+          "sleeve": 18
         },
         {
           "label": "L",
-          "length": 71.0,
-          "shoulder": 50.0,
-          "chest": 59.0,
-          "sleeve": 23.5
-        },
-        {
-          "label": "XL",
-          "length": 73.0,
-          "shoulder": 52.0,
-          "chest": 61.5,
-          "sleeve": 24.5
+          "length": 67,
+          "shoulder": 58,
+          "chest": 57,
+          "sleeve": 19
         }
       ]
     },
     {
-      "id": "brand-853",
-      "name": "드로우핏",
-      "product": "와플 헨리넥 하프 티셔츠 [MELANGE]",
-      "url": "https://www.musinsa.com/products/4990664",
+      "id": "giordano",
+      "name": "지오다노",
+      "product": "코튼 반팔 티셔츠 헤비웨이트 (AI 검색 수집)",
+      "url": "https://www.giordano.co.kr/_gio_on/2025/01025521size.jpg",
       "sizes": [
         {
           "label": "M",
           "length": 70.5,
-          "shoulder": 52.0,
-          "chest": 55.0,
-          "sleeve": 21.0
+          "shoulder": 47,
+          "chest": 53.3,
+          "sleeve": 22.2
         },
         {
           "label": "L",
-          "length": 72.5,
-          "shoulder": 54.0,
-          "chest": 57.5,
-          "sleeve": 22.0
+          "length": 73,
+          "shoulder": 49.5,
+          "chest": 55.9,
+          "sleeve": 23.5
         },
         {
           "label": "XL",
-          "length": 74.5,
-          "shoulder": 56.0,
-          "chest": 60.0,
-          "sleeve": 23.0
+          "length": 75.6,
+          "shoulder": 52.1,
+          "chest": 58.4,
+          "sleeve": 24.8
         }
       ]
     },
     {
-      "id": "brand-827",
-      "name": "마하그리드",
-      "product": "CORP TEE_4colors",
-      "url": "https://www.musinsa.com/products/3126011",
+      "id": "t500-78",
+      "name": "지프",
+      "product": "[190g] M-Logo 그래픽 반팔 티 (JR5TSU173WH)",
+      "url": "https://www.musinsa.com/products/1356896",
       "sizes": [
         {
+          "label": "XS",
+          "length": 61,
+          "shoulder": 44,
+          "chest": 51,
+          "sleeve": 21
+        },
+        {
           "label": "S",
-          "length": 65.0,
-          "shoulder": 46.5,
-          "chest": 53.0,
-          "sleeve": 22.0
+          "length": 63,
+          "shoulder": 45,
+          "chest": 53,
+          "sleeve": 22
+        },
+        {
+          "label": "M",
+          "length": 69,
+          "shoulder": 50,
+          "chest": 56,
+          "sleeve": 25
+        },
+        {
+          "label": "L",
+          "length": 70,
+          "shoulder": 51,
+          "chest": 58,
+          "sleeve": 26
+        },
+        {
+          "label": "XL",
+          "length": 71,
+          "shoulder": 52,
+          "chest": 61,
+          "sleeve": 27
+        },
+        {
+          "label": "2XL",
+          "length": 72,
+          "shoulder": 53,
+          "chest": 64,
+          "sleeve": 27
+        },
+        {
+          "label": "3XL",
+          "length": 74,
+          "shoulder": 55,
+          "chest": 66,
+          "sleeve": 28
+        }
+      ]
+    },
+    {
+      "id": "champion",
+      "name": "챔피온",
+      "product": "조그택 반팔 티셔츠 Navy",
+      "url": "https://www.musinsa.com/products/6626012",
+      "sizes": [
+        {
+          "label": "XS",
+          "length": 64.0,
+          "shoulder": 47.0,
+          "chest": 52.5,
+          "sleeve": 20.5
+        },
+        {
+          "label": "S",
+          "length": 66.0,
+          "shoulder": 49.0,
+          "chest": 55.0,
+          "sleeve": 21.5
         },
         {
           "label": "M",
           "length": 68.0,
-          "shoulder": 49.0,
-          "chest": 56.0,
-          "sleeve": 23.0
+          "shoulder": 51.0,
+          "chest": 57.5,
+          "sleeve": 22.5
         },
         {
           "label": "L",
-          "length": 71.0,
-          "shoulder": 51.5,
-          "chest": 59.0,
-          "sleeve": 24.0
+          "length": 70.0,
+          "shoulder": 53.0,
+          "chest": 60.0,
+          "sleeve": 23.5
         },
         {
           "label": "XL",
+          "length": 72.0,
+          "shoulder": 55.0,
+          "chest": 62.5,
+          "sleeve": 24.5
+        },
+        {
+          "label": "XXL",
+          "length": 73.5,
+          "shoulder": 57.0,
+          "chest": 65.0,
+          "sleeve": 25.0
+        }
+      ]
+    },
+    {
+      "id": "covernat",
+      "name": "커버낫",
+      "product": "쿨 코튼 티셔츠",
+      "url": "https://www.musinsa.com/products/1943792",
+      "sizes": [
+        {
+          "label": "XS",
+          "length": 64,
+          "shoulder": 46,
+          "chest": 49.5,
+          "sleeve": 20.4
+        },
+        {
+          "label": "S",
+          "length": 66,
+          "shoulder": 48,
+          "chest": 52,
+          "sleeve": 21.1
+        },
+        {
+          "label": "M",
+          "length": 69,
+          "shoulder": 51,
+          "chest": 55.5,
+          "sleeve": 22.3
+        },
+        {
+          "label": "L",
+          "length": 71,
+          "shoulder": 53,
+          "chest": 58,
+          "sleeve": 23
+        },
+        {
+          "label": "XL",
+          "length": 73,
+          "shoulder": 55,
+          "chest": 60.5,
+          "sleeve": 23.7
+        },
+        {
+          "label": "XXL",
+          "length": 74,
+          "shoulder": 57,
+          "chest": 63,
+          "sleeve": 24.4
+        }
+      ]
+    },
+    {
+      "id": "t500-196",
+      "name": "코이리스",
+      "product": "솔루나 배색 반팔 티 남녀공용 (13컬러)",
+      "url": "https://www.musinsa.com/products/6012584",
+      "sizes": [
+        {
+          "label": "L",
+          "length": 56,
+          "shoulder": 38,
+          "chest": 42,
+          "sleeve": 17
+        }
+      ]
+    },
+    {
+      "id": "creegan",
+      "name": "크리건",
+      "product": "CLUB JERSEY TEE (3color)",
+      "url": "https://www.musinsa.com/products/6653694",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 68.0,
+          "shoulder": 50.0,
+          "chest": 54.0,
+          "sleeve": 20.0
+        },
+        {
+          "label": "L",
+          "length": 70.0,
+          "shoulder": 52.0,
+          "chest": 57.0,
+          "sleeve": 21.0
+        },
+        {
+          "label": "XL",
+          "length": 72.0,
+          "shoulder": 54.5,
+          "chest": 60.0,
+          "sleeve": 22.0
+        }
+      ]
+    },
+    {
+      "id": "t500-112",
+      "name": "크림소다랩",
+      "product": "15MIN 쿼터 팀플레이 그래픽 로고 반팔티 화이트 블루",
+      "url": "https://www.musinsa.com/products/4040040",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 70,
+          "shoulder": 47,
+          "chest": 52,
+          "sleeve": 20
+        },
+        {
+          "label": "L",
+          "length": 74,
+          "shoulder": 50,
+          "chest": 55,
+          "sleeve": 22
+        },
+        {
+          "label": "XL",
+          "length": 78,
+          "shoulder": 53,
+          "chest": 58,
+          "sleeve": 24
+        },
+        {
+          "label": "XXL",
+          "length": 82,
+          "shoulder": 56,
+          "chest": 61,
+          "sleeve": 26
+        }
+      ]
+    },
+    {
+      "id": "t100-63",
+      "name": "탄산마그네슘",
+      "product": "포니 자수 티셔츠 (민트)",
+      "url": "https://www.musinsa.com/products/6650963",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 52,
+          "shoulder": 34,
+          "chest": 46.2,
+          "sleeve": 14
+        }
+      ]
+    },
+    {
+      "id": "t100-64",
+      "name": "튜드먼트",
+      "product": "[7COLORS] 50s EMBROIDERED T-SHIRT",
+      "url": "https://www.musinsa.com/products/5004882",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 50,
+          "shoulder": 37,
+          "chest": 39,
+          "sleeve": 12
+        },
+        {
+          "label": "M",
+          "length": 51,
+          "shoulder": 39.5,
+          "chest": 41.5,
+          "sleeve": 12.5
+        }
+      ]
+    },
+    {
+      "id": "travel",
+      "name": "트래블",
+      "product": "커브드 라인 래글런 반팔티 차콜",
+      "url": "https://www.musinsa.com/products/3182421",
+      "sizes": [
+        {
+          "label": "SMALL",
+          "length": 63.0,
+          "shoulder": null,
+          "chest": 49.0,
+          "sleeve": 47.0
+        },
+        {
+          "label": "MEDIUM",
+          "length": 70.0,
+          "shoulder": null,
+          "chest": 56.0,
+          "sleeve": 53.0
+        },
+        {
+          "label": "LARGE",
+          "length": 72.0,
+          "shoulder": null,
+          "chest": 58.5,
+          "sleeve": 56.0
+        },
+        {
+          "label": "EXTRA LARGE",
+          "length": 74.0,
+          "shoulder": null,
+          "chest": 61.0,
+          "sleeve": 59.0
+        }
+      ]
+    },
+    {
+      "id": "t500-16",
+      "name": "트릴리온",
+      "product": "[기획](건조기가능) 에센셜 CP 이중지 크롭 반팔티_9color",
+      "url": "https://www.musinsa.com/products/6148671",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 61,
+          "shoulder": 51,
+          "chest": 56,
+          "sleeve": 19
+        },
+        {
+          "label": "L",
+          "length": 63,
+          "shoulder": 53,
+          "chest": 58,
+          "sleeve": 20
+        },
+        {
+          "label": "XL",
+          "length": 65,
+          "shoulder": 55,
+          "chest": 60,
+          "sleeve": 21
+        }
+      ]
+    },
+    {
+      "id": "brand-783",
+      "name": "퍼스텝",
+      "product": "[2PACK] 트레이스 링거 반팔티셔츠 4종 JUST4766",
+      "url": "https://www.musinsa.com/products/6354954",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 68.0,
+          "shoulder": 48.0,
+          "chest": 56.0,
+          "sleeve": 22.0
+        },
+        {
+          "label": "L",
+          "length": 70.0,
+          "shoulder": 50.0,
+          "chest": 58.0,
+          "sleeve": 23.0
+        },
+        {
+          "label": "XL",
+          "length": 72.0,
+          "shoulder": 52.0,
+          "chest": 60.0,
+          "sleeve": 24.0
+        },
+        {
+          "label": "2XL",
           "length": 74.0,
           "shoulder": 54.0,
           "chest": 62.0,
@@ -1608,81 +3370,169 @@
       ]
     },
     {
-      "id": "brand-835",
-      "name": "미나브",
-      "product": "[미나브X리제임스] 골지 크롭 반팔 티셔츠  [화이트]",
-      "url": "https://www.musinsa.com/products/6460242",
+      "id": "polo-ralph-lauren",
+      "name": "폴로 랄프 로렌",
+      "product": "클래식 핏 저지 티셔츠 (AI 검색 수집)",
+      "url": "https://fas-bee.com/en-sg/products/15951045",
       "sizes": [
         {
+          "label": "S",
+          "length": 68,
+          "shoulder": 49,
+          "chest": 51,
+          "sleeve": 18.5
+        },
+        {
           "label": "M",
-          "length": 62.5,
-          "shoulder": 45.0,
-          "chest": 50.5,
-          "sleeve": 19.0
+          "length": 70,
+          "shoulder": 51,
+          "chest": 55,
+          "sleeve": 19
         },
         {
           "label": "L",
-          "length": 64.0,
-          "shoulder": 47.0,
-          "chest": 53.0,
-          "sleeve": 20.0
-        },
-        {
-          "label": "XL",
-          "length": 65.5,
-          "shoulder": 49.0,
-          "chest": 55.5,
-          "sleeve": 21.0
+          "length": 72,
+          "shoulder": 54,
+          "chest": 58,
+          "sleeve": 20
         }
       ]
     },
     {
-      "id": "613",
-      "name": "613서울",
-      "product": "크랙 식스 포인트 로고 반팔 티셔츠 (블랙)",
-      "url": "https://www.musinsa.com/products/6370967",
+      "id": "t500-73",
+      "name": "프렌다",
+      "product": "PRDA DENIM PATCH CREWNECK TEE WHITE",
+      "url": "https://www.musinsa.com/products/2462040",
+      "sizes": [
+        {
+          "label": "F",
+          "length": 55.5,
+          "shoulder": 37,
+          "chest": 45,
+          "sleeve": 17
+        },
+        {
+          "label": "S",
+          "length": 56.5,
+          "shoulder": 40,
+          "chest": 50,
+          "sleeve": 18
+        }
+      ]
+    },
+    {
+      "id": "filluminate",
+      "name": "필루미네이트",
+      "product": "데일리 롤업 레이어드 ST 크롭 티셔츠-3Color",
+      "url": "https://www.musinsa.com/products/6708161",
       "sizes": [
         {
           "label": "S",
-          "length": 62.0,
-          "shoulder": 49.0,
+          "length": 65.0,
+          "shoulder": 49.5,
           "chest": 52.0,
-          "sleeve": 20.0
+          "sleeve": 19.0
         },
         {
           "label": "M",
-          "length": 66.0,
+          "length": 66.5,
           "shoulder": 51.0,
-          "chest": 54.0,
-          "sleeve": 21.0
+          "chest": 54.5,
+          "sleeve": 20.5
         },
         {
           "label": "L",
-          "length": 70.0,
-          "shoulder": 53.0,
-          "chest": 566.0,
+          "length": 68.0,
+          "shoulder": 52.5,
+          "chest": 57.0,
           "sleeve": 22.0
+        }
+      ]
+    },
+    {
+      "id": "t500-178",
+      "name": "핍스 모터사이클",
+      "product": "Speed Track nylon T-shirt Navy",
+      "url": "https://www.musinsa.com/products/3902089",
+      "sizes": [
+        {
+          "label": "S",
+          "length": 70,
+          "shoulder": null,
+          "chest": 61,
+          "sleeve": 51.5
+        },
+        {
+          "label": "M",
+          "length": 72,
+          "shoulder": null,
+          "chest": 63,
+          "sleeve": 52.5
+        },
+        {
+          "label": "L",
+          "length": 74,
+          "shoulder": null,
+          "chest": 65,
+          "sleeve": 53.5
         },
         {
           "label": "XL",
-          "length": 74.0,
-          "shoulder": 55.0,
-          "chest": 58.0,
-          "sleeve": 23.0
+          "length": 76,
+          "shoulder": null,
+          "chest": 67,
+          "sleeve": 54.5
         },
         {
-          "label": "2XL",
-          "length": 78.0,
-          "shoulder": 58.0,
-          "chest": 64.0,
-          "sleeve": 24.0
+          "label": "XXL",
+          "length": 78,
+          "shoulder": null,
+          "chest": 69,
+          "sleeve": 55.5
+        }
+      ]
+    },
+    {
+      "id": "t100-68",
+      "name": "해비즘",
+      "product": "NAME CARD S/S TEE(WHITE)",
+      "url": "https://www.musinsa.com/products/6579995",
+      "sizes": [
+        {
+          "label": "FREE",
+          "length": 53,
+          "shoulder": 38,
+          "chest": 43,
+          "sleeve": 15.5
+        }
+      ]
+    },
+    {
+      "id": "t500-121",
+      "name": "후브스",
+      "product": "오버랩 헨리넥 크롭 반팔티 [멜란지그레이]",
+      "url": "https://www.musinsa.com/products/6429010",
+      "sizes": [
+        {
+          "label": "M",
+          "length": 63,
+          "shoulder": 49,
+          "chest": 57,
+          "sleeve": 25
         },
         {
-          "label": "3XL(빅사이즈)",
-          "length": 82.0,
-          "shoulder": 62.0,
-          "chest": 76.0,
-          "sleeve": 29.0
+          "label": "L",
+          "length": 65,
+          "shoulder": 51,
+          "chest": 59,
+          "sleeve": 26
+        },
+        {
+          "label": "XL",
+          "length": 67,
+          "shoulder": 53,
+          "chest": 61,
+          "sleeve": 27
         }
       ]
     }
