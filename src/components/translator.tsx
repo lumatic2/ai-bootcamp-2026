@@ -574,7 +574,7 @@ export function Translator() {
             </div>
 
             {browsingBrand && browsingProducts.length > 0 && (
-              <div className="mt-5">
+              <div className="mt-6 border-t pt-5">
                 <p className="text-sm text-muted-foreground">
                   {browsingBrand.name}에서 어떤 상품을 갖고 있나요?
                 </p>
@@ -645,7 +645,7 @@ export function Translator() {
             )}
 
             {browsingBrand && browsingProducts.length === 0 && (
-              <div className="mt-5">
+              <div className="mt-6 border-t pt-5">
                 <p className="text-sm text-muted-foreground">
                   {browsingBrand.name}에서 입는 사이즈는? (라벨 그대로)
                 </p>
