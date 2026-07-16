@@ -13,10 +13,11 @@
 
 ## 2. 방법 (Method)
 
-### 셋업
-- 모델: OpenAI API (리뷰 핏 신호 추출 + 사이즈표 정규화)
-- 데이터: 브랜드 상의 실측표 10~20개 (무신사·공식몰 큐레이션, E0에서 확보) + 대상 상품 리뷰 텍스트(사용자 붙여넣기)
-- 하네스 구성: Next.js `/api/translate`(실측 매핑+종합), `/api/mine-reviews`(LLM 핏 신호)
+### 셋업 (2026-07-16 현행화 — 측정 대상은 당일 배포본)
+- 데이터: 시드 120브랜드 + **상품 단위 실측 차트 245개**(`src/data/product-charts.json` — 팀 시트 수기 + 크롤러 옵션열 라벨 복구, 교차검증 로그는 changeset #2step-rebuild)
+- 엔진: 클라이언트 실행 `translateToRows()` — 앵커(잘 맞는 옷) 평균 벡터를 각 상품 실측표에 가중 매칭 (가슴3·어깨2·총장1·소매0.5)
+- UI: 2스텝 (Step1 브랜드→상품→사이즈 앵커 + AI 사이즈표 검색 + 실측 직접입력 옵션 / Step2 상품 그리드+검색). 리뷰 마이닝은 2026-07-15 범위 제외로 미사용
+- AI 요소: 시드 밖 브랜드의 사이즈표 웹검색·파싱(`/api/parse-chart`, gpt-5.4-mini) — 커스텀 앵커 경로
 
 ### 시나리오 (mock 먼저, real 다음)
 - V0: 팀원 4명이 자기 옷(브랜드+사이즈 아는 것)으로 교차 예측 — 정답을 아는 상태의 파이프라인 점검
@@ -24,7 +25,8 @@
 
 ### 측정 metric (KPI 정의: `docs/presentation-2026-07-15.md`)
 - 핏 적중률(★ North Star, 목표 ≥60%) / 첫 예측 완료율 ≥50% / 첫 결과까지 ≤60초 / 결정 채택률 ≥40% / 당일 재조회율 ≥25% / 예측불가율 ≤30% (가드레일)
-- 계측: GA4 이벤트 6종 (`start_input`→`view_result`→`adopt_size`/`repeat_query`) + 서버 로그
+- 계측: GA4 이벤트 (`start_input`→`view_result`/`view_grid`→`adopt_size`(카드 클릭=`outbound_click` 동시 발화)/`repeat_query`, 적중률은 `feedback_fit {hit|miss}`) — ⚠ GA는 07-16 오전까지 프로덕션 미주입 상태였음(changeset #prod-env-fix), 실측정은 07-16 오후분부터 유효
+- V0 수기 기록: `V0-log.md` (예측 vs 실착 원장 — GA와 교차 대조)
 
 ## 3. 결과 (Results)
 
