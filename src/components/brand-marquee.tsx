@@ -5,7 +5,11 @@ export function BrandMarquee() {
   const names = brands.map((b) => b.name);
   return (
     <div className="marquee-mask overflow-hidden py-3.5" aria-label={`지원 브랜드 ${names.length}개`}>
-      <div className="animate-marquee flex w-max items-center gap-8">
+      {/* 지속시간을 브랜드 수에 비례시킨다 — 고정 55s면 브랜드가 늘수록 흐름이 빨라짐 (48개 기준 ≈1.15s/개) */}
+      <div
+        className="animate-marquee flex w-max items-center gap-8"
+        style={{ animationDuration: `${Math.round(names.length * 1.15)}s` }}
+      >
         {[...names, ...names].map((name, i) => (
           <span
             key={`${name}-${i}`}
