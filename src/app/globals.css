@@ -116,6 +116,11 @@
       inset 1px 1px 3px rgb(0 0 0 / 0.06),
       inset -1px -1px 2px rgb(255 255 255 / 0.5);
   }
+  /* 선택된 상태(검정 배지)는 음각 제외 — 어두운 배경 테두리에 회색 림으로 비침 */
+  .pressable.bg-primary:hover,
+  .pressable.border-primary:hover {
+    box-shadow: none;
+  }
 }
 .pressable:active {
   box-shadow:
