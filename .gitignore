@@ -17,3 +17,5 @@ next-env.d.ts
 .playwright-mcp/
 references/*.zip
 references/* 복사본.zip
+.vercel
+CLAUDE.local.md
