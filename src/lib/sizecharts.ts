@@ -17,6 +17,7 @@ export type Brand = {
   url: string;
   sizes: SizeRow[];
   notes?: string;
+  logo?: string;
 };
 
 export type SizeChartData = {

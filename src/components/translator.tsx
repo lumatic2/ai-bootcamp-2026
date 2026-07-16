@@ -575,7 +575,7 @@ export function Translator() {
                         setBrowsing(b.id);
                         setBrowsingProduct(null);
                       }}
-                      className={`pressable rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${
+                      className={`pressable flex items-center gap-2 rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${
                         browsing === b.id
                           ? "border-primary bg-primary text-primary-foreground"
                           : anchors.some((a) => a.brandId === b.id) ||
@@ -584,10 +584,21 @@ export function Translator() {
                             : "bg-background hover:bg-muted"
                       }`}
                     >
-                      {b.name}
+                      {b.logo && (
+                        <Image
+                          src={b.logo}
+                          alt=""
+                          width={18}
+                          height={18}
+                          unoptimized
+                          className="size-[18px] shrink-0 rounded-sm object-contain"
+                          aria-hidden="true"
+                        />
+                      )}
+                      <span className="truncate">{b.name}</span>
                       {(anchors.some((a) => a.brandId === b.id) ||
                         customAnchors.some((c) => c.brandId === b.id)) && (
-                        <Check className="ml-1 inline size-3.5" aria-hidden="true" />
+                        <Check className="ml-auto size-3.5 shrink-0" aria-hidden="true" />
                       )}
                     </button>
                   ))}
