@@ -86,6 +86,7 @@ export function Translator() {
   const totalAnchors = anchors.length + customAnchors.length;
 
   const startedRef = useRef(false);
+  const startedAtRef = useRef<number | null>(null);
   const searchFiredRef = useRef(false);
 
   useEffect(() => {
@@ -198,7 +199,12 @@ export function Translator() {
 
   useEffect(() => {
     if (step === 2) {
-      gaEvent("view_result");
+      gaEvent("view_result", {
+        elapsed_ms:
+          startedAtRef.current === null
+            ? 0
+            : Math.max(0, Math.round(window.performance.now() - startedAtRef.current)),
+      });
       gaEvent("view_grid", { count: fittedRows.length });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -211,15 +217,16 @@ export function Translator() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step, fittedRows.length]);
 
-  function markStarted() {
+  function markStarted(startedAt: number) {
     if (!startedRef.current) {
       startedRef.current = true;
+      startedAtRef.current = startedAt;
       gaEvent("start_input");
     }
   }
 
-  function addAnchor(brandId: string, size: string) {
-    markStarted();
+  function addAnchor(brandId: string, size: string, startedAt: number) {
+    markStarted(startedAt);
     const next: Anchor = { brandId, size };
     setAnchors((prev) => {
       const withoutSameBrand = prev.filter((a) => a.brandId !== brandId);
@@ -228,8 +235,15 @@ export function Translator() {
     });
   }
 
-  function addCustomAnchor(name: string, size: string, row: SizeRow, url?: string, brandId?: string) {
-    markStarted();
+  function addCustomAnchor(
+    name: string,
+    size: string,
+    row: SizeRow,
+    startedAt: number,
+    url?: string,
+    brandId?: string,
+  ) {
+    markStarted(startedAt);
     setCustomAnchors((prev) => {
       const withoutSame = prev.filter((c) => c.name !== name);
       if (anchors.length + withoutSame.length >= 5) return prev;
@@ -289,7 +303,7 @@ export function Translator() {
     Number.isFinite(parseFloat(mChest)) &&
     Number.isFinite(parseFloat(mLength));
 
-  function addManualAnchor() {
+  function addManualAnchor(startedAt: number) {
     if (!isManualValid) return;
     const row: SizeRow = {
       label: "실측",
@@ -298,7 +312,7 @@ export function Translator() {
       chest: parseFloat(mChest),
       sleeve: mSleeve.trim() ? parseFloat(mSleeve) : null,
     };
-    addCustomAnchor("직접 입력", "실측", row);
+    addCustomAnchor("직접 입력", "실측", row, startedAt);
     setMOpen(false);
     setMLength("");
     setMShoulder("");
@@ -478,13 +492,14 @@ export function Translator() {
                           <button
                             key={s.label}
                             type="button"
-                            onClick={() =>
+                            onClick={(event) =>
                               seedRep
-                                ? addAnchor(browsingBrand.id, s.label)
+                                ? addAnchor(browsingBrand.id, s.label, event.timeStamp)
                                 : addCustomAnchor(
                                     `${browsingBrand.name} ${browsingProduct.name.slice(0, 20)}`,
                                     s.label,
                                     s,
+                                    event.timeStamp,
                                     browsingProduct.url,
                                     browsingBrand.id,
                                   )
@@ -520,7 +535,7 @@ export function Translator() {
                       <button
                         key={s.label}
                         type="button"
-                        onClick={() => addAnchor(browsingBrand.id, s.label)}
+                        onClick={(event) => addAnchor(browsingBrand.id, s.label, event.timeStamp)}
                         className={`rounded-md border px-3.5 py-2 font-mono text-sm transition-colors ${
                           selected
                             ? "border-primary bg-primary text-primary-foreground"
@@ -599,7 +614,7 @@ export function Translator() {
                             <button
                               key={s.label}
                               type="button"
-                              onClick={() => addCustomAnchor(name, s.label, s)}
+                              onClick={(event) => addCustomAnchor(name, s.label, s, event.timeStamp)}
                               className={`rounded-md border px-3.5 py-2 font-mono text-sm transition-colors ${
                                 selected
                                   ? "border-primary bg-primary text-primary-foreground"
@@ -684,7 +699,12 @@ export function Translator() {
                       />
                     </label>
                   </div>
-                  <Button variant="outline" disabled={!isManualValid} onClick={addManualAnchor} className="w-full">
+                  <Button
+                    variant="outline"
+                    disabled={!isManualValid}
+                    onClick={(event) => addManualAnchor(event.timeStamp)}
+                    className="w-full"
+                  >
                     <Plus className="mr-1 size-3.5" aria-hidden="true" /> 이 치수로 추가
                   </Button>
                 </div>

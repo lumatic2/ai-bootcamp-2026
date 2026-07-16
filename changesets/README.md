@@ -24,6 +24,7 @@
 | 14 | 20260715-nubi-step1-search | 2026-07-15 | favicon 원복·Step1 AI 검색(커스텀 앵커)·리뷰 입력 제거·상품명 검색 | ✅ | passed |
 | 15 | 20260715-nubi-icon-b | 2026-07-15 | 시안 B 화살표 SVG 파비콘 설치 | ✅ | passed |
 | 16 | 20260715-nubi-spec-adoption | 2026-07-15 | 팀 스펙 채택: 풀 리스킨·48브랜드 그리드·몰 연결고리 | ✅ | passed |
+| 17 | 20260716-nubi-measurement-contract | 2026-07-16 | GA4 측정 계약 보정: 소요시간·핏 정답 파라미터 | ✅ | passed |
 
 ## 운영 원칙
 

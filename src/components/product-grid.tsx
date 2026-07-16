@@ -172,7 +172,13 @@ export function ProductGrid({ rows }: { rows: ProductRow[] }) {
                           type="button"
                           onClick={() => {
                             setFeedbackMap((m) => ({ ...m, [p.url]: "hit" }));
-                            gaEvent("feedback_fit", { fit: "hit", brand: p.brand, product: p.name });
+                            gaEvent("feedback_fit", {
+                              correct: true,
+                              fit: "hit",
+                              target_brand: p.brandId ?? p.brand,
+                              recommended: fit.recommended,
+                              product: p.name,
+                            });
                           }}
                           className="flex flex-1 items-center justify-center gap-1 rounded-sm border bg-card px-2 py-1.5 text-[0.7rem] font-medium hover:bg-muted"
                         >
@@ -182,7 +188,13 @@ export function ProductGrid({ rows }: { rows: ProductRow[] }) {
                           type="button"
                           onClick={() => {
                             setFeedbackMap((m) => ({ ...m, [p.url]: "miss" }));
-                            gaEvent("feedback_fit", { fit: "miss", brand: p.brand, product: p.name });
+                            gaEvent("feedback_fit", {
+                              correct: false,
+                              fit: "miss",
+                              target_brand: p.brandId ?? p.brand,
+                              recommended: fit.recommended,
+                              product: p.name,
+                            });
                           }}
                           className="flex flex-1 items-center justify-center gap-1 rounded-sm border bg-card px-2 py-1.5 text-[0.7rem] font-medium hover:bg-muted"
                         >
