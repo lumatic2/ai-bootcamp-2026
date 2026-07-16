@@ -4,7 +4,7 @@ import Image from "next/image";
 import { BrandMarquee } from "@/components/brand-marquee";
 import { brands } from "@/lib/sizecharts";
 import { Button } from "@/components/ui/button";
-import { HeaderLogoHome, HomeButton } from "@/components/header-home";
+import { HeaderLogoHome } from "@/components/header-home";
 import { LoginDialog } from "@/components/login-dialog";
 import { RotatingLabel } from "@/components/rotating-label";
 import { SizeChat } from "@/components/size-chat";
@@ -16,10 +16,7 @@ export default function Home() {
       <header className="border-b bg-background">
         <div className="mx-auto flex min-h-14 max-w-3xl items-center justify-between px-5 sm:px-8">
           <HeaderLogoHome />
-          <div className="flex items-center gap-2">
-            <HomeButton />
-            <LoginDialog />
-          </div>
+          <LoginDialog />
         </div>
       </header>
 

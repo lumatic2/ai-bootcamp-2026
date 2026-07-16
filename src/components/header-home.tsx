@@ -1,29 +1,9 @@
-"use client";
-
-import { House } from "lucide-react";
 import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
-
-// 홈 = 페이지 이동이 아니라 최상단 스크롤 — 사용자가 고른 기준 옷 상태를 보존한다 (팀 피드백 2026-07-16)
-function scrollHome() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
+// 홈 = 로고 클릭 시 홈 새로고침 (팀 피드백 2026-07-16 — 별도 홈 버튼 제거, 로고가 홈 역할)
 export function HeaderLogoHome() {
   return (
-    <div
-      role="button"
-      tabIndex={0}
-      onClick={scrollHome}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          scrollHome();
-        }
-      }}
-      className="flex cursor-pointer items-center gap-3"
-    >
+    <a href="/" className="flex items-center gap-3" aria-label="홈으로 새로고침">
       <Image
         src="/images/logo-nubi-mark.png"
         alt="너비 로고"
@@ -37,15 +17,6 @@ export function HeaderLogoHome() {
           SIZE IS A RELATION, NOT A NUMBER
         </p>
       </div>
-    </div>
-  );
-}
-
-export function HomeButton() {
-  return (
-    <Button variant="ghost" size="sm" onClick={scrollHome} aria-label="홈으로" className="gap-1.5">
-      <House className="size-4" aria-hidden="true" />
-      <span className="hidden sm:inline">홈</span>
-    </Button>
+    </a>
   );
 }
