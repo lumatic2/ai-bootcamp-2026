@@ -5,6 +5,7 @@ import { BrandMarquee } from "@/components/brand-marquee";
 import { brands } from "@/lib/sizecharts";
 import { Button } from "@/components/ui/button";
 import { HeaderLogoHome } from "@/components/header-home";
+import { InstallAppButton } from "@/components/install-app-button";
 import { LoginDialog } from "@/components/login-dialog";
 import { RotatingLabel } from "@/components/rotating-label";
 import { SizeChat } from "@/components/size-chat";
@@ -16,7 +17,10 @@ export default function Home() {
       <header className="border-b bg-background">
         <div className="mx-auto flex min-h-14 max-w-3xl items-center justify-between px-5 sm:px-8">
           <HeaderLogoHome />
-          <LoginDialog />
+          <div className="flex items-center gap-2">
+            <InstallAppButton />
+            <LoginDialog />
+          </div>
         </div>
       </header>
 
