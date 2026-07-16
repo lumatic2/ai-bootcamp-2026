@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Check, ChevronDown, ExternalLink, X } from "lucide-react";
+import { Check, ChevronDown, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { gaEvent } from "@/lib/ga";
@@ -37,6 +37,29 @@ const SORTS: { key: SortKey; label: string }[] = [
   { key: "priceDesc", label: "높은 가격순" },
 ];
 
+function matchScoreBucket(pct: number): "95_100" | "90_94" | "80_89" | "under_80" {
+  if (pct >= 95) return "95_100";
+  if (pct >= 90) return "90_94";
+  if (pct >= 80) return "80_89";
+  return "under_80";
+}
+
+const BASIS_OPTIONS: { key: string; label: string }[] = [
+  { key: "tried_on", label: "입어봤어요" },
+  { key: "owned", label: "갖고 있어요" },
+  { key: "measurement_only", label: "치수표만 봤어요" },
+];
+
+const REASON_OPTIONS: { key: string; label: string }[] = [
+  { key: "too_small", label: "너무 작아요" },
+  { key: "too_large", label: "너무 커요" },
+  { key: "chest_mismatch", label: "가슴" },
+  { key: "shoulder_mismatch", label: "어깨" },
+  { key: "length_mismatch", label: "총장" },
+  { key: "sleeve_mismatch", label: "소매" },
+  { key: "other", label: "기타" },
+];
+
 export function ProductGrid({
   rows,
   fitPreference = "same",
@@ -50,6 +73,8 @@ export function ProductGrid({
   const [sort, setSort] = useState<SortKey>("fit");
   const [expandedUrl, setExpandedUrl] = useState<string | null>(null);
   const [feedbackMap, setFeedbackMap] = useState<Record<string, "hit" | "miss">>({});
+  const [basisMap, setBasisMap] = useState<Record<string, string>>({});
+  const [reasonMap, setReasonMap] = useState<Record<string, string>>({});
   const sorted =
     sort === "fit"
       ? rows
@@ -84,12 +109,24 @@ export function ProductGrid({
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4">
+      <div className="grid grid-cols-2 items-start gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4">
         {shown.map(({ product: p, pct, badgeClassName, fit }, index) => {
           const expanded = expandedUrl === p.url;
+          const anyExpanded = expandedUrl !== null;
           const feedback = feedbackMap[p.url] ?? null;
+          const basis = basisMap[p.url] ?? null;
+          const reason = reasonMap[p.url] ?? null;
+          const cardStateClassName = expanded
+            ? "relative z-10 ring-1 ring-primary shadow-md"
+            : anyExpanded
+              ? "opacity-80 transition-opacity hover:opacity-100"
+              : "";
           return (
-            <div key={p.url} className="overflow-hidden rounded-md border bg-background">
+            <div
+              key={p.url}
+              className={`rounded-md border bg-background ${cardStateClassName} ${expanded ? "" : "card-hover-lift"}`}
+            >
+              <div className="overflow-hidden rounded-md">
               <a
                 href={p.url}
                 target="_blank"
@@ -121,9 +158,10 @@ export function ProductGrid({
                     />
                   )}
                   <span
-                    className={`absolute top-1.5 left-1.5 rounded-xs px-1.5 py-0.5 text-[0.65rem] font-semibold ${badgeClassName}`}
+                    aria-label={`핏 적합도 ${pct}%`}
+                    className={`absolute top-1.5 left-1.5 rounded-xs px-1.5 py-0.5 text-[0.6rem] font-semibold whitespace-nowrap ${badgeClassName}`}
                   >
-                    {pct}%
+                    핏 적합도 {pct}%
                   </span>
                   <span className="absolute top-1.5 right-1.5 rounded-xs bg-primary px-1.5 py-0.5 font-mono text-[0.65rem] font-semibold text-primary-foreground">
                     추천 {fit.recommended}
@@ -218,9 +256,9 @@ export function ProductGrid({
                       ))}
                     </tbody>
                   </table>
-                  <div className="mt-2 flex gap-1.5">
+                  <div className="mt-2 space-y-2">
                     {feedback === null ? (
-                      <>
+                      <div className="flex gap-1.5">
                         <button
                           type="button"
                           onClick={() => {
@@ -231,6 +269,9 @@ export function ProductGrid({
                               target_brand: p.brandId ?? p.brand,
                               recommended: fit.recommended,
                               product: p.name,
+                              match_score: pct,
+                              recommendation_rank: index,
+                              match_score_bucket: matchScoreBucket(pct),
                             });
                           }}
                           className="flex flex-1 items-center justify-center gap-1 rounded-sm border bg-card px-2 py-1.5 text-[0.7rem] font-medium hover:bg-muted"
@@ -247,29 +288,79 @@ export function ProductGrid({
                               target_brand: p.brandId ?? p.brand,
                               recommended: fit.recommended,
                               product: p.name,
+                              match_score: pct,
+                              recommendation_rank: index,
+                              match_score_bucket: matchScoreBucket(pct),
                             });
                           }}
                           className="flex flex-1 items-center justify-center gap-1 rounded-sm border bg-card px-2 py-1.5 text-[0.7rem] font-medium hover:bg-muted"
                         >
                           <X className="size-3" aria-hidden="true" /> 틀렸어요
                         </button>
-                      </>
+                      </div>
+                    ) : basis === null ? (
+                      <div className="space-y-1.5">
+                        <p className="text-[0.7rem] text-muted-foreground">
+                          이 상품을 실제로 입어보거나 갖고 있나요?
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {BASIS_OPTIONS.map((o) => (
+                            <button
+                              key={o.key}
+                              type="button"
+                              onClick={() => {
+                                setBasisMap((m) => ({ ...m, [p.url]: o.key }));
+                                gaEvent("feedback_basis_submit", {
+                                  basis: o.key,
+                                  fit: feedback === "hit" ? "correct" : "incorrect",
+                                  item_id: p.id,
+                                  item_brand: p.brandId ?? p.brand,
+                                  recommended_size: fit.recommended,
+                                });
+                              }}
+                              className="rounded-sm border bg-card px-2 py-1 text-[0.7rem] font-medium hover:bg-muted"
+                            >
+                              {o.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : feedback === "miss" && reason === null ? (
+                      <div className="space-y-1.5">
+                        <p className="text-[0.7rem] text-muted-foreground">
+                          어떤 부분이 예상과 달랐나요?
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {REASON_OPTIONS.map((o) => (
+                            <button
+                              key={o.key}
+                              type="button"
+                              onClick={() => {
+                                setReasonMap((m) => ({ ...m, [p.url]: o.key }));
+                                gaEvent("comparison_feedback_reason_submit", {
+                                  feedback_reason: o.key,
+                                  item_id: p.id,
+                                  item_brand: p.brandId ?? p.brand,
+                                  recommended_size: fit.recommended,
+                                  match_score_bucket: matchScoreBucket(pct),
+                                });
+                              }}
+                              className="rounded-sm border bg-card px-2 py-1 text-[0.7rem] font-medium hover:bg-muted"
+                            >
+                              {o.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
                     ) : (
-                      <p className="w-full text-center text-[0.7rem] text-muted-foreground">
+                      <p className="text-center text-[0.7rem] text-muted-foreground">
                         알려주셔서 고마워요. 번역기가 더 정확해지는 데 쓰여요.
                       </p>
                     )}
                   </div>
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-2 flex items-center justify-center gap-1 text-[0.7rem] text-evidence underline"
-                  >
-                    판매처에서 보기 <ExternalLink className="size-3" aria-hidden="true" />
-                  </a>
                 </div>
               )}
+              </div>
             </div>
           );
         })}

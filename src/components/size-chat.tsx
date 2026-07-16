@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MessageCircle, Send, X } from "lucide-react";
+import { ArrowUp, MessageCircle, Send, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,11 +19,36 @@ export function SizeChat() {
   const [messages, setMessages] = useState<Msg[]>([GREETING]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
+  const [labelCollapsed, setLabelCollapsed] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    // 데스크톱(정밀 포인터+hover)은 라벨 상시 표시, 그 외(모바일)는 5초 후 접힘
+    const isDesktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (isDesktop) return;
+    const timer = window.setTimeout(() => setLabelCollapsed(true), 5000);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    function onScroll() {
+      setShowScrollTop(window.scrollY > 500);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  function scrollToTop() {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  }
 
   async function send() {
     const text = input.trim();
@@ -106,14 +131,35 @@ export function SizeChat() {
           </form>
         </div>
       )}
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-label="사이즈 도우미 열기"
-        className="fixed right-4 bottom-4 z-50 flex size-13 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105"
-      >
-        {open ? <X className="size-5" aria-hidden="true" /> : <MessageCircle className="size-5" aria-hidden="true" />}
-      </button>
+      {showScrollTop && !open && (
+        <button
+          type="button"
+          onClick={scrollToTop}
+          aria-label="맨 위로 이동"
+          className="fixed right-4 bottom-20 z-50 flex size-11 items-center justify-center rounded-full border bg-card text-foreground shadow-lg hover:bg-muted"
+        >
+          <ArrowUp className="size-5" aria-hidden="true" />
+        </button>
+      )}
+      <div className="fixed right-4 bottom-4 z-50 flex items-center gap-2">
+        {!open && !labelCollapsed && (
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="rounded-full border bg-card px-3 py-2 text-xs font-medium whitespace-nowrap text-foreground shadow-lg hover:bg-muted"
+          >
+            사이즈·핏 질문하기
+          </button>
+        )}
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="사이즈 도우미 열기"
+          className="flex size-13 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105"
+        >
+          {open ? <X className="size-5" aria-hidden="true" /> : <MessageCircle className="size-5" aria-hidden="true" />}
+        </button>
+      </div>
     </>
   );
 }

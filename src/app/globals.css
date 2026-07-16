@@ -180,3 +180,27 @@
     animation: none;
   }
 }
+
+/* 상품 카드 PC hover 강조 — 포인터 정밀도가 있는 기기에서만, transform만 사용해 레이아웃 밀림 없음 */
+.card-hover-lift {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .card-hover-lift:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.08);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-hover-lift {
+    transition: box-shadow 180ms ease;
+  }
+}
+@media (prefers-reduced-motion: reduce) and (hover: hover) and (pointer: fine) {
+  .card-hover-lift:hover {
+    transform: none;
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.08);
+  }
+}

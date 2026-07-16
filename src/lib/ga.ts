@@ -23,7 +23,9 @@ export type GaEventName =
   | "recommendation_adopted"
   | "recommendation_feedback"
   | "anchor_edit"
-  | "compare_item";
+  | "compare_item"
+  | "feedback_basis_submit"
+  | "comparison_feedback_reason_submit";
 
 export function gaEvent(name: GaEventName, params: GaParams = {}) {
   if (typeof window === "undefined") return;
