@@ -73,6 +73,7 @@ export function Translator() {
   const [c1Text, setC1Text] = useState("");
   const [c1Parsed, setC1Parsed] = useState<ParsedChart | null>(null);
   const [c1Parsing, setC1Parsing] = useState(false);
+  const [c1Mode, setC1Mode] = useState<"search" | "paste">("paste");
   // Step 1 실측 치수 직접 입력 블록
   const [mOpen, setMOpen] = useState(false);
   const [mLength, setMLength] = useState("");
@@ -242,6 +243,8 @@ export function Translator() {
     startedAt: number,
     url?: string,
     brandId?: string,
+    via?: "search" | "paste" | "manual",
+    product?: string,
   ) {
     markStarted(startedAt);
     setCustomAnchors((prev) => {
@@ -249,6 +252,14 @@ export function Translator() {
       if (anchors.length + withoutSame.length >= 5) return prev;
       return [...withoutSame, { name, size, row, url, brandId }];
     });
+    // AI 발굴 데이터 축적 (팀 제안 2026-07-16): 실패해도 UX에 영향 없어야 하므로 fire-and-forget.
+    if (via) {
+      fetch("/api/contribute", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ brand: name, product: product ?? "", sourceUrl: url ?? "", via, sizes: [row] }),
+      }).catch(() => {});
+    }
   }
 
   function removeAnchor(key: string) {
@@ -289,6 +300,7 @@ export function Translator() {
   async function parseChart1(mode: "paste" | "search") {
     setC1Parsing(true);
     setC1Parsed(null);
+    setC1Mode(mode);
     const parsed = await fetchChart(
       mode,
       mode === "paste" ? { text: c1Text } : { brandName: c1Name, productName: c1Product },
@@ -312,7 +324,7 @@ export function Translator() {
       chest: parseFloat(mChest),
       sleeve: mSleeve.trim() ? parseFloat(mSleeve) : null,
     };
-    addCustomAnchor("직접 입력", "실측", row, startedAt);
+    addCustomAnchor("직접 입력", "실측", row, startedAt, undefined, undefined, "manual");
     setMOpen(false);
     setMLength("");
     setMShoulder("");
@@ -614,7 +626,18 @@ export function Translator() {
                             <button
                               key={s.label}
                               type="button"
-                              onClick={(event) => addCustomAnchor(name, s.label, s, event.timeStamp)}
+                              onClick={(event) =>
+                                addCustomAnchor(
+                                  name,
+                                  s.label,
+                                  s,
+                                  event.timeStamp,
+                                  c1Parsed.sourceUrl || undefined,
+                                  undefined,
+                                  c1Mode,
+                                  c1Product.trim() || undefined,
+                                )
+                              }
                               className={`rounded-md border px-3.5 py-2 font-mono text-sm transition-colors ${
                                 selected
                                   ? "border-primary bg-primary text-primary-foreground"
