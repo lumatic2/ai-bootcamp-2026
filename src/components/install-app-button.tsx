@@ -32,16 +32,16 @@ export function InstallAppButton() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showIosGuide, setShowIosGuide] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [ios, setIos] = useState(false);
+  // 렌더에 안 쓰이는 플래그라 lazy init 안전 (SSR에선 false, hydration 불일치 없음)
+  const [ios] = useState(() => typeof navigator !== "undefined" && isIos());
 
   useEffect(() => {
     if (isStandaloneDisplay()) return;
 
-    const iosDevice = isIos();
-    setIos(iosDevice);
-    if (iosDevice) {
-      setVisible(true);
-      return;
+    if (ios) {
+      // effect 내 동기 setState 규칙 회피 — 마이크로태스크로 이연 (hydration 안전한 노출 타이밍은 동일)
+      const t = setTimeout(() => setVisible(true), 0);
+      return () => clearTimeout(t);
     }
 
     const onBeforeInstallPrompt = (e: Event) => {
@@ -51,7 +51,7 @@ export function InstallAppButton() {
     };
     window.addEventListener("beforeinstallprompt", onBeforeInstallPrompt);
     return () => window.removeEventListener("beforeinstallprompt", onBeforeInstallPrompt);
-  }, []);
+  }, [ios]);
 
   if (!visible) return null;
 
