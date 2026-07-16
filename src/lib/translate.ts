@@ -53,7 +53,7 @@ export class TranslateError extends Error {
   }
 }
 
-function score(source: SizeRow, target: SizeRow) {
+function score(source: SizeRow, target: SizeRow, weights: Record<DimKey, number> = WEIGHTS) {
   let weightSum = 0;
   let acc = 0;
   const deltas: DimDelta[] = [];
@@ -62,18 +62,23 @@ function score(source: SizeRow, target: SizeRow) {
     const t = target[dim];
     if (s == null || t == null) continue;
     const delta = t - s;
-    weightSum += WEIGHTS[dim];
-    acc += WEIGHTS[dim] * Math.abs(delta);
+    weightSum += weights[dim];
+    acc += weights[dim] * Math.abs(delta);
     deltas.push({ dim, source: s, target: t, delta: Math.round(delta * 10) / 10 });
   }
   if (weightSum === 0) return null;
   return { distance: acc / weightSum, deltas };
 }
 
-function rank(row: SizeRow, targetSizes: SizeRow[], multiAnchor = false) {
+function rank(
+  row: SizeRow,
+  targetSizes: SizeRow[],
+  multiAnchor = false,
+  weights: Record<DimKey, number> = WEIGHTS,
+) {
   const scored = targetSizes
     .map((t) => {
-      const s = score(row, t);
+      const s = score(row, t, weights);
       return s ? { label: t.label, ...s } : null;
     })
     .filter((s): s is NonNullable<typeof s> => s !== null)
@@ -178,19 +183,56 @@ export type RowFit = {
   margin: number;
 };
 
+// 핏 해석 (팀 제안 2026-07-16): 핏 방향으로 목표 벡터를 조정하고, 중요 부위 가중치를 증폭한다.
+export type FitPref = { fit?: "same" | "loose" | "slim"; focus?: DimKey | "all" };
+
+const FIT_RATIOS: Record<"same" | "loose" | "slim", Record<DimKey, number>> = {
+  same: { shoulder: 1, chest: 1, length: 1, sleeve: 1 },
+  loose: { shoulder: 1.01, chest: 1.02, length: 1.02, sleeve: 1.01 },
+  slim: { shoulder: 0.99, chest: 0.98, length: 0.99, sleeve: 0.99 },
+};
+
+function adjustRow(row: SizeRow, fit: "same" | "loose" | "slim"): SizeRow {
+  const ratios = FIT_RATIOS[fit];
+  const adjusted: SizeRow = { ...row };
+  for (const dim of DIMS) {
+    const v = row[dim];
+    adjusted[dim] = v == null ? null : Math.round(v * ratios[dim] * 10) / 10;
+  }
+  return adjusted;
+}
+
+function focusWeights(focus?: DimKey | "all"): Record<DimKey, number> {
+  if (!focus || focus === "all") return WEIGHTS;
+  return { ...WEIGHTS, [focus]: WEIGHTS[focus] * 3 };
+}
+
 export function translateToRows(
   anchors: Anchor[],
   customs: CustomSource[],
   targetSizes: SizeRow[],
+  opts?: FitPref,
 ): RowFit {
   const { row, total } = meanRow(anchors, customs);
-  const { best, second, margin, comparedDims, confidence } = rank(row, targetSizes, total >= 2);
+  const fitKind = opts?.fit ?? "same";
+  const weights = focusWeights(opts?.focus);
+  const goalRow = fitKind === "same" ? row : adjustRow(row, fitKind);
+  const { best, second, margin, comparedDims, confidence } = rank(
+    goalRow,
+    targetSizes,
+    total >= 2,
+    weights,
+  );
+  // 표시용 delta는 조정된 목표가 아니라 원본 "내 옷" 벡터 기준으로 재계산한다 —
+  // 비교 표 헤더가 "내 옷"이므로 조정값 대비 delta를 보여주면 실제 치수 차이를 왜곡해 보여주게 된다.
+  const target = targetSizes.find((t) => t.label === best.label);
+  const deltas = target ? (score(row, target, weights)?.deltas ?? best.deltas) : best.deltas;
   return {
     recommended: best.label,
     runnerUp: second?.label ?? null,
     // 시드 밖 앵커가 섞이면 신뢰도 상한 '보통' 캡 (기존 규칙 유지)
     confidence: customs.length > 0 && confidence === "high" ? "mid" : confidence,
-    deltas: best.deltas,
+    deltas,
     comparedDims,
     distance: Math.round(best.distance * 100) / 100,
     margin: second ? Math.round(margin * 100) / 100 : -1,

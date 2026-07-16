@@ -9,8 +9,8 @@ import { Input } from "@/components/ui/input";
 import { ProductGrid, type Product as ProductChartItem, type ProductRow } from "@/components/product-grid";
 import productChartsData from "@/data/product-charts.json";
 import { gaEvent } from "@/lib/ga";
-import { brands, getBrand, type Brand, type SizeRow } from "@/lib/sizecharts";
-import { translateToRows, type Anchor, type CustomSource } from "@/lib/translate";
+import { brands, getBrand, type Brand, type DimKey, type SizeRow } from "@/lib/sizecharts";
+import { translateToRows, type Anchor, type CustomSource, type FitPref } from "@/lib/translate";
 
 type ParsedChart = { sizes: SizeRow[]; note: string; sourceUrl: string };
 
@@ -33,6 +33,24 @@ function fitLabel(pct: number) {
 function anchorKey(a: Anchor) {
   return `${a.brandId}::${a.size}`;
 }
+
+// 핏 해석 선택 UI (팀 제안 2026-07-16): 그리드 위 2줄 세그먼트, 선택 즉시 재계산.
+type FitKind = "same" | "loose" | "slim";
+type FocusKind = DimKey | "all";
+
+const FIT_OPTIONS: { key: FitKind; label: string }[] = [
+  { key: "same", label: "지금 핏 그대로" },
+  { key: "loose", label: "조금 더 여유롭게" },
+  { key: "slim", label: "조금 더 슬림하게" },
+];
+
+const FOCUS_OPTIONS: { key: FocusKind; label: string }[] = [
+  { key: "all", label: "전체 균형" },
+  { key: "chest", label: "가슴" },
+  { key: "shoulder", label: "어깨" },
+  { key: "length", label: "총장" },
+  { key: "sleeve", label: "소매" },
+];
 
 // 선택한 상품이 시드의 대표 상품(브랜드 실측표 그 자체)인지 — 맞으면 기존 Anchor 경로를 쓴다
 function isSeedRepresentative(p: ProductChartItem, b: Brand) {
@@ -61,6 +79,9 @@ export function Translator() {
   const [mShoulder, setMShoulder] = useState("");
   const [mChest, setMChest] = useState("");
   const [mSleeve, setMSleeve] = useState("");
+  // 핏 해석 선택 (기본: 지금 핏 그대로 · 전체 균형)
+  const [fitPref, setFitPref] = useState<FitKind>("same");
+  const [focusDim, setFocusDim] = useState<FocusKind>("all");
 
   const totalAnchors = anchors.length + customAnchors.length;
 
@@ -142,11 +163,12 @@ export function Translator() {
       size: c.size,
       row: c.row,
     }));
+    const opts: FitPref = { fit: fitPref, focus: focusDim };
     return products
       .filter((p) => !usedProductUrls.has(p.url))
       .map((p) => {
         try {
-          const fit = translateToRows(anchors, customs, p.sizes);
+          const fit = translateToRows(anchors, customs, p.sizes, opts);
           const pct = fitPercent(fit.distance);
           const row: ProductRow = { product: p, pct, badgeClassName: fitLabel(pct).className, fit };
           return row;
@@ -156,7 +178,7 @@ export function Translator() {
       })
       .filter((r): r is ProductRow => r !== null)
       .sort((a, b) => a.fit.distance - b.fit.distance);
-  }, [step, anchors, customAnchors, usedProductUrls, totalAnchors]);
+  }, [step, anchors, customAnchors, usedProductUrls, totalAnchors, fitPref, focusDim]);
 
   const filteredRows = useMemo(() => {
     const q = search2.trim().toLowerCase();
@@ -290,6 +312,16 @@ export function Translator() {
       gaEvent("repeat_query", { via: "search" });
     }
     setSearch2(v);
+  }
+
+  function handleFitPrefChange(fit: FitKind) {
+    setFitPref(fit);
+    gaEvent("repeat_query", { via: "fit-pref", fit, focus: focusDim });
+  }
+
+  function handleFocusDimChange(focus: FocusKind) {
+    setFocusDim(focus);
+    gaEvent("repeat_query", { via: "fit-pref", fit: fitPref, focus });
   }
 
   return (
@@ -696,6 +728,41 @@ export function Translator() {
             <p className="mt-2 text-xs text-muted-foreground">
               적합도와 추천 사이즈는 각 상품의 실측표 기준이에요.
             </p>
+
+            <div className="mt-3 space-y-1.5">
+              <div className="flex flex-wrap gap-1.5">
+                {FIT_OPTIONS.map((o) => (
+                  <button
+                    key={o.key}
+                    type="button"
+                    onClick={() => handleFitPrefChange(o.key)}
+                    className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                      fitPref === o.key
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "bg-card hover:bg-muted"
+                    }`}
+                  >
+                    {o.label}
+                  </button>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {FOCUS_OPTIONS.map((o) => (
+                  <button
+                    key={o.key}
+                    type="button"
+                    onClick={() => handleFocusDimChange(o.key)}
+                    className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                      focusDim === o.key
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "bg-card hover:bg-muted"
+                    }`}
+                  >
+                    {o.label}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {filteredRows.length > 0 ? (
               <ProductGrid rows={filteredRows} />
