@@ -3,6 +3,7 @@ import Image from "next/image";
 // 홈 = 로고 클릭 시 홈 새로고침 (팀 피드백 2026-07-16 — 별도 홈 버튼 제거, 로고가 홈 역할)
 export function HeaderLogoHome() {
   return (
+    // eslint-disable-next-line @next/next/no-html-link-for-pages -- 의도된 풀 리로드: "홈 새로고침"이 요구사항 (Link는 소프트 내비게이션이라 상태가 남음)
     <a href="/" className="flex items-center gap-3" aria-label="홈으로 새로고침">
       <Image
         src="/images/logo-nubi-mark.png"
