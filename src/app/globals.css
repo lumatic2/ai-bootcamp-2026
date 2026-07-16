@@ -107,11 +107,15 @@
   transition:
     box-shadow 120ms ease,
     transform 120ms ease;
+  -webkit-tap-highlight-color: transparent;
 }
-.pressable:hover {
-  box-shadow:
-    inset 1px 1px 3px rgb(0 0 0 / 0.06),
-    inset -1px -1px 2px rgb(255 255 255 / 0.5);
+/* 터치 기기에서는 :hover가 탭 후에도 남아 잔상(회색 인셋)이 생긴다 — 진짜 호버 가능한 기기에서만 적용 */
+@media (hover: hover) {
+  .pressable:hover {
+    box-shadow:
+      inset 1px 1px 3px rgb(0 0 0 / 0.06),
+      inset -1px -1px 2px rgb(255 255 255 / 0.5);
+  }
 }
 .pressable:active {
   box-shadow:

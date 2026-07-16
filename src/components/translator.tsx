@@ -20,6 +20,36 @@ type CustomAnchor = { name: string; size: string; row: SizeRow; url?: string; br
 
 const products = productChartsData.products as ProductChartItem[];
 
+// Step1 브랜드 목록 노출 순서 — 대중 인지도 높은 브랜드를 위로 (팀 결정 2026-07-16). 검색 필터에는 영향 없음.
+const PRIORITY_BRANDS = [
+  "나이키",
+  "아디다스",
+  "무신사 스탠다드",
+  "노스페이스",
+  "뉴발란스",
+  "폴로 랄프 로렌",
+  "라코스테",
+  "캘빈클라인",
+  "타미힐피거",
+  "칼하트",
+  "챔피온",
+  "스투시",
+  "휠라",
+  "푸마",
+  "아식스",
+  "지오다노",
+  "커버낫",
+  "디스이즈네버댓",
+  "마리떼 프랑소와 저버",
+  "스파오",
+];
+const priorityRank = new Map(PRIORITY_BRANDS.map((n, i) => [n, i]));
+const orderedBrands = [...brands].sort((a, b) => {
+  const ra = priorityRank.get(a.name) ?? 999;
+  const rb = priorityRank.get(b.name) ?? 999;
+  return ra - rb || a.name.localeCompare(b.name, "ko");
+});
+
 // 적합도: 가중 실측 거리(distance)를 사용자가 읽을 수 있는 %로 변환 (스펙 §13)
 function fitPercent(distance: number) {
   return Math.max(45, Math.min(100, Math.round(100 - distance * 12.5)));
@@ -434,7 +464,7 @@ export function Translator() {
               />
             </div>
             <div className="mt-3 grid max-h-56 grid-cols-2 gap-2 overflow-y-auto sm:grid-cols-3">
-              {brands
+              {orderedBrands
                 .filter((b) => b.name.toLowerCase().includes(filter1.trim().toLowerCase()))
                 .map((b) => (
                   <button
