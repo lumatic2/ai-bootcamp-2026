@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>너비 발표 자료 팩</title>
+<title>너비 발표 자료 팩 v2</title>
 <style>
   @page { size: A4 landscape; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,7 +24,6 @@
   }
   h1 { font-size: 26pt; font-weight: 800; letter-spacing: -.03em; line-height: 1.15; margin-bottom: 6mm; }
   h2 { font-size: 12.5pt; font-weight: 800; margin: 5mm 0 2.5mm; }
-  h2 .n { color: #71716b; font-weight: 600; }
   p, li { font-size: 10pt; line-height: 1.55; }
   ul { padding-left: 5mm; margin-bottom: 2mm; }
   li { margin-bottom: 1.2mm; }
@@ -42,7 +41,6 @@
     font-size: 7.5pt; color: #71716b; border-top: 1px solid #deded6; padding-top: 2mm;
   }
   .evidence { font-size: 8pt; color: #71716b; font-family: ui-monospace, monospace; }
-  .big { font-size: 30pt; font-weight: 800; letter-spacing: -.02em; }
   .stat { text-align: center; padding: 4mm 2mm; }
   .stat .v { font-size: 22pt; font-weight: 800; }
   .stat .l { font-size: 8.5pt; color: #71716b; margin-top: 1mm; }
@@ -59,26 +57,27 @@
 
 <!-- ══════════════ 0. 사용 안내 ══════════════ -->
 <section class="slide">
-  <span class="eyebrow">이 문서에 대해</span>
-  <h1>발표 슬라이드 자료 팩 (초안)</h1>
-  <p style="max-width:180mm">
-    사용자가 잡은 8장 슬라이드 구성 초안에 맞춰, 각 장에 들어갈 <b>내용·수치·증거 경로·말할 포인트</b>를 슬라이드당 1페이지로 정리한 자료 팩입니다.
-    <b>팀 합의 전 초안</b>이며, 여기서 팀이 고른 것만 실제 슬라이드로 옮기면 됩니다. 모든 수치에는 레포 증거 경로를 붙였습니다.
+  <span class="eyebrow">이 문서에 대해 · v2</span>
+  <h1>발표 슬라이드 자료 팩 (배점 정렬판)</h1>
+  <p style="max-width:190mm">
+    8장 구성은 유지하되 <b>공식 배점(과정 80% / 구현·전달 20%)에 맞춰 무게를 재배분</b>한 판입니다.
+    v1 대비 변경: 기획+제작을 한 장으로 압축하고, 빠진 자리에 <b>"가설과 검증 설계" 전용 슬라이드(4장)</b>를 신설 — 배점 30%짜리 항목에 온전한 한 장을 줬습니다.
+    각 장 상단 라임 띠에 어느 평가항목을 노리는 장인지 표기.
   </p>
-  <h2>구성 (사용자 초안 그대로)</h2>
+  <h2>공식 평가항목 → 슬라이드 매핑</h2>
   <table>
-    <tr><th style="width:12mm">#</th><th>슬라이드</th><th>이 팩에서 주는 것</th></tr>
-    <tr><td>1</td><td>표지 — 너비</td><td>타이틀·태그라인·한 줄 소개</td></tr>
-    <tr><td>2</td><td>리서치를 통한 문제 재정의</td><td>피벗 스토리 + 리서치 품질 관리 3장치 + 루브릭 점수</td></tr>
-    <tr><td>3</td><td>솔루션 선택과 가설</td><td>수렴 기준·포지셔닝·가설/반증 조건</td></tr>
-    <tr><td>4</td><td>제품 기획</td><td>페르소나 → 결정 → 서비스 매핑 + "모바일 앱?" 답</td></tr>
-    <tr><td>5</td><td>제작 과정</td><td>데이터·AI·디자인·QC·협업 5트랙 팩트</td></tr>
-    <tr><td>6</td><td>라이브 데모</td><td>시연 시나리오 8스텝 + 말할 포인트 + 리스크 대비</td></tr>
-    <tr><td>7</td><td>설문 및 검증 결과</td><td>V1 설문 n=16 집계 + V0 실측 원장 + KPI 정의</td></tr>
-    <tr><td>8</td><td>마무리</td><td>Learn 3개 + 다음 가설 로드맵 + 클로징 문장</td></tr>
+    <tr><th style="width:12mm">#</th><th>슬라이드</th><th>노리는 평가항목 (배점)</th></tr>
+    <tr><td>1</td><td>표지 — 너비</td><td>전달 (10)</td></tr>
+    <tr><td>2</td><td>리서치를 통한 문제 재정의</td><td><b>문제·가설 정의 (30)</b> + 학습·피벗 (20) 시동</td></tr>
+    <tr><td>3</td><td>솔루션 선택과 포지셔닝</td><td><b>문제·가설 정의 (30)</b></td></tr>
+    <tr><td>4</td><td>가설과 검증 설계 ← <b>신설</b></td><td><b>검증 설계·실행 (30)</b> — "만들기 전에 선언했다"</td></tr>
+    <tr><td>5</td><td>제품과 제작 ← 기획+제작 압축</td><td>MVP 동작 (10) + <b>검증 설계 (30)</b>로 재프레임</td></tr>
+    <tr><td>6</td><td>라이브 데모</td><td>MVP 동작 (10) + 검증 실행 연결</td></tr>
+    <tr><td>7</td><td>검증 결과와 판정</td><td><b>검증 설계·실행 (30)</b> + 학습 (20)</td></tr>
+    <tr><td>8</td><td>Learn과 다음 가설</td><td><b>학습·피벗 (20)</b> 클라이맥스</td></tr>
   </table>
-  <p class="note">발표 배점 리마인드: 과정(문제정의 30 + 검증설계 30 + 학습·피벗 20) = <b>80%</b>, 구현 = 10%. 슬라이드 2·3·7·8이 득점의 몸통, 5·6은 증거 역할.</p>
-  <div class="foot"><span>너비 · AI Vibe Coding Bootcamp 2026 · 5조</span><span>2026-07-16</span></div>
+  <p class="note">발표 배점: ① 문제·가설 정의 30 · ② 검증 설계·실행 30 · ③ 학습·피벗 20 · ④ MVP 동작 10 · ⑤ 전달 10. 원문: docs/presentation-2026-07-15.md §⭐</p>
+  <div class="foot"><span>너비 · AI Vibe Coding Bootcamp 2026 · 5조</span><span>2026-07-16 · v2</span></div>
 </section>
 
 <!-- ══════════════ 1. 표지 ══════════════ -->
@@ -94,7 +93,7 @@
 
 <!-- ══════════════ 2. 리서치 문제 재정의 ══════════════ -->
 <section class="slide">
-  <span class="eyebrow">SLIDE 2 · 리서치를 통한 문제 재정의</span>
+  <span class="eyebrow">SLIDE 2 · 리서치를 통한 문제 재정의 — 배점: 문제정의 30 + 피벗 20</span>
   <h1>피드백을 반박하지 않고, 리서치로 검증했다</h1>
   <div class="cols">
     <div class="col">
@@ -131,9 +130,9 @@
   <div class="foot"><span>너비 · 문제 재정의</span><span>2 / 8</span></div>
 </section>
 
-<!-- ══════════════ 3. 솔루션 선택과 가설 ══════════════ -->
+<!-- ══════════════ 3. 솔루션 선택과 포지셔닝 ══════════════ -->
 <section class="slide">
-  <span class="eyebrow">SLIDE 3 · 솔루션 선택과 가설</span>
+  <span class="eyebrow">SLIDE 3 · 솔루션 선택과 포지셔닝 — 배점: 문제정의 30</span>
   <h1>"사이즈는 속성이 아니라 관계다"</h1>
   <div class="cols">
     <div class="col">
@@ -143,107 +142,103 @@
         <li>핵심 프레임(학술 근거): 같은 실측이어도 같은 핏이 아니다 — 사이즈는 사람과 옷 사이의 <b>관계</b> (Amazon, WWW 2018)</li>
         <li><b>AI 필수 요건</b>: 비정형 사이즈표 해석 + 시드에 없는 브랜드의 AI 사이즈표 웹 검색 — LLM 없이는 성립하지 않는 코어</li>
       </ul>
+    </div>
+    <div class="col">
       <h2>포지셔닝 — 참신함을 주장하지 않는다</h2>
       <ul>
         <li>"True Fit이 접근의 타당성을 B2B로 증명했고, <span class="lime"><b>한국에 소비자가 직접 쓰는 형태가 비어 있다</b></span>"</li>
         <li>경쟁자들은 전부 '내 실측 치수를 안다'를 전제 — 우리는 <b>줄자 없이</b>, 잘 맞는 옷 한 벌(관계 신호)로 번역</li>
       </ul>
+      <p class="note">예상 질문 방어: "이미 있는 서비스 아닌가요?" → "맞습니다. 그래서 저희는 참신함 대신 빈 위치를 주장합니다 — B2B 위젯 vs 소비자 독립 도구, 실측 입력 vs 관계 신호."</p>
     </div>
+  </div>
+  <p class="evidence">증거: references/research-clothes-20260715/07-competitor-verification.md · 08-solution-convergence.md</p>
+  <div class="foot"><span>너비 · 솔루션과 포지셔닝</span><span>3 / 8</span></div>
+</section>
+
+<!-- ══════════════ 4. 가설과 검증 설계 (신설) ══════════════ -->
+<section class="slide">
+  <span class="eyebrow">SLIDE 4 · 가설과 검증 설계 — 배점: 검증 설계·실행 30 (전용 슬라이드)</span>
+  <h1>만들기 전에, 틀렸을 조건부터 선언했다</h1>
+  <div class="cols">
     <div class="col">
-      <h2>가설 — 만들기 전에 반증 조건부터</h2>
+      <h2>가설 H1 (2026-07-15 사전 선언)</h2>
       <div class="card">
         <p><b>H1.</b> 실측 치수 없이, 잘 맞는 브랜드+사이즈라는 관계 신호만으로 처음 보는 브랜드의 추천 사이즈를 <b>적중률 60% 이상</b>으로 예측할 수 있다 (우연 수준 ~33%, S/M/L 3지선다 가정)</p>
         <p style="margin-top:2mm"><b>반증 조건.</b> 블라인드 검증 적중률 <b>40% 미만이면 엔진 가설 기각</b> → 피벗하고, 기각 과정 자체를 발표한다</p>
       </div>
-      <h2>선행 가설 E0도 실측으로 닫음</h2>
+      <h2>검증 3단 설계</h2>
       <ul>
-        <li>"브랜드 실측표를 3시간 내 10개+ 확보할 수 있다" → 17개 시도, 11개 수집, <b>GO</b></li>
-        <li>실패 6건의 원인("기준표 탭" 함정 — 실측이 아닌 제품 기준치)까지 기록 — 이 발견이 이후 데이터 파이프라인 설계의 입력이 됨</li>
+        <li><b>E0 (선행)</b>: "실측표를 3시간 내 10개+ 확보 가능한가" → 17개 시도, 11개 수집, <b>GO</b>. 실패 6건의 원인("기준표 탭" 함정)까지 기록 — 이 발견이 데이터 파이프라인 설계의 입력이 됨</li>
+        <li><b>V0 (팀원 교차)</b>: 정답을 아는 옷으로 파이프라인 점검 — 표본 ≥8, 원장 수기 기록 + GA 교차 대조</li>
+        <li><b>V1 (외부)</b>: 부트캠프 참가자·지인 설문/블라인드 — 모집이 곧 측정</li>
       </ul>
-      <p class="note">말할 포인트: "KPI는 팔란티어 프레임(어떤 결정을 · 얼마나 바꾸나 · 무슨 데이터로)으로 골랐고, MAU·페이지뷰는 쓰지 않았습니다."</p>
+      <p class="note">말할 포인트: "가설·목표·반증 조건 전부 <b>제품을 만들기 전</b>인 7/15 문서에 커밋으로 박혀 있습니다 — 결과를 보고 기준을 움직일 수 없는 구조입니다."</p>
+    </div>
+    <div class="col">
+      <h2>KPI 6+1종 — 팔란티어 프레임으로 선정</h2>
+      <p style="font-size:9pt; color:#71716b; margin-bottom:1.5mm">기준: 어떤 결정을 · 얼마나 바꾸나 · 무슨 데이터로. MAU·페이지뷰는 쓰지 않았다.</p>
+      <table>
+        <tr><th>KPI</th><th>목표</th><th>액션 조건 (사전 선언)</th></tr>
+        <tr><td>핏 적중률 ★ North Star</td><td>≥60%</td><td>&lt;40% 엔진 기각 → 피벗</td></tr>
+        <tr><td>첫 예측 완료율</td><td>≥50%</td><td>&lt;30% 입력 마찰 — UX 수정</td></tr>
+        <tr><td>첫 결과까지 시간</td><td>≤60초</td><td>초과 시 입력 단계 축소</td></tr>
+        <tr><td>결정 채택률 (adopt_size)</td><td>≥40%</td><td>낮으면 "결과 불신" — 근거 표시 강화</td></tr>
+        <tr><td>당일 재조회율</td><td>≥25%</td><td>retention의 하루 프록시</td></tr>
+        <tr><td>예측불가율 (가드레일)</td><td>≤30%</td><td>초과 시 커버리지 부족 — 지원 브랜드 명시</td></tr>
+        <tr><td>Step2 도달률 (팀 제안 07-16)</td><td>≥40%</td><td>미달 구간별 랜딩/입력 개선</td></tr>
+      </table>
+      <ul>
+        <li>계측: GA4 이벤트 퍼널 (start_input → view_result → adopt_size / feedback_fit) + V0 수기 원장 교차 대조</li>
+        <li>모든 KPI에 <b>목표뿐 아니라 미달 시 액션</b>이 붙어 있음 — 측정이 결정으로 이어지는 설계</li>
+      </ul>
     </div>
   </div>
-  <p class="evidence">증거: references/research-clothes-20260715/08-solution-convergence.md · 09-size-chart-feasibility.md · experiments/01/README.md §1</p>
-  <div class="foot"><span>너비 · 솔루션과 가설</span><span>3 / 8</span></div>
+  <p class="evidence">증거: docs/presentation-2026-07-15.md §3 (07-15 커밋) · experiments/01/README.md §1~2 · 09-size-chart-feasibility.md · playbooks/mvp-build-day.md</p>
+  <div class="foot"><span>너비 · 가설과 검증 설계</span><span>4 / 8</span></div>
 </section>
 
-<!-- ══════════════ 4. 제품 기획 ══════════════ -->
+<!-- ══════════════ 5. 제품과 제작 (압축) ══════════════ -->
 <section class="slide">
-  <span class="eyebrow">SLIDE 4 · 제품 기획</span>
-  <h1>누구의 어떤 결정을, 어떻게 바꾸는가</h1>
+  <span class="eyebrow">SLIDE 5 · 제품과 제작 — 배점: MVP 10 + "측정 가능하게 만들었다"는 검증설계 30의 증거</span>
+  <h1>측정할 수 있게 만들었다</h1>
   <table>
-    <tr><th style="width:30mm">누구 (페르소나)</th><td>온라인으로 옷을 사는 20대 남성 — 오프라인 시착 없이 결제하고, 브랜드마다 라벨이 달라 "이 브랜드 M이 내 M인가"를 매번 다시 고민한다. (설문에서 이 집단의 94%가 사이즈 실패 경험)</td></tr>
-    <tr><th>어떤 결정 (문제 상황)</th><td>장바구니 앞 <b>"M을 살까 L을 살까" 사이즈 도박</b>. 현재 해법 1위는 체형 비슷한 사람 후기 뒤지기(56%) — 시간이 들고, 후기가 없는 신생 브랜드에선 아예 불가능</td></tr>
-    <tr><th>어떻게 (서비스)</th><td><b>Step 1</b> 지금 갖고 있는 "제일 잘 맞는 반팔티"를 앵커로 등록 (브랜드→상품→사이즈, 최대 5벌 · 없는 브랜드는 AI 사이즈표 검색 · 줄자 있으면 실측 직접 입력) → <b>Step 2</b> 213개 브랜드 · 533개 상품 그리드에 <b>핏 적합도 %와 추천 사이즈 라벨</b>이 즉시 계산됨. 핏 취향(정핏/루즈/슬림)과 우선 부위(가슴·어깨·총장·소매) 조정 가능 → 추천 사이즈로 판매처 이동</td></tr>
+    <tr><th style="width:28mm">누구 (페르소나)</th><td>온라인으로 옷을 사는 20대 남성 — 오프라인 시착 없이 결제, 브랜드마다 라벨이 달라 매번 다시 고민 (설문: 94% 사이즈 실패 경험)</td></tr>
+    <tr><th>어떤 결정</th><td>장바구니 앞 <b>"M을 살까 L을 살까" 사이즈 도박</b> — 현재 해법 1위는 후기 뒤지기(56%), 신생 브랜드에선 불가능</td></tr>
+    <tr><th>어떻게 (서비스)</th><td><b>Step 1</b> 제일 잘 맞는 반팔티를 앵커로 (브랜드→상품→사이즈 · AI 사이즈표 검색 · 실측 직접 입력) → <b>Step 2</b> 213개 브랜드 · 533개 상품에 <b>핏 적합도 %와 추천 라벨</b> 즉시 계산, 핏 취향·우선 부위 조정 → 판매처 이동. <b>모바일 앱?</b> 웹 우선 + PWA 설치 버튼(팀원 구현) — 스토어 심사 없이 URL 하나로 배포·측정·설문 직결</td></tr>
   </table>
   <div class="cols">
     <div class="col">
-      <h2>설계 원칙 3개</h2>
+      <h2>데이터 — 하루 만에 4.4배, 규율 있게</h2>
       <ul>
-        <li><b>줄자 금지</b>: 실측 입력은 폴백일 뿐, 기본 경로는 "잘 맞는 옷 하나 고르기" — 30초 안에 첫 결과</li>
-        <li><b>정직한 표시</b>: 적합도 %의 근거(실측 치수 delta 표)를 비교 패널에서 그대로 공개, 데이터 없는 브랜드는 없다고 말함</li>
-        <li><b>측정 가능</b>: 모든 스텝에 GA4 이벤트 — 퍼널로 어디서 이탈하는지 즉시 확인</li>
-      </ul>
-    </div>
-    <div class="col">
-      <h2>"모바일 앱?"에 대한 답</h2>
-      <ul>
-        <li><b>웹 우선 + PWA</b>: 헤더의 "앱 설치" 버튼으로 홈 화면 설치 (팀원 구현, beforeinstallprompt / iOS 공유 시트 안내)</li>
-        <li>이유: 3일 안에 <b>배포·측정·수정 루프</b>를 돌려야 함 — 스토어 심사 없이 URL 하나로 설문 배포까지 직결</li>
-        <li>네이티브 앱은 로드맵 항목 — PWA 설치율·재방문 데이터가 그 결정의 입력이 된다</li>
-      </ul>
-    </div>
-  </div>
-  <p class="evidence">증거: src/components/translator.tsx (2-step) · src/components/install-app-button.tsx · docs/presentation-2026-07-15.md §3</p>
-  <div class="foot"><span>너비 · 제품 기획</span><span>4 / 8</span></div>
-</section>
-
-<!-- ══════════════ 5. 제작 과정 ══════════════ -->
-<section class="slide">
-  <span class="eyebrow">SLIDE 5 · 제작 과정 — 데이터 · AI · 디자인 · QC · 협업</span>
-  <h1>하루 만에 데이터 4.4배, 피드백 20+건 당일 반영</h1>
-  <div class="cols">
-    <div class="col">
-      <h2>데이터 — 48 → 213 브랜드, 상품 차트 533개</h2>
-      <ul>
-        <li>팀원 수집 시트 병합 + <b>옵션열 라벨 복구 알고리즘</b>(옵션 수=행 수일 때만 결합, 추측 금지)으로 282행 복구</li>
-        <li><b>무신사 실측 API 발견</b>: 상품별 라벨 붙은 실측치를 공식 엔드포인트에서 확보 — 수기 재추출 의존 제거</li>
-        <li>상품 이미지 532/533 (1건은 출처 지역차단 — 남의 사진 대신 정직한 placeholder)</li>
-        <li>오염 데이터 2개 브랜드 제외, 소스 오타 1건 교정(566→56.6cm, API 교차 확인) — <b>병합은 기존 값 불변(additive-only)</b></li>
+        <li>시드 48 → <b>213 브랜드 / 상품 실측 차트 533개</b>: 팀 시트 병합 + 옵션열 라벨 복구(추측 금지 규칙) + <b>무신사 실측 API 발견</b> + AI 검색 수집</li>
+        <li>병합은 <b>additive-only</b>(기존 값 불변 — 측정 중 데이터 오염 방지), 오염 2브랜드 제외·소스 오타 1건 API 교차 교정</li>
       </ul>
       <h2>AI — 3개 사용처, 전부 코어</h2>
       <ul>
-        <li>① 시드에 없는 브랜드 <b>사이즈표 웹 검색·파싱</b> (출처 URL 필수, 수치 범위 검증)</li>
-        <li>② 사이즈 도우미 챗봇 — function calling으로 실데이터를 조회해 답변 (지어내기 차단)</li>
-        <li>③ AI가 수집한 새 브랜드 차트를 <b>자동 축적</b>하는 파이프라인 (/api/contribute) — 쓸수록 데이터가 늘어나는 구조</li>
+        <li>① 없는 브랜드 사이즈표 웹 검색·파싱 (출처 URL 필수) ② 챗봇 — function calling으로 실데이터만 답변 ③ AI 수집분 자동 축적 파이프라인</li>
       </ul>
     </div>
     <div class="col">
-      <h2>디자인</h2>
+      <h2>QC·계측 — 검증 설계의 실행 증거</h2>
       <ul>
-        <li>팀원이 작성한 디자인 스펙을 그대로 채택해 <b>전면 리스킨</b> (오프화이트 캔버스 + 잉크 + 신호용 라임)</li>
-        <li>디자인 정본 DESIGN.md + 자동 디자인 lint <b>위반 0건</b> 유지</li>
-      </ul>
-      <h2>QC — 증거 없이 완료 보고 없음</h2>
-      <ul>
-        <li>팀원 UI 피드백 문서 <b>3건 · 20+ 항목 전건 당일 반영</b> (CTA 높이 고정, 카드당 외부 링크 1개, 비교 blur, 챗 버튼 통합, 터치 잔상 수리 등)</li>
-        <li>모든 변경은 Playwright <b>DOM 실측</b>으로 검증 (예: CTA 높이 전 카드 40px 단일값, 카드당 외부 링크 정확히 1개)</li>
-        <li>배포 전 발견·수리: GA가 프로덕션에 미주입 상태였음 → 환경변수 주입으로 수리 (측정은 07-16 오후부터 유효 — 발표에서도 이대로 공개)</li>
-        <li>변경 이력은 changeset 12+개로 박제 (검증 체크리스트 포함)</li>
+        <li><b>전 스텝 GA4 계측</b>: KPI 표의 모든 지표가 실제 이벤트로 연결됨. 배포 후 GA 미주입을 발견해 당일 수리 — 측정 유효 시점(07-16 오후)을 발표에서도 공개</li>
+        <li>팀원 UI 피드백 문서 <b>3건 · 20+ 항목 전건 당일 반영</b>, 전부 Playwright <b>DOM 실측</b>으로 검증 후 배포</li>
+        <li>변경 이력 changeset 12+개 박제 (검증 체크리스트 필수) — "증거 없이 완료 보고 없음"</li>
       </ul>
       <h2>협업 — 역할 분담이 코드에 남아 있다</h2>
       <ul>
-        <li>디자인 스펙 · 데이터 시트 · <b>PWA 설치 버튼(팀원 커밋)</b> · 쇼핑몰 양방향 연동 계약(딥링크 ?target= + 판매처 URL 교체) · 설문 설계·배포 — GitHub 공동 작업</li>
+        <li>디자인 스펙(팀원, 전면 리스킨 채택) · 데이터 시트 · PWA 버튼(팀원 커밋) · 쇼핑몰 양방향 연동 계약 · 설문 설계·배포 — GitHub 공동 작업</li>
       </ul>
     </div>
   </div>
   <p class="evidence">증거: src/data/size-charts.json(213) · product-charts.json(533) · changesets/20260716-* · docs/mall-integration.md · DESIGN.md</p>
-  <div class="foot"><span>너비 · 제작 과정</span><span>5 / 8</span></div>
+  <div class="foot"><span>너비 · 제품과 제작</span><span>5 / 8</span></div>
 </section>
 
 <!-- ══════════════ 6. 라이브 데모 ══════════════ -->
 <section class="slide">
-  <span class="eyebrow">SLIDE 6 · 라이브 데모</span>
+  <span class="eyebrow">SLIDE 6 · 라이브 데모 — 배점: MVP 10 + 검증 실행 연결</span>
   <h1>bootcamp.askewly.com — 30초 만에 번역하기</h1>
   <div class="cols">
     <div class="col">
@@ -265,7 +260,7 @@
       <ul>
         <li>"적합도는 서버가 아니라 <b>브라우저 안의 엔진</b>이 계산합니다 — 가슴 3 · 어깨 2 · 총장 1 · 소매 0.5 가중 거리, 임계 90/75%로 라벨링"</li>
         <li>"모든 추천에는 근거 표가 붙습니다 — 못 맞히면 못 맞힌 대로 보이는 구조"</li>
-        <li>"방금 하신 행동 전부가 GA 이벤트로 남았습니다 — 이게 오늘 오후 검증 데이터가 됩니다"</li>
+        <li>"방금 하신 행동 전부가 GA 이벤트로 남았습니다 — <b>데모가 곧 측정</b>입니다" ← 검증 실행(30%)으로 연결하는 문장</li>
       </ul>
       <h2>실측 검증 성공 사례 (실화)</h2>
       <p class="note">발표자 본인 옷으로 검증: <b>육군 티셔츠 XL</b>(라벨 체계가 완전히 다른 극단 케이스)을 실측 직접 입력 → <b>푸마 M</b> 추천 → 실착과 일치 (V0 원장 #1). "군용 XL = 푸마 M"은 라벨만 봐서는 절대 못 하는 번역.</p>
@@ -280,10 +275,10 @@
   <div class="foot"><span>너비 · 라이브 데모</span><span>6 / 8</span></div>
 </section>
 
-<!-- ══════════════ 7. 설문 및 검증 결과 ══════════════ -->
+<!-- ══════════════ 7. 검증 결과와 판정 ══════════════ -->
 <section class="slide">
-  <span class="eyebrow">SLIDE 7 · 설문 및 검증 결과</span>
-  <h1>문제는 실재하고, 조건은 하나 — 정확도</h1>
+  <span class="eyebrow">SLIDE 7 · 검증 결과와 판정 — 배점: 검증 실행 30 + 학습 20</span>
+  <h1>반증 조건 대비, 지금 어디까지 왔나</h1>
   <div class="cols">
     <div class="col">
       <h2>V1 설문 (n=16, 07-16 13:08~14:32)</h2>
@@ -295,37 +290,40 @@
         <tr><td>현재 사이즈 판단 기준</td><td>후기 56% &gt; 과거 구매 25% &gt; <b>실측 비교 19%</b></td></tr>
       </table>
       <ul>
-        <li>해석 ①: 사용 의향 15명 전원이 "정확도"를 조건으로 걸었다 — <span class="lime"><b>적중률 = North Star라는 KPI 설계가 사용자 언어로 재확인</b></span></li>
+        <li>해석 ①: 의향 15명 전원이 "정확도"를 조건으로 걸었다 — <span class="lime"><b>적중률 = North Star라는 KPI 설계가 사용자 언어로 재확인</b></span></li>
         <li>해석 ②: 실측 비교는 19%만 하던 고관여 기술 — 너비는 그걸 자동화해 후기 의존층(56%)에게 주는 도구</li>
-        <li>한계(정직 공개): n=16 소표본 · 부트캠프 참가자 편중 · 적중률 블라인드 검증은 아님</li>
+        <li>한계(정직 공개): n=16 소표본 · 부트캠프 참가자 편중 · <b>적중률 검증은 아님</b> — 그건 V0/GA의 몫</li>
       </ul>
     </div>
     <div class="col">
-      <h2>V0 적중률 실측 (진행 중)</h2>
+      <h2>V0 적중률 실측 — 판정 현황</h2>
       <table>
         <tr><th>#</th><th>앵커</th><th>대상</th><th>추천</th><th>실착</th><th>판정</th></tr>
         <tr><td>1</td><td>육군 티셔츠 XL (실측 입력)</td><td>푸마 반팔티</td><td>M</td><td>M</td><td><b>HIT</b></td></tr>
-        <tr><td colspan="6" style="color:#71716b">#2~8 팀원 샘플 수집 중 — 표본 8 채워야 판정 (반증 조건 &lt;40% 유지)</td></tr>
+        <tr><td colspan="6" style="color:#71716b">#2~8 팀원 샘플 수집 중 — 표본 8 채워야 판정</td></tr>
       </table>
-      <p class="note warn">발표 화법: "1/1 = 100%"라고 말하지 않는다. "첫 실측 샘플이 극단 케이스에서 적중했고, 표본 8이 차면 60% 기준으로 판정합니다" — 반증 조건을 먼저 말하는 것이 신뢰의 근거.</p>
-      <h2>KPI 계측 체계 (GA4 퍼널 가동 중)</h2>
-      <table>
-        <tr><th>KPI</th><th>목표</th><th>액션 조건</th></tr>
-        <tr><td>핏 적중률 ★</td><td>≥60%</td><td>&lt;40% 엔진 기각→피벗</td></tr>
-        <tr><td>첫 예측 완료율</td><td>≥50%</td><td>&lt;30% 입력 마찰 수정</td></tr>
-        <tr><td>Step2 도달률 (팀 제안)</td><td>≥40%</td><td>미달 구간별 랜딩/입력 개선</td></tr>
-        <tr><td>결정 채택률 / 재조회율 / 예측불가율</td><td>≥40 / ≥25 / ≤30%</td><td>신뢰·리텐션·커버리지 신호</td></tr>
-      </table>
-      <p style="font-size:8.5pt;color:#71716b">주: GA 프로덕션 계측은 07-16 오후부터 유효 (미주입 상태를 발견해 당일 수리 — 이 발견 자체가 Learn)</p>
+      <div class="card">
+        <p><b>판정 상태 (사전 선언 기준 그대로)</b></p>
+        <ul style="margin-top:1.5mm">
+          <li>≥60% → 가설 통과 / 40~60% → 임계 보정 후 재측정 / <b>&lt;40% → 기각·피벗</b></li>
+          <li>현재: <b>1 HIT / 표본 1 — 판정 보류</b> (표본 부족을 그대로 공개)</li>
+        </ul>
+      </div>
+      <p class="note warn">발표 화법: "1/1 = 100%"라고 말하지 않는다. "첫 실측 샘플이 극단 케이스에서 적중했고, 표본 8이 차면 60% 기준으로 판정합니다" — <b>반증 조건을 먼저 말하는 것이 신뢰의 근거이자 이 항목의 득점 포인트.</b></p>
+      <h2>GA4 퍼널 (가동 중)</h2>
+      <ul>
+        <li>page_view → start_input → view_result → adopt_size/feedback_fit — Step2 도달률·완료율·채택률이 여기서 나온다</li>
+        <li>정직 공개: GA 프로덕션 계측은 <b>07-16 오후부터 유효</b> (미주입 상태를 발견해 당일 수리 — 이 발견 자체가 Learn)</li>
+      </ul>
     </div>
   </div>
-  <p class="evidence">증거: experiments/01/README.md §3 · V0-log.md · data/v1-survey-2026-07-16.csv · docs/presentation-2026-07-15.md §3</p>
-  <div class="foot"><span>너비 · 검증 결과</span><span>7 / 8</span></div>
+  <p class="evidence">증거: experiments/01/README.md §3 · V0-log.md · data/v1-survey-2026-07-16.csv</p>
+  <div class="foot"><span>너비 · 검증 결과와 판정</span><span>7 / 8</span></div>
 </section>
 
-<!-- ══════════════ 8. 마무리 ══════════════ -->
+<!-- ══════════════ 8. Learn과 다음 가설 ══════════════ -->
 <section class="slide">
-  <span class="eyebrow">SLIDE 8 · 마무리</span>
+  <span class="eyebrow">SLIDE 8 · Learn과 다음 가설 — 배점: 학습·피벗 20 (클라이맥스)</span>
   <h1>3일 동안 배운 것, 그리고 다음 가설</h1>
   <div class="cols">
     <div class="col">
@@ -358,7 +356,7 @@
     </div>
   </div>
   <p class="evidence">증거: experiments/01/README.md §4 · docs/adr/ · ROADMAP.md</p>
-  <div class="foot"><span>너비 · 마무리</span><span>8 / 8</span></div>
+  <div class="foot"><span>너비 · Learn과 다음 가설</span><span>8 / 8</span></div>
 </section>
 
 </body>
