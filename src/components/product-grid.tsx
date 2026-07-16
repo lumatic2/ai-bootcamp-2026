@@ -57,21 +57,24 @@ export function ProductGrid({ rows }: { rows: ProductRow[] }) {
 
   return (
     <div className="mt-5">
-      <div className="mb-3 flex flex-wrap gap-1.5">
-        {SORTS.map((s) => (
-          <button
-            key={s.key}
-            type="button"
-            onClick={() => setSort(s.key)}
-            className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
-              sort === s.key
-                ? "border-primary bg-primary text-primary-foreground"
-                : "bg-card hover:bg-muted"
-            }`}
-          >
-            {s.label}
-          </button>
-        ))}
+      <div className="mb-3 space-y-1.5">
+        <p className="text-xs text-muted-foreground">상품 정렬</p>
+        <div className="flex flex-wrap gap-1.5">
+          {SORTS.map((s) => (
+            <button
+              key={s.key}
+              type="button"
+              onClick={() => setSort(s.key)}
+              className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                sort === s.key
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "bg-card hover:bg-muted"
+              }`}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
       </div>
       <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4">
         {shown.map(({ product: p, pct, badgeClassName, fit }) => {

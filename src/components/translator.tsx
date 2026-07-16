@@ -366,7 +366,7 @@ export function Translator() {
                 className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
               >
                 <ArrowLeft className="size-3.5" aria-hidden="true" />
-                앵커 수정
+                기준 옷 바꾸기
               </button>
             )}
           </div>
@@ -444,7 +444,7 @@ export function Translator() {
                       setBrowsing(b.id);
                       setBrowsingProduct(null);
                     }}
-                    className={`rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${
+                    className={`pressable rounded-md border px-3 py-2.5 text-left text-sm transition-colors ${
                       browsing === b.id
                         ? "border-primary bg-primary text-primary-foreground"
                         : anchors.some((a) => a.brandId === b.id) ||
@@ -473,7 +473,7 @@ export function Translator() {
                       key={p.id}
                       type="button"
                       onClick={() => setBrowsingProduct(p)}
-                      className={`overflow-hidden rounded-md border text-left transition-colors ${
+                      className={`pressable overflow-hidden rounded-md border text-left transition-colors ${
                         browsingProduct?.id === p.id
                           ? "border-primary bg-background"
                           : "bg-background hover:bg-muted"
@@ -516,7 +516,7 @@ export function Translator() {
                                     browsingBrand.id,
                                   )
                             }
-                            className={`rounded-md border px-3.5 py-2 font-mono text-sm transition-colors ${
+                            className={`pressable rounded-md border px-3.5 py-2 font-mono text-sm transition-colors ${
                               selected
                                 ? "border-primary bg-primary text-primary-foreground"
                                 : "bg-background hover:bg-muted"
@@ -548,7 +548,7 @@ export function Translator() {
                         key={s.label}
                         type="button"
                         onClick={(event) => addAnchor(browsingBrand.id, s.label, event.timeStamp)}
-                        className={`rounded-md border px-3.5 py-2 font-mono text-sm transition-colors ${
+                        className={`pressable rounded-md border px-3.5 py-2 font-mono text-sm transition-colors ${
                           selected
                             ? "border-primary bg-primary text-primary-foreground"
                             : "bg-background hover:bg-muted"
@@ -567,7 +567,7 @@ export function Translator() {
               <button
                 type="button"
                 onClick={() => setC1Open((v) => !v)}
-                className="flex w-full items-center gap-1.5 text-sm font-medium text-evidence"
+                className="pressable flex w-full items-center gap-1.5 rounded-md text-sm font-medium text-evidence"
               >
                 <Sparkles className="size-4" aria-hidden="true" />
                 내 옷 브랜드가 없나요? AI로 사이즈표 가져오기
@@ -599,7 +599,7 @@ export function Translator() {
                     onChange={(e) => setC1Text(e.target.value)}
                     rows={3}
                     placeholder="또는 상품 페이지의 실측 사이즈표를 복사해서 붙여넣기"
-                    className="w-full rounded-md border bg-background p-3 text-sm outline-none focus:border-primary"
+                    className="pressable w-full rounded-md border bg-background p-3 text-sm outline-none focus:border-primary"
                   />
                   {c1Text.trim() && !c1Parsed && (
                     <Button
@@ -638,7 +638,7 @@ export function Translator() {
                                   c1Product.trim() || undefined,
                                 )
                               }
-                              className={`rounded-md border px-3.5 py-2 font-mono text-sm transition-colors ${
+                              className={`pressable rounded-md border px-3.5 py-2 font-mono text-sm transition-colors ${
                                 selected
                                   ? "border-primary bg-primary text-primary-foreground"
                                   : "bg-background hover:bg-muted"
@@ -673,7 +673,7 @@ export function Translator() {
               <button
                 type="button"
                 onClick={() => setMOpen((v) => !v)}
-                className="flex w-full items-center gap-1.5 text-sm font-medium text-muted-foreground"
+                className="pressable flex w-full items-center gap-1.5 rounded-md text-sm font-medium text-muted-foreground"
               >
                 <Ruler className="size-4" aria-hidden="true" />
                 줄자 없이 어려우면? 실측 치수로 직접 입력
@@ -772,38 +772,45 @@ export function Translator() {
               적합도와 추천 사이즈는 각 상품의 실측표 기준이에요.
             </p>
 
-            <div className="mt-3 space-y-1.5">
-              <div className="flex flex-wrap gap-1.5">
-                {FIT_OPTIONS.map((o) => (
-                  <button
-                    key={o.key}
-                    type="button"
-                    onClick={() => handleFitPrefChange(o.key)}
-                    className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
-                      fitPref === o.key
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "bg-card hover:bg-muted"
-                    }`}
-                  >
-                    {o.label}
-                  </button>
-                ))}
+            <div className="mt-3 rounded-md border bg-card p-4">
+              <p className="eyebrow text-evidence">추천 조건 설정</p>
+              <div className="mt-3 space-y-1.5">
+                <p className="text-xs text-muted-foreground">원하는 핏</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {FIT_OPTIONS.map((o) => (
+                    <button
+                      key={o.key}
+                      type="button"
+                      onClick={() => handleFitPrefChange(o.key)}
+                      className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                        fitPref === o.key
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "bg-card hover:bg-muted"
+                      }`}
+                    >
+                      {o.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {FOCUS_OPTIONS.map((o) => (
-                  <button
-                    key={o.key}
-                    type="button"
-                    onClick={() => handleFocusDimChange(o.key)}
-                    className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
-                      focusDim === o.key
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "bg-card hover:bg-muted"
-                    }`}
-                  >
-                    {o.label}
-                  </button>
-                ))}
+              <div className="mt-3 space-y-1.5">
+                <p className="text-xs text-muted-foreground">중요하게 볼 치수</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {FOCUS_OPTIONS.map((o) => (
+                    <button
+                      key={o.key}
+                      type="button"
+                      onClick={() => handleFocusDimChange(o.key)}
+                      className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                        focusDim === o.key
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "bg-card hover:bg-muted"
+                      }`}
+                    >
+                      {o.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { BrandMarquee } from "@/components/brand-marquee";
 import { brands } from "@/lib/sizecharts";
 import { Button } from "@/components/ui/button";
+import { HeaderLogoHome, HomeButton } from "@/components/header-home";
 import { LoginDialog } from "@/components/login-dialog";
 import { RotatingLabel } from "@/components/rotating-label";
 import { SizeChat } from "@/components/size-chat";
@@ -14,22 +15,11 @@ export default function Home() {
     <main>
       <header className="border-b bg-background">
         <div className="mx-auto flex min-h-14 max-w-3xl items-center justify-between px-5 sm:px-8">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/images/logo-nubi-mark.png"
-              alt="너비 로고"
-              width={512}
-              height={512}
-              className="h-8 w-auto"
-            />
-            <div>
-              <p className="text-sm font-semibold">너비 · 사이즈 번역기</p>
-              <p className="font-mono text-[0.65rem] text-muted-foreground">
-                SIZE IS A RELATION, NOT A NUMBER
-              </p>
-            </div>
+          <HeaderLogoHome />
+          <div className="flex items-center gap-2">
+            <HomeButton />
+            <LoginDialog />
           </div>
-          <LoginDialog />
         </div>
       </header>
 
@@ -49,7 +39,12 @@ export default function Home() {
             나머지는 너비가 찾아드려요.
           </p>
           <div className="mt-7">
-            <Button className="h-[54px] px-6 text-base" size="lg" nativeButton={false} render={<a href="#translate" />}>
+            <Button
+              className="h-[54px] gap-2 px-6 has-data-[icon=inline-end]:pr-6 text-base"
+              size="lg"
+              nativeButton={false}
+              render={<a href="#translate" />}
+            >
               30초 만에 번역하기
               <ArrowDown data-icon="inline-end" />
             </Button>
