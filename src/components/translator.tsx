@@ -16,6 +16,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ProductGrid, type Product, type ProductRow } from "@/components/product-grid";
+import productsData from "@/data/products.json";
 import { gaEvent } from "@/lib/ga";
 import { brands, DIM_LABELS, getBrand, type SizeRow } from "@/lib/sizecharts";
 import {
@@ -149,6 +151,30 @@ export function Translator() {
       .filter((r): r is TranslateResult => r !== null)
       .sort((a, b) => a.distance - b.distance);
   }, [step, anchors, customAnchors, totalAnchors]);
+
+  // 브랜드 적합도 위에 무신사 TOP500 상품을 얹는다 — 브랜드명 정확일치만, 적합도순→순위순
+  const productRows = useMemo<ProductRow[]>(() => {
+    if (gridRows.length === 0) return [];
+    const byName = new Map(gridRows.map((r) => [r.targetBrandName, r]));
+    return (productsData as Product[])
+      .flatMap((p) => {
+        const r = byName.get(p.brand);
+        if (!r) return [];
+        const pct = fitPercent(r.distance);
+        return [
+          {
+            product: p,
+            brandId: r.targetBrandId,
+            pct,
+            badgeClassName: fitLabel(pct).className,
+            recommended: r.recommended,
+            chestDelta: r.deltas.find((d) => d.dim === "chest")?.delta ?? null,
+            lengthDelta: r.deltas.find((d) => d.dim === "length")?.delta ?? null,
+          },
+        ];
+      })
+      .sort((a, b) => b.pct - a.pct || a.product.rank - b.product.rank);
+  }, [gridRows]);
 
   useEffect(() => {
     if (step === 3 && gridRows.length > 0) {
@@ -960,6 +986,16 @@ export function Translator() {
                   </Button>
                 )}
               </div>
+            )}
+
+            {productRows.length > 0 && (
+              <ProductGrid
+                rows={productRows}
+                onCompare={(brandId) => {
+                  setTargetBrand(brandId);
+                  void submit(anchors, brandId);
+                }}
+              />
             )}
           </div>
         )}
