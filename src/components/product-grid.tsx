@@ -185,7 +185,7 @@ export function ProductGrid({
                       priority_dimension: priorityDimension,
                     });
                   }}
-                  className="flex h-10 flex-1 items-center justify-center whitespace-nowrap rounded-sm bg-primary px-2 text-[13px] font-semibold text-primary-foreground hover:opacity-90"
+                  className="flex h-10 flex-1 items-center justify-center whitespace-nowrap rounded-sm bg-primary px-2 text-[12px] leading-4 font-semibold text-primary-foreground hover:opacity-90"
                 >
                   추천 {fit.recommended}로 보러가기
                 </a>
@@ -204,7 +204,7 @@ export function ProductGrid({
                       });
                     }
                   }}
-                  className="flex h-10 shrink-0 items-center justify-center gap-1 rounded-sm border bg-card px-2 text-[0.7rem] font-medium hover:bg-muted"
+                  className="flex h-10 shrink-0 items-center justify-center gap-1 rounded-sm border bg-card px-2 text-[12px] leading-4 font-medium hover:bg-muted"
                 >
                   비교{" "}
                   <ChevronDown

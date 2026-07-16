@@ -175,6 +175,8 @@ export function Translator() {
   const [filter1, setFilter1] = useState("");
   const brandListRef = useRef<HTMLDivElement>(null);
   const [brandFade, setBrandFade] = useState({ top: false, bottom: false });
+  const productListRef = useRef<HTMLDivElement>(null);
+  const [productFade, setProductFade] = useState({ top: false, bottom: false });
   const [search2, setSearch2] = useState("");
   // Step 1 시드 밖 브랜드 블록 (AI 검색/붙여넣기)
   const [c1Open, setC1Open] = useState(false);
@@ -455,6 +457,19 @@ export function Translator() {
     updateBrandFade();
   }, [filter1]);
 
+  function updateProductFade() {
+    const el = productListRef.current;
+    if (!el) return;
+    setProductFade({
+      top: el.scrollTop > 0,
+      bottom: el.scrollTop + el.clientHeight < el.scrollHeight - 1,
+    });
+  }
+
+  useEffect(() => {
+    updateProductFade();
+  }, [browsingProducts]);
+
   function handleSearchChange(v: string) {
     if (!searchFiredRef.current && v.trim() !== "") {
       searchFiredRef.current = true;
@@ -622,26 +637,44 @@ export function Translator() {
                 <p className="text-sm text-muted-foreground">
                   {browsingBrand.name}에서 어떤 상품을 갖고 있나요?
                 </p>
-                <div className="mt-2 grid max-h-64 grid-cols-3 gap-2 overflow-y-auto p-1 sm:grid-cols-4">
-                  {browsingProducts.map((p) => (
-                    <button
-                      key={p.id}
-                      type="button"
-                      onClick={() => setBrowsingProduct(p)}
-                      className={`card-hover-lift overflow-hidden rounded-md border text-left transition-colors ${
-                        browsingProduct?.id === p.id
-                          ? "border-primary bg-background"
-                          : "bg-background hover:bg-muted"
-                      }`}
-                    >
-                      <div className="relative aspect-[4/5] bg-muted">
-                        {p.image && (
-                          <Image src={p.image} alt={p.name} fill sizes="120px" className="object-cover" />
-                        )}
-                      </div>
-                      <p className="truncate p-1.5 text-[0.65rem]">{p.name}</p>
-                    </button>
-                  ))}
+                <div className="relative mt-2">
+                  <div
+                    ref={productListRef}
+                    onScroll={updateProductFade}
+                    className="grid max-h-64 grid-cols-3 gap-3 overflow-y-auto p-3 sm:grid-cols-4"
+                  >
+                    {browsingProducts.map((p) => (
+                      <button
+                        key={p.id}
+                        type="button"
+                        onClick={() => setBrowsingProduct(p)}
+                        className={`card-hover-lift rounded-md border text-left transition-colors ${
+                          browsingProduct?.id === p.id
+                            ? "border-primary bg-background"
+                            : "bg-background hover:bg-muted"
+                        }`}
+                      >
+                        <div className="relative aspect-[4/5] overflow-hidden rounded-[5px] bg-muted">
+                          {p.image && (
+                            <Image src={p.image} alt={p.name} fill sizes="120px" className="object-cover" />
+                          )}
+                        </div>
+                        <p className="truncate p-1.5 text-[0.65rem]">{p.name}</p>
+                      </button>
+                    ))}
+                  </div>
+                  <div
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute inset-x-0 top-0 h-5 bg-gradient-to-b from-background to-transparent transition-opacity duration-150 ${
+                      productFade.top ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                  <div
+                    aria-hidden="true"
+                    className={`pointer-events-none absolute inset-x-0 bottom-0 h-5 bg-gradient-to-t from-background to-transparent transition-opacity duration-150 ${
+                      productFade.bottom ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
                 </div>
 
                 {browsingProduct && (
