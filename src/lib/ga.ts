@@ -19,7 +19,11 @@ export type GaEventName =
   | "predict_unavailable"
   | "view_grid"
   | "mall_referral"
-  | "outbound_click";
+  | "outbound_click"
+  | "recommendation_adopted"
+  | "recommendation_feedback"
+  | "anchor_edit"
+  | "compare_item";
 
 export function gaEvent(name: GaEventName, params: GaParams = {}) {
   if (typeof window === "undefined") return;

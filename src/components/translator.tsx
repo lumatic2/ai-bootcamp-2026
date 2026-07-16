@@ -87,6 +87,84 @@ function isSeedRepresentative(p: ProductChartItem, b: Brand) {
   return p.brandId === b.id && p.url === b.url;
 }
 
+type PreferenceChoice = "data_recommendation" | "usual_size" | "similar_reviews";
+
+const PREFERENCE_OPTIONS: { key: PreferenceChoice; label: string }[] = [
+  { key: "data_recommendation", label: "잘 맞는 옷 데이터로 추천받기" },
+  { key: "usual_size", label: "평소 입던 사이즈 그대로" },
+  { key: "similar_reviews", label: "비슷한 체형 후기 보기" },
+];
+
+const TRUST_SCORES = [1, 2, 3, 4, 5];
+
+function FeedbackCard({ anchorCount }: { anchorCount: number }) {
+  const [preference, setPreference] = useState<PreferenceChoice | null>(null);
+  const [trust, setTrust] = useState<number | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+
+  if (submitted) {
+    return (
+      <div className="mt-4 rounded-md border bg-card p-4 text-center text-sm text-muted-foreground">
+        답변 감사해요. 다음 추천을 더 정확하게 만드는 데 쓰일게요.
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-4 rounded-md border bg-card p-4">
+      <p className="text-xs font-medium">다음에 옷 사이즈를 고를 때 가장 먼저 사용하고 싶은 방식은?</p>
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        {PREFERENCE_OPTIONS.map((o) => (
+          <button
+            key={o.key}
+            type="button"
+            onClick={() => setPreference(o.key)}
+            className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+              preference === o.key
+                ? "border-primary bg-primary text-primary-foreground"
+                : "bg-card hover:bg-muted"
+            }`}
+          >
+            {o.label}
+          </button>
+        ))}
+      </div>
+      <p className="mt-3 text-xs font-medium">이번 추천을 얼마나 믿을 수 있나요?</p>
+      <div className="mt-2 flex flex-wrap gap-1.5">
+        {TRUST_SCORES.map((score) => (
+          <button
+            key={score}
+            type="button"
+            onClick={() => setTrust(score)}
+            className={`size-8 rounded-sm border text-xs font-medium transition-colors ${
+              trust === score
+                ? "border-primary bg-primary text-primary-foreground"
+                : "bg-card hover:bg-muted"
+            }`}
+          >
+            {score}
+          </button>
+        ))}
+      </div>
+      <Button
+        className="mt-3 h-9 w-full"
+        disabled={preference === null || trust === null}
+        onClick={() => {
+          if (preference === null || trust === null) return;
+          gaEvent("recommendation_feedback", {
+            preference_choice: preference,
+            trust_score: trust,
+            anchor_count: anchorCount,
+          });
+          setSubmitted(true);
+        }}
+      >
+        제출
+      </Button>
+    </div>
+  );
+}
+
 export function Translator() {
   const [step, setStep] = useState<1 | 2>(1);
   const [anchors, setAnchors] = useState<Anchor[]>([]);
@@ -392,7 +470,10 @@ export function Translator() {
             {step === 2 && (
               <button
                 type="button"
-                onClick={() => setStep(1)}
+                onClick={() => {
+                  gaEvent("anchor_edit", {});
+                  setStep(1);
+                }}
                 className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
               >
                 <ArrowLeft className="size-3.5" aria-hidden="true" />
@@ -845,7 +926,14 @@ export function Translator() {
             </div>
 
             {filteredRows.length > 0 ? (
-              <ProductGrid rows={filteredRows} />
+              <>
+                <ProductGrid
+                  rows={filteredRows}
+                  fitPreference={fitPref}
+                  priorityDimension={focusDim}
+                />
+                <FeedbackCard anchorCount={totalAnchors} />
+              </>
             ) : fittedRows.length === 0 ? (
               <p className="mt-6 rounded-md border border-danger/40 bg-danger/5 p-4 text-center text-sm text-danger">
                 이 조합으로는 아직 비교할 실측 상품을 찾지 못했어요. 다른 옷을 앵커로 추가해 보세요.

@@ -37,7 +37,15 @@ const SORTS: { key: SortKey; label: string }[] = [
   { key: "priceDesc", label: "높은 가격순" },
 ];
 
-export function ProductGrid({ rows }: { rows: ProductRow[] }) {
+export function ProductGrid({
+  rows,
+  fitPreference = "same",
+  priorityDimension = "all",
+}: {
+  rows: ProductRow[];
+  fitPreference?: string;
+  priorityDimension?: string;
+}) {
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState<SortKey>("fit");
   const [expandedUrl, setExpandedUrl] = useState<string | null>(null);
@@ -77,7 +85,7 @@ export function ProductGrid({ rows }: { rows: ProductRow[] }) {
         </div>
       </div>
       <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-4">
-        {shown.map(({ product: p, pct, badgeClassName, fit }) => {
+        {shown.map(({ product: p, pct, badgeClassName, fit }, index) => {
           const expanded = expandedUrl === p.url;
           const feedback = feedbackMap[p.url] ?? null;
           return (
@@ -129,11 +137,53 @@ export function ProductGrid({ rows }: { rows: ProductRow[] }) {
                   )}
                 </div>
               </a>
-              <div className="px-2.5 pb-2.5">
+              <div className="flex gap-1.5 px-2.5 pb-2.5">
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => {
+                    let host = "";
+                    try {
+                      host = new URL(p.url).hostname;
+                    } catch {}
+                    const target = p.brandId ?? p.brand;
+                    gaEvent("outbound_click", { target_brand: target, url_host: host });
+                    gaEvent("adopt_size", {
+                      via: "cta",
+                      target_brand: target,
+                      recommended: fit.recommended,
+                      confidence: fit.confidence,
+                    });
+                    gaEvent("recommendation_adopted", {
+                      item_id: p.id,
+                      item_brand: target,
+                      recommended_size: fit.recommended,
+                      match_score: pct,
+                      recommendation_rank: index,
+                      fit_preference: fitPreference,
+                      priority_dimension: priorityDimension,
+                    });
+                  }}
+                  className="flex flex-1 items-center justify-center rounded-sm bg-primary px-2 py-1.5 text-[0.7rem] font-semibold text-primary-foreground hover:opacity-90"
+                >
+                  추천 {fit.recommended} 사이즈로 보러가기
+                </a>
                 <button
                   type="button"
-                  onClick={() => setExpandedUrl(expanded ? null : p.url)}
-                  className="flex w-full items-center justify-center gap-1 rounded-sm border bg-card px-2 py-1.5 text-[0.7rem] font-medium hover:bg-muted"
+                  onClick={() => {
+                    const willExpand = !expanded;
+                    setExpandedUrl(willExpand ? p.url : null);
+                    if (willExpand) {
+                      gaEvent("compare_item", {
+                        item_id: p.id,
+                        item_brand: p.brandId ?? p.brand,
+                        recommended_size: fit.recommended,
+                        match_score: pct,
+                      });
+                    }
+                  }}
+                  className="flex items-center justify-center gap-1 rounded-sm border bg-card px-2 py-1.5 text-[0.7rem] font-medium hover:bg-muted"
                 >
                   비교{" "}
                   <ChevronDown
