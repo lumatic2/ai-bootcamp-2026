@@ -89,7 +89,7 @@ export default function Home() {
                 지금 되는 것
               </p>
               <ul className="mt-3 space-y-1.5 text-xs text-primary-foreground/60">
-                <li>반팔 티셔츠 48개 브랜드 번역</li>
+                <li>반팔 티셔츠 {brands.length}개 브랜드 번역</li>
                 <li>없는 브랜드는 AI 웹 검색·붙여넣기로</li>
                 <li>사이즈 도우미 챗봇</li>
               </ul>

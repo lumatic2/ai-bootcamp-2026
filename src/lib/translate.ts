@@ -166,6 +166,37 @@ export function translate(
   };
 }
 
+// 상품 단위 번역 — 임의의 실측 행 집합(상품 1개의 사이즈표)을 대상으로 앵커 평균을 매칭한다.
+// 2스텝 리빌드(팀 피드백 2026-07-16): 결과 그리드가 브랜드 대리값 대신 상품별 실측으로 적합도를 계산할 때 사용.
+export type RowFit = {
+  recommended: string;
+  runnerUp: string | null;
+  confidence: Confidence;
+  deltas: DimDelta[];
+  comparedDims: number;
+  distance: number;
+  margin: number;
+};
+
+export function translateToRows(
+  anchors: Anchor[],
+  customs: CustomSource[],
+  targetSizes: SizeRow[],
+): RowFit {
+  const { row, total } = meanRow(anchors, customs);
+  const { best, second, margin, comparedDims, confidence } = rank(row, targetSizes, total >= 2);
+  return {
+    recommended: best.label,
+    runnerUp: second?.label ?? null,
+    // 시드 밖 앵커가 섞이면 신뢰도 상한 '보통' 캡 (기존 규칙 유지)
+    confidence: customs.length > 0 && confidence === "high" ? "mid" : confidence,
+    deltas: best.deltas,
+    comparedDims,
+    distance: Math.round(best.distance * 100) / 100,
+    margin: second ? Math.round(margin * 100) / 100 : -1,
+  };
+}
+
 // 시드에 없는 브랜드는 LLM이 파싱한 사이즈표를 대상으로 번역한다 (/api/parse-chart 경유)
 export function translateCustom(
   anchors: Anchor[],
