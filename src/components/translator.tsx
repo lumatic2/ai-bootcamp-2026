@@ -293,9 +293,9 @@ export function Translator() {
   }
 
   return (
-    <section id="translate" className="mx-auto w-full max-w-xl px-5 py-10 sm:px-0">
-      <div className="rounded-xl border bg-card p-5 sm:p-7">
-        <div className="mb-6">
+    <section id="translate" className="mx-auto w-full max-w-5xl px-5 py-10 sm:px-8">
+      <div>
+        <div className="mx-auto mb-6 max-w-2xl">
           <div className="flex items-center justify-between">
             <p className="eyebrow text-evidence">
               {step === 1 && "STEP 1 / 2 · 잘 맞는 옷"}
@@ -321,7 +321,7 @@ export function Translator() {
         </div>
 
         {step === 1 && (
-          <div>
+          <div className="mx-auto max-w-2xl">
             <h2 className="text-xl font-semibold">
               지금 갖고 있는 옷 중에서 <span className="bg-signal px-1">제일 잘 맞는 반팔티</span>를
               골라주세요
