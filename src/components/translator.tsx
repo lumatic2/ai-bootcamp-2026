@@ -112,14 +112,16 @@ function FeedbackCard({ anchorCount }: { anchorCount: number }) {
 
   return (
     <div className="mt-4 rounded-md border bg-card p-4">
-      <p className="text-xs font-medium">다음에 옷 사이즈를 고를 때 가장 먼저 사용하고 싶은 방식은?</p>
+      <p className="text-xs font-medium break-keep">
+        다음에 옷 사이즈를 고를 때 가장 먼저 사용하고 싶은 방식은?
+      </p>
       <div className="mt-2 flex flex-wrap gap-1.5">
         {PREFERENCE_OPTIONS.map((o) => (
           <button
             key={o.key}
             type="button"
             onClick={() => setPreference(o.key)}
-            className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 ${
               preference === o.key
                 ? "border-primary bg-primary text-primary-foreground"
                 : "bg-card hover:bg-muted"
@@ -136,7 +138,7 @@ function FeedbackCard({ anchorCount }: { anchorCount: number }) {
             key={score}
             type="button"
             onClick={() => setTrust(score)}
-            className={`size-8 rounded-sm border text-xs font-medium transition-colors ${
+            className={`size-8 rounded-sm border text-xs font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 ${
               trust === score
                 ? "border-primary bg-primary text-primary-foreground"
                 : "bg-card hover:bg-muted"
@@ -147,7 +149,7 @@ function FeedbackCard({ anchorCount }: { anchorCount: number }) {
         ))}
       </div>
       <Button
-        className="mt-3 h-9 w-full"
+        className="mt-4 h-9 w-full"
         disabled={preference === null || trust === null}
         onClick={() => {
           if (preference === null || trust === null) return;
@@ -504,7 +506,7 @@ export function Translator() {
                   gaEvent("anchor_edit", {});
                   setStep(1);
                 }}
-                className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+                className="flex items-center gap-1 rounded-sm text-xs text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
               >
                 <ArrowLeft className="size-3.5" aria-hidden="true" />
                 기준 옷 바꾸기
@@ -521,11 +523,11 @@ export function Translator() {
 
         {step === 1 && (
           <div className="mx-auto max-w-2xl">
-            <h2 className="text-xl font-semibold">
+            <h2 className="text-xl leading-snug font-semibold break-keep">
               지금 갖고 있는 옷 중에서 <span className="bg-signal px-1">제일 잘 맞는 반팔티</span>를
               골라주세요
             </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-2 text-sm break-keep text-muted-foreground">
               여러 벌 고를수록 추천이 정확해져요. 최대 5벌까지 담을 수 있어요.
             </p>
 
@@ -541,6 +543,7 @@ export function Translator() {
                       type="button"
                       aria-label="선택 해제"
                       onClick={() => removeAnchor(anchorKey(a))}
+                      className="-mr-1 rounded-full p-0.5 outline-none transition-colors hover:bg-primary-foreground/20 focus-visible:ring-2 focus-visible:ring-ring/50"
                     >
                       <X className="size-3.5" aria-hidden="true" />
                     </button>
@@ -557,6 +560,7 @@ export function Translator() {
                       type="button"
                       aria-label="선택 해제"
                       onClick={() => removeCustomAnchor(c.name)}
+                      className="-mr-1 rounded-full p-0.5 outline-none transition-colors hover:bg-primary-foreground/20 focus-visible:ring-2 focus-visible:ring-ring/50"
                     >
                       <X className="size-3.5" aria-hidden="true" />
                     </button>
@@ -634,7 +638,7 @@ export function Translator() {
 
             {browsingBrand && browsingProducts.length > 0 && (
               <div className="mt-6 border-t pt-5">
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm break-keep text-muted-foreground">
                   {browsingBrand.name}에서 어떤 상품을 갖고 있나요?
                 </p>
                 <div className="relative mt-2">
@@ -679,7 +683,9 @@ export function Translator() {
 
                 {browsingProduct && (
                   <div className="mt-3">
-                    <p className="text-sm text-muted-foreground">입는 사이즈는? (라벨 그대로)</p>
+                    <p className="text-sm break-keep text-muted-foreground">
+                      입는 사이즈는? (라벨 그대로)
+                    </p>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {browsingProduct.sizes.map((s) => {
                         const seedRep = isSeedRepresentative(browsingProduct, browsingBrand);
@@ -723,7 +729,7 @@ export function Translator() {
 
             {browsingBrand && browsingProducts.length === 0 && (
               <div className="mt-6 border-t pt-5">
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm break-keep text-muted-foreground">
                   {browsingBrand.name}에서 입는 사이즈는? (라벨 그대로)
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
@@ -923,7 +929,7 @@ export function Translator() {
             </div>
 
             {error && (
-              <p className="mt-4 rounded-md border border-danger/40 bg-danger/5 p-3 text-sm text-danger">
+              <p className="mt-4 rounded-md border border-danger/40 bg-danger/5 p-3 text-sm break-keep text-danger">
                 {error}
               </p>
             )}
@@ -941,7 +947,7 @@ export function Translator() {
         {step === 2 && (
           <div>
             <div className="flex items-start justify-between gap-3">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm break-keep text-muted-foreground">
                 <span className="font-medium text-foreground">『{anchorSummaryLabel}』</span>이 잘
                 맞는 분께
               </p>
@@ -956,7 +962,7 @@ export function Translator() {
                 className="pl-9"
               />
             </div>
-            <p className="mt-2 text-xs text-muted-foreground">
+            <p className="mt-2 text-xs break-keep text-muted-foreground">
               적합도와 추천 사이즈는 각 상품의 실측표 기준이에요.
             </p>
 
@@ -970,7 +976,7 @@ export function Translator() {
                       key={o.key}
                       type="button"
                       onClick={() => handleFitPrefChange(o.key)}
-                      className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                      className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 ${
                         fitPref === o.key
                           ? "border-primary bg-primary text-primary-foreground"
                           : "bg-card hover:bg-muted"
@@ -989,7 +995,7 @@ export function Translator() {
                       key={o.key}
                       type="button"
                       onClick={() => handleFocusDimChange(o.key)}
-                      className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                      className={`rounded-sm border px-2.5 py-1.5 text-xs font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 ${
                         focusDim === o.key
                           ? "border-primary bg-primary text-primary-foreground"
                           : "bg-card hover:bg-muted"
@@ -1012,11 +1018,11 @@ export function Translator() {
                 <FeedbackCard anchorCount={totalAnchors} />
               </>
             ) : fittedRows.length === 0 ? (
-              <p className="mt-6 rounded-md border border-danger/40 bg-danger/5 p-4 text-center text-sm text-danger">
+              <p className="mt-6 rounded-md border p-4 text-center text-sm break-keep text-muted-foreground">
                 이 조합으로는 아직 비교할 실측 상품을 찾지 못했어요. 다른 옷을 앵커로 추가해 보세요.
               </p>
             ) : (
-              <p className="mt-6 rounded-md border p-4 text-center text-sm text-muted-foreground">
+              <p className="mt-6 rounded-md border p-4 text-center text-sm break-keep text-muted-foreground">
                 &lsquo;{search2}&rsquo;와 일치하는 상품이 없어요. 다른 검색어로 시도해 보세요.
               </p>
             )}
@@ -1024,7 +1030,7 @@ export function Translator() {
         )}
       </div>
 
-      <p className="mt-3 text-center text-xs text-muted-foreground">
+      <p className="mt-3 text-center text-xs break-keep text-muted-foreground">
         반팔 티셔츠 기준, {brands.length}개 브랜드의 무신사 실측표를 쓰고 있어요. 계속 늘어납니다.
       </p>
     </section>

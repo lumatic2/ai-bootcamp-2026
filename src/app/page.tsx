@@ -29,17 +29,17 @@ export default function Home() {
           <p className="eyebrow mb-4 inline-block rounded-xs bg-signal px-2 py-1">
             처음 보는 브랜드도 내 사이즈로
           </p>
-          <h1 className="text-3xl leading-[1.15] font-extrabold tracking-[-0.04em] text-balance sm:text-5xl">
+          <h1 className="text-3xl leading-[1.15] font-extrabold tracking-[-0.04em] text-balance break-keep sm:text-5xl">
             내 사이즈는 <RotatingLabel />,
             <br />
             <span className="text-muted-foreground">다른 브랜드에서는 뭘까요?</span>
           </h1>
-          <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
+          <p className="mt-5 max-w-md text-base leading-7 break-keep text-muted-foreground">
             줄자 없이, 잘 맞는 옷 하나만 고르세요.
             <br />
             나머지는 너비가 찾아드려요.
           </p>
-          <div className="mt-7">
+          <div className="mt-6">
             <Button
               className="h-[54px] gap-2 px-6 has-data-[icon=inline-end]:pr-6 text-base"
               size="lg"
@@ -54,7 +54,7 @@ export default function Home() {
         <div className="mt-10 bg-primary">
           <BrandMarquee />
         </div>
-        <p className="py-3 text-center text-xs text-muted-foreground">
+        <p className="py-3 text-center text-xs break-keep text-muted-foreground">
           현재 반팔티 {brands.length}개 브랜드의 실측 데이터를 지원합니다
         </p>
       </section>
