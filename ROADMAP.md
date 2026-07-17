@@ -8,7 +8,7 @@
 ## Current Horizon
 
 <!-- harness:goal id="bootcamp-3day-loop" -->
-목표: 팀이 문제 선정부터 발표까지 Build–Measure–Learn 루프를 재현 가능하게 수행한다. (상세 plan → `docs/horizons/bootcamp-3day-loop.md`)
+목표: 팀이 문제 선정부터 발표까지 Build–Measure–Learn 루프를 재현 가능하게 수행한다. (상세 plan → `plans/horizons/bootcamp-3day-loop.md`)
 
 ## Active Milestones
 
