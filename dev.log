@@ -1,0 +1,15 @@
+
+> ai-bootcamp-2026@0.1.0 dev
+> next dev
+
+⚠ Port 3000 is in use by process 57760, using available port 3001 instead.
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://100.67.186.13:3001
+✓ Ready in 500ms
+⨯ Another next dev server is already running GET / 200 in 112ms (next.js: 5ms, application-code: 107ms)
+ GET / 200 in 157ms (next.js: 7ms, application-code: 150ms)
+ GET /manifest.webmanifest 200 in 62ms (next.js: 49ms, application-code: 13ms)
+[?25h
+p it.
+[?25h
